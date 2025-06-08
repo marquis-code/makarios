@@ -1,8 +1,6 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  // Force disable SSR since your original config had it as false
-  // This will prevent the SSR rendering errors
   ssr: false,
   target: "static",
   app: {
@@ -66,7 +64,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
   ],
   
-  css: ["/assets/css/main.css"],
+  css: ["@/assets/css/main.css"],
 
   tailwindcss: {
     cssPath: "@/assets/css/main.css",
