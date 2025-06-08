@@ -424,7 +424,7 @@
               </div>
               <div class="flex justify-between">
                 <span>Account Name:</span>
-                <span class="font-semibold text-sm"
+                <span class="font-semibold text-right text-sm"
                   >Makarios Initiative for Health and Humanitarian
                   Development</span
                 >

@@ -143,9 +143,11 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const navigation = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '#about' },
-  { name: 'Donate', path: '#donate' },
-  { name: 'Testimonials', path: '#testimonials' },
+  { name: 'About', path: '/#about' },
+  { name: 'Safe Passage Initiative', path: '/safe-passage' },
+  { name: 'Donate', path: '/#donate' },
+  { name: 'Testimonials', path: '/#testimonials' },
+  { name: 'News', path: '/news' },
 ]
 
 const mobileMenuOpen = ref(false)

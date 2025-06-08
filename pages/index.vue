@@ -1,6 +1,9 @@
 <template>
   <main class="bg-white">
-  <HeroVideo />
+    <NavbarSection />
+    <AnimatedHero />
+    <!-- <NavbarSection />
+  <HeroVideo /> -->
   <section>
 
 
@@ -40,7 +43,7 @@
    <KikaExamination id="kika" />
 
   </section>
-
+  <Footer />
 </main>
 </template>
 
@@ -63,6 +66,8 @@ import kika15 from "@/assets/img/kika/kika15.jpeg"
 import kika16 from "@/assets/img/kika/kika16.jpeg"
 import kika17 from "@/assets/img/kika/kika17.jpeg"
 import ContinousCarousel from "../components/ContinousCarousel.vue"
+import AnimatedHero from "../components/AnimatedHero.vue"
+import NavbarSection from "../components/NavbarSection.vue"
 const managementTeam  = ref([
     {
        image: kika1,

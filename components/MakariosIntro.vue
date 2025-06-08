@@ -97,6 +97,7 @@
   
           <!-- Stats Section -->
           <div 
+           id="impact"
             ref="statsSection"
             class="bg-gradient-to-br from-indigo-500 to-purple-700 text-white p-16 text-center mb-12 rounded-3xl"
           >
@@ -123,9 +124,9 @@
             <p class="text-lg md:text-xl text-gray-600 mb-8">
               Together, we can build a healthier, more empowered society for all.
             </p>
-            <button class="cta-button inline-block bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg animate-pulse-custom hover:transform hover:-translate-y-1 hover:shadow-xl">
+            <a href="#donate" class="cta-button inline-block bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg animate-pulse-custom hover:transform hover:-translate-y-1 hover:shadow-xl">
               Get Involved Today
-            </button>
+            </a>
           </div>
         </div>
       </div>

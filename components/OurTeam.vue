@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import testimonial1 from '@/assets/img/testimonials/testimonial1.jpeg'
+// import testimonial1 from '@/assets/img/testimonials/testimonial1.jpeg'
 
 interface Testimonial {
   id: number;
@@ -18,31 +20,34 @@ const testimonials = ref<Testimonial[]>([
     position: "Head Teacher",
     organization: "Straitgate School",
     quote: "The book's message is timely and impactful, inspiring our pupils to uphold moral values and excel academically, especially in challenging situations. We look forward to using it during our prize-giving event and as part of our learning resources for ages 8–12.",
-    image: "https://images.unsplash.com/photo-1494790108755-2616c6a96c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    image: testimonial1
   },
   {
     id: 2,
     name: "Kehinde Ojo",
     position: "Deputy Head Teacher",
     organization: "Straitgate School",
+    image: testimonial1,
     quote: "Thank you for partnering with us in nurturing well-rounded future leaders. We welcome future collaborations and pray for continued success in your noble work.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    // image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
   },
   {
     id: 3,
     name: "Ishola N.A.",
     position: "Head of Schools",
     organization: "Divine Offspring International Schools",
+    image: testimonial1,
     quote: "Kika's story is sure to motivate our pupils, especially those in the 8 to 11 age group, to uphold integrity and courage in the face of academic challenges. Your thoughtful gesture will go a long way in enriching our library.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    // image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
   },
   {
     id: 4,
     name: "Mrs. Lauretta Patrick-Nwachi",
     position: "Program Coordinator & Book Author",
     organization: "MIHHD",
+    image: testimonial1,
     quote: "We are committed to building a generation for God through impactful educational resources that inspire moral excellence and academic achievement in young minds.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    // image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
   }
 ]);
 
