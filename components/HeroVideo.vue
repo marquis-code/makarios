@@ -89,8 +89,8 @@
     
     const videos = [
       '/home-video.mp4',
-      '/home-video2.mp4',
-      '/home-video.mp4',
+      // '/home-video2.mp4',
+      // '/home-video.mp4',
     ];
     
     const slides = ref<Slide[]>([

@@ -246,6 +246,32 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
+useServerSeoMeta({
+  title: "Makarios Initiative",
+  ogTitle: "Makarios Initiative | News",
+  description: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence.",
+  ogDescription: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence.",
+  ogImage: "https://makariosinitiative.org/og-image.jpg",
+  ogImageUrl: "https://makariosinitiative.org/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterDescription: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterImage: "https://makariosinitiative.org/og-image.jpg"
+})
+
+useSeoMeta({
+  title: "Makarios Initiative",
+  ogTitle: "Makarios Initiative | News",
+  description: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence.",
+  ogDescription: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence.",
+  ogImage: "https://makariosinitiative.org/og-image.jpg",
+  ogImageUrl: "https://makariosinitiative.org/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterDescription: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterImage: "https://makariosinitiative.org/og-image.jpg"
+  });
+
 // Reactive refs for animations
 const introRef = ref<HTMLElement>()
 const video1Ref = ref<HTMLElement>()

@@ -193,9 +193,9 @@
             Visual evidence of our groundbreaking work transforming maternal healthcare across Imo State
           </p>
         </div>
-
+        <ContinousCarousel :testimonials="galleryImages" />
         <!-- Simple Marquee Gallery -->
-        <div class="relative overflow-hidden">
+        <!-- <div class="relative overflow-hidden">
           <div class="flex animate-marquee space-x-4">
             <div 
               v-for="(image, index) in [...galleryImages, ...galleryImages]" 
@@ -212,7 +212,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -222,7 +222,7 @@
         <div class="max-w-6xl mx-auto">
           <div class="bg-gradient-to-r from-red-400/20 to-amber-400/20 backdrop-blur-lg rounded-2xl p-8 md:p-16 border border-red-400/40 shadow-2xl">
             <div class="text-center mb-12">
-              <h2 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400 mb-6">
+              <h2 class="text-3xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400 mb-6">
                 WORLD-FIRST INNOVATION
               </h2>
             </div>
@@ -314,6 +314,32 @@ import spi20 from "@/assets/img/spi/spi20.jpeg"
 import spi21 from "@/assets/img/spi/spi21.jpeg"
 import NavbarSection from "../components/NavbarSection.vue"
 
+useServerSeoMeta({
+  title: "Makarios Initiative | SAFE PASSAGE INITIATIVE",
+  ogTitle: "Makarios Initiative | SAFE PASSAGE INITIATIVE",
+  description: "Revolutionizing Maternal Health in Nigeria | Makarios Initiative.",
+  ogDescription: "Revolutionizing Maternal Health in Nigeria | Makarios Initiative.",
+  ogImage: "https://makariosinitiative.org/og-image.jpg",
+  ogImageUrl: "https://makariosinitiative.org/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterDescription: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterImage: "https://makariosinitiative.org/og-image.jpg"
+})
+
+useSeoMeta({
+  title: "Makarios Initiative | SAFE PASSAGE INITIATIVE",
+  ogTitle: "Makarios Initiative | SAFE PASSAGE INITIATIVE",
+  description: "Revolutionizing Maternal Health in Nigeria | Makarios Initiative.",
+  ogDescription: "Revolutionizing Maternal Health in Nigeria | Makarios Initiative.",
+  ogImage: "https://makariosinitiative.org/og-image.jpg",
+  ogImageUrl: "https://makariosinitiative.org/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterDescription: "MAKARIOS Initiative is dedicated to Transforming Education Through Innovation and Excellence | Makarios Initiative",
+  twitterImage: "https://makariosinitiative.org/og-image.jpg"
+  });
+
 // Define types
 interface Stat {
   icon: string
@@ -323,7 +349,7 @@ interface Stat {
 }
 
 interface GalleryImage {
-  src: string
+  image: string
   alt: string
   title: string
   subtitle: string
@@ -344,27 +370,27 @@ const stats: Stat[] = [
 
 // Gallery images data
 const galleryImages: GalleryImage[] = [
-  { src: spi1, alt: 'Safe Passage Initiative Training', title: 'TBA Training', subtitle: 'Training session' },
-  { src: spi2, alt: 'Community Health Workshop', title: 'Community Engagement', subtitle: 'Health workshop' },
-  { src: spi3, alt: 'D-Prize Award Recognition', title: 'Global Recognition', subtitle: 'Award ceremony' },
-  { src: spi4, alt: 'Field Implementation', title: 'Field Work', subtitle: 'Implementation' },
-  { src: spi5, alt: 'Success Stories', title: 'Impact Stories', subtitle: 'Real impact' },
-  { src: spi6, alt: 'Team Collaboration', title: 'Team Work', subtitle: 'Collaboration' },
-  { src: spi7, alt: 'Healthcare Training', title: 'Skills Development', subtitle: 'Training' },
-  { src: spi8, alt: 'Community Outreach', title: 'Outreach', subtitle: 'Community work' },
-  { src: spi9, alt: 'Medical Equipment', title: 'Equipment Training', subtitle: 'Medical tools' },
-  { src: spi10, alt: 'Health Education', title: 'Education', subtitle: 'Health learning' },
-  { src: spi11, alt: 'Program Implementation', title: 'Implementation', subtitle: 'Program rollout' },
-  { src: spi12, alt: 'Stakeholder Meeting', title: 'Stakeholders', subtitle: 'Engagement' },
-  { src: spi13, alt: 'Documentation', title: 'Documentation', subtitle: 'Recording progress' },
-  { src: spi14, alt: 'Health Workers', title: 'Health Workers', subtitle: 'Local workers' },
-  { src: spi15, alt: 'Maternal Care', title: 'Maternal Care', subtitle: 'Specialized care' },
-  { src: spi16, alt: 'Evaluation', title: 'Evaluation', subtitle: 'Assessment' },
-  { src: spi17, alt: 'Mobilization', title: 'Mobilization', subtitle: 'Community action' },
-  { src: spi18, alt: 'Award Ceremony', title: 'Recognition', subtitle: 'Global award' },
-  { src: spi19, alt: 'Training Completion', title: 'Graduation', subtitle: 'Completion' },
-  { src: spi20, alt: 'Impact Assessment', title: 'Assessment', subtitle: 'Measuring success' },
-  { src: spi21, alt: 'Future Planning', title: 'Planning', subtitle: 'Future expansion' }
+  { image: spi1, alt: 'Safe Passage Initiative Training', title: 'TBA Training', subtitle: 'Training session' },
+  { image: spi2, alt: 'Community Health Workshop', title: 'Community Engagement', subtitle: 'Health workshop' },
+  { image: spi3, alt: 'D-Prize Award Recognition', title: 'Global Recognition', subtitle: 'Award ceremony' },
+  { image: spi4, alt: 'Field Implementation', title: 'Field Work', subtitle: 'Implementation' },
+  { image: spi5, alt: 'Success Stories', title: 'Impact Stories', subtitle: 'Real impact' },
+  { image: spi6, alt: 'Team Collaboration', title: 'Team Work', subtitle: 'Collaboration' },
+  { image: spi7, alt: 'Healthcare Training', title: 'Skills Development', subtitle: 'Training' },
+  { image: spi8, alt: 'Community Outreach', title: 'Outreach', subtitle: 'Community work' },
+  { image: spi9, alt: 'Medical Equipment', title: 'Equipment Training', subtitle: 'Medical tools' },
+  { image: spi10, alt: 'Health Education', title: 'Education', subtitle: 'Health learning' },
+  { image: spi11, alt: 'Program Implementation', title: 'Implementation', subtitle: 'Program rollout' },
+  { image: spi12, alt: 'Stakeholder Meeting', title: 'Stakeholders', subtitle: 'Engagement' },
+  { image: spi13, alt: 'Documentation', title: 'Documentation', subtitle: 'Recording progress' },
+  { image: spi14, alt: 'Health Workers', title: 'Health Workers', subtitle: 'Local workers' },
+  { image: spi15, alt: 'Maternal Care', title: 'Maternal Care', subtitle: 'Specialized care' },
+  { image: spi16, alt: 'Evaluation', title: 'Evaluation', subtitle: 'Assessment' },
+  { image: spi17, alt: 'Mobilization', title: 'Mobilization', subtitle: 'Community action' },
+  { image: spi18, alt: 'Award Ceremony', title: 'Recognition', subtitle: 'Global award' },
+  { image: spi19, alt: 'Training Completion', title: 'Graduation', subtitle: 'Completion' },
+  { image: spi20, alt: 'Impact Assessment', title: 'Assessment', subtitle: 'Measuring success' },
+  { image: spi21, alt: 'Future Planning', title: 'Planning', subtitle: 'Future expansion' }
 ]
 
 // Methods

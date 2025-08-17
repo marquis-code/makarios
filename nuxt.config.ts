@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   target: "static",
   app: {
     head: {
-      title: "Buildr - Build the future of your business",
+      title: "Makarios Initiative - Improving Lives Through Health and Humanitarian Projects",
       htmlAttrs: { lang: "en" },
       meta: [
         { charset: "utf-8" },
@@ -13,34 +13,34 @@ export default defineNuxtConfig({
         { name: "format-detection", content: "telephone=no" },
         { 
           name: "description", 
-          content: "Product development agency specializing in UI/UX design and software development for startups. We build MVPs, mobile apps, and web applications with expert remote teams." 
+          content: "MAKARIOS Initiative is dedicated to improving health outcomes and empowering communities through sustainable development programs." 
         },
-        { name: "author", content: "Buildr" },
+        { name: "author", content: "Makarios Initiative" },
         
         // Open Graph
         { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://gobuildr.io/' },
-        { property: 'og:title', content: 'Buildr - Build the future of your business' },
+        { property: 'og:url', content: 'https://makariosinitiative.org' },
+        { property: 'og:title', content: 'Makarios Initiative - Improving Lives Through Health and Humanitarian Projects' },
         { 
           property: 'og:description', 
-          content: 'Product development agency specializing in UI/UX design and software development for startups.' 
+          content: 'Breaking barriers and creating opportunities through innovative educational programs and resources that transform communities.' 
         },
-        { property: 'og:image', content: 'https://gobuildr.io/icon.png' },
+        { property: 'og:image', content: 'https://makariosinitiative.org/icon.png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         
         // Twitter
         { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:url', content: 'https://gobuildr.io/' },
-        { property: 'twitter:title', content: 'Buildr - Build the future of your business' },
+        { property: 'twitter:url', content: 'https://makariosinitiative.org/' },
+        { property: 'twitter:title', content: 'Makarios Initiative - Improving Lives Through Health and Humanitarian Projects' },
         { 
           property: 'twitter:description', 
           content: 'Product development agency specializing in UI/UX design and software development for startups.' 
         },
-        { property: 'twitter:image', content: 'https://gobuildr.io/icon.png' }
+        { property: 'twitter:image', content: 'https://makariosinitiative.org/icon.png' }
       ],
       link: [
-        { rel: 'canonical', href: 'https://gobuildr.io/' },
+        { rel: 'canonical', href: 'https://makariosinitiative.org/' },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         {
           rel: 'stylesheet',

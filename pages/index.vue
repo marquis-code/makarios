@@ -4,6 +4,8 @@
     <AnimatedHero />
     <!-- <NavbarSection />
   <HeroVideo /> -->
+  <CurrentProgram />
+  <ProgramsSection />
   <section>
 
 
@@ -37,8 +39,9 @@
    <Subscriptions id="donate" />
 
    <OurTeam id="testimonials" />
-   <TestimonialsScroll id="testimonials" />
+   <TestimonialsScroll class="mb-10" id="testimonials" />
 
+   <Team />
 
    <KikaExamination id="kika" />
 
@@ -68,6 +71,34 @@ import kika17 from "@/assets/img/kika/kika17.jpeg"
 import ContinousCarousel from "../components/ContinousCarousel.vue"
 import AnimatedHero from "../components/AnimatedHero.vue"
 import NavbarSection from "../components/NavbarSection.vue"
+
+
+useServerSeoMeta({
+  title: "Makarios Initiative",
+  ogTitle: "Makarios Initiative | Home",
+  description: "MAKARIOS Initiative is dedicated to improving health outcomes and empowering communities through sustainable development programs.",
+  ogDescription: "Improving Lives Through Health and Humanitarian Projects",
+  ogImage: "https://makariosinitiative.org/og-image.jpg",
+  ogImageUrl: "https://makariosinitiative.org/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "Improving Lives Through Health and Humanitarian Projects | Makarios Initiative",
+  twitterDescription: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  twitterImage: "https://makariosinitiative.org/og-image.jpg"
+})
+
+useSeoMeta({
+  title: "Makarios Initiative",
+  ogTitle: "Makarios Initiative | Home",
+  description: "MAKARIOS Initiative is dedicated to improving health outcomes and empowering communities through sustainable development programs.",
+  ogDescription: "Improving Lives Through Health and Humanitarian Projects",
+  ogImage: "https://makariosinitiative.org/og-image.jpg",
+  ogImageUrl: "https://makariosinitiative.org/og-image.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "Improving Lives Through Health and Humanitarian Projects | Makarios Initiative",
+  twitterDescription: "Your Vision, Our Mission — Together, We’ll Build Exceptional Software. We turn ambitious ideas into high-performing digital products through innovative tech and agile development.",
+  twitterImage: "https://makariosinitiative.org/og-image.jpg"
+  });
+
 const managementTeam  = ref([
     {
        image: kika1,

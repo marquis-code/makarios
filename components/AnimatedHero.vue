@@ -98,7 +98,7 @@
                 
                 <!-- Animated Title -->
                 <Transition name="slide-up" appear>
-                  <h1 class="text-4xl md:text-6xl lg:text-8xl max-w-5xl mx-auto font-bold text-white mb-8 leading-tight">
+                  <h1 class="text-4xl md:text-6xl lg:text-8xl max-w-5xl mx-auto font-bold text-white/90 mb-8 leading-tight">
                     <span 
                       v-for="(word, wordIndex) in slide.title.split(' ')" 
                       :key="`word-${wordIndex}`"
@@ -210,7 +210,7 @@
         </div>
   
         <!-- Scroll Indicator -->
-        <Transition name="bounce" appear>
+        <!-- <Transition name="bounce" appear>
           <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
             <div 
               class="flex flex-col items-center text-white/60 hover:text-white transition-all duration-300 cursor-pointer group"
@@ -225,7 +225,7 @@
               />
             </div>
           </div>
-        </Transition>
+        </Transition> -->
   
         <!-- Enhanced Modal -->
         <Teleport to="body">
@@ -303,8 +303,8 @@
   // Reactive data
   const videos = [
     '/home-video.mp4',
-    '/home-video2.mp4',
-    '/home-video.mp4',
+    // '/home-video2.mp4',
+    // '/home-video.mp4',
   ];
   
   const slides = ref<Slide[]>([
@@ -335,7 +335,7 @@
       ],
       buttons: [
         { text: 'Join Our Educational Mission', action: 'openGame', primary: true },
-        { text: 'View Programs', action: '#programs', secondary: true }
+        { text: 'View Programs', action: '#about', secondary: true }
       ]
     }
   ]);

@@ -1,12 +1,12 @@
 <template>
   <header 
     class="fixed inset-x-0 top-0 z-50 bg-white transition-all duration-500" 
-    :class="{ 'shadow-lg': scrolled }"
+    :class="{ 'shadow-lg': scrolled, 'transform -translate-y-full': !isNavVisible }"
   >
     <nav class="container mx-auto flex items-center justify-between p-4 lg:px-8" aria-label="Global">
       <!-- Logo on the left -->
       <div class="flex items-center">
-        <NuxtLink to="/" class="logo-container relative group">
+        <NuxtLink to="/" class="logo-container relative group" @click="handleLogoClick">
           <div class="logo-wrapper overflow-hidden rounded-full relative">
             <img 
               src="@/assets/img/logo.jpeg" 
@@ -23,16 +23,75 @@
       <!-- Desktop navigation items in the center -->
       <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center">
         <div class="flex space-x-8">
-          <NuxtLink 
-            v-for="item in navigation" 
-            :key="item.name" 
-            :to="item.path" 
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2"
-            :class="{ 'active-link text-olg-green': isActive(item.path) }"
+          <!-- Home Link -->
+          <NuxtLink
+            to="/"
+            @click="handleHomeClick"
+            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === '' }"
           >
-            <span class="nav-text relative block">{{ item.name }}</span>
+            <span class="nav-text relative block">Home</span>
             <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
-                  :class="isActive(item.path) ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+                  :class="(route.path === '/' && activeSection === '') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+          </NuxtLink>
+
+          <!-- About Hash Link -->
+          <a
+            href="#about"
+            @click="handleHashClick($event, 'about')"
+            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'about' }"
+          >
+            <span class="nav-text relative block">About</span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+                  :class="(route.path === '/' && activeSection === 'about') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+          </a>
+
+          <!-- Safe Passage Link -->
+
+          <!-- Donate Hash Link -->
+          <a
+            href="#donate"
+            @click="handleHashClick($event, 'donate')"
+            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'donate' }"
+          >
+            <span class="nav-text relative block">Donate</span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+                  :class="(route.path === '/' && activeSection === 'donate') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+          </a>
+
+          <!-- Testimonials Hash Link -->
+          <a
+            href="#testimonials"
+            @click="handleHashClick($event, 'testimonials')"
+            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'testimonials' }"
+          >
+            <span class="nav-text relative block">Testimonials</span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+                  :class="(route.path === '/' && activeSection === 'testimonials') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+          </a>
+
+          <NuxtLink
+            to="/safe-passage"
+            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-olg-green': route.path.startsWith('/safe-passage') }"
+          >
+            <span class="nav-text relative block">Safe Passage Initiative</span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+                  :class="route.path.startsWith('/safe-passage') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+          </NuxtLink>
+
+          <!-- News Link -->
+          <NuxtLink
+            to="/news"
+            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-olg-green': route.path.startsWith('/news') }"
+          >
+            <span class="nav-text relative block">News</span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+                  :class="route.path.startsWith('/news') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </NuxtLink>
         </div>
       </div>
@@ -41,8 +100,9 @@
       <div class="hidden lg:flex lg:items-center">
         <a 
           href="#kika" 
-          class="cta-button text-base font-semibold text-white bg-olg-blue px-6 py-3 rounded-md hover:bg-olg-green transition-all duration-300 flex items-center gap-2 relative overflow-hidden group"
-          :class="{ 'bg-olg-green': isActive('/programs') }"
+          @click="handleHashClick($event, 'kika')"
+          class="cta-button text-base font-semibold text-white bg-olg-blue px-6 py-3 rounded-md hover:bg-olg-green transition-all duration-300 flex items-center gap-2 relative overflow-hidden group cursor-pointer"
+          :class="{ 'bg-olg-green': activeSection === 'kika' }"
         >
           <span class="relative z-10">Kika's Examination</span>
           <span class="arrow-icon inline-block transition-all duration-300 group-hover:translate-x-1 relative z-10" aria-hidden="true">&rarr;</span>
@@ -83,48 +143,103 @@
       </div>
     </nav>
     
-    <!-- Mobile menu with enhanced animations and active states -->
+    <!-- Mobile menu -->
     <div 
       class="lg:hidden overflow-hidden transition-all duration-500 ease-in-out"
       :class="mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'"
     >
       <div class="bg-white px-6 py-4 shadow-lg">
         <div class="space-y-1">
-          <NuxtLink 
-            v-for="(item, index) in navigation" 
-            :key="item.name" 
-            :to="item.path" 
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300"
+          <!-- Mobile Home -->
+          <NuxtLink
+            to="/"
+            @click="handleMobileHomeClick"
+            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
             :class="[
-              isActive(item.path) 
+              (route.path === '/' && activeSection === '') 
                 ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
                 : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
             ]"
-            :style="{ 
-              transitionDelay: `${index * 70}ms`,
-              transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)',
-              opacity: mobileMenuOpen ? '1' : '0'
-            }"
-            @click="mobileMenuOpen = false"
           >
-            {{ item.name }}
+            Home
+          </NuxtLink>
+
+          <!-- Mobile About -->
+          <a
+            href="#about"
+            @click="handleMobileHashClick($event, 'about')"
+            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
+            :class="[
+              (route.path === '/' && activeSection === 'about') 
+                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
+                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
+            ]"
+          >
+            About
+          </a>
+
+          <!-- Mobile Safe Passage -->
+          <NuxtLink
+            to="/safe-passage"
+            @click="closeMobileMenu"
+            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
+            :class="[
+              route.path.startsWith('/safe-passage') 
+                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
+                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
+            ]"
+          >
+            Safe Passage Initiative
+          </NuxtLink>
+
+          <!-- Mobile Donate -->
+          <a
+            href="#donate"
+            @click="handleMobileHashClick($event, 'donate')"
+            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
+            :class="[
+              (route.path === '/' && activeSection === 'donate') 
+                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
+                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
+            ]"
+          >
+            Donate
+          </a>
+
+          <!-- Mobile Testimonials -->
+          <a
+            href="#testimonials"
+            @click="handleMobileHashClick($event, 'testimonials')"
+            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
+            :class="[
+              (route.path === '/' && activeSection === 'testimonials') 
+                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
+                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
+            ]"
+          >
+            Testimonials
+          </a>
+
+          <!-- Mobile News -->
+          <NuxtLink
+            to="/news"
+            @click="closeMobileMenu"
+            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
+            :class="[
+              route.path.startsWith('/news') 
+                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
+                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
+            ]"
+          >
+            News
           </NuxtLink>
           
           <div class="pt-4 mt-4 border-t border-gray-200">
             <a 
               href="#kika" 
-              class="mobile-cta flex items-center justify-between rounded-lg px-3 py-3 text-base font-semibold transition-all duration-300"
-              :class="[
-                isActive('/programs') 
-                  ? 'bg-olg-green text-white' 
-                  : 'text-white bg-olg-blue hover:bg-olg-green'
-              ]"
-              :style="{ 
-                transitionDelay: `${navigation.length * 70 + 100}ms`,
-                transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)',
-                opacity: mobileMenuOpen ? '1' : '0'
-              }"
-              @click="mobileMenuOpen = false"
+              @click="handleMobileHashClick($event, 'kika')"
+              class="mobile-cta flex items-center justify-between rounded-lg px-3 py-3 text-base font-semibold transition-all duration-300 cursor-pointer text-white bg-olg-blue hover:bg-olg-green"
+              :class="{ 'bg-olg-green': activeSection === 'kika' }"
             >
               Kika's Examination
               <span aria-hidden="true" class="text-white transition-transform duration-300">&rarr;</span>
@@ -137,44 +252,108 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
-const navigation = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/#about' },
-  { name: 'Safe Passage Initiative', path: '/safe-passage' },
-  { name: 'Donate', path: '/#donate' },
-  { name: 'Testimonials', path: '/#testimonials' },
-  { name: 'News', path: '/news' },
-]
+const router = useRouter()
 
+// Reactive state
 const mobileMenuOpen = ref(false)
 const scrolled = ref(false)
 const lastScrollY = ref(0)
 const isNavVisible = ref(true)
+const activeSection = ref('')
 
-// Function to check if a route is active
-const isActive = (path: string) => {
-  if (path === '/') {
-    return route.path === '/'
+// Handle logo click
+const handleLogoClick = () => {
+  activeSection.value = ''
+  if (route.path !== '/') {
+    router.push('/')
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-  return route.path.startsWith(path)
+}
+
+// Handle home click
+const handleHomeClick = () => {
+  activeSection.value = ''
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+// Handle hash link clicks
+const handleHashClick = (event: Event, sectionId: string) => {
+  event.preventDefault()
+  
+  if (route.path !== '/') {
+    // Navigate to home first, then scroll to section
+    router.push('/').then(() => {
+      nextTick(() => {
+        setTimeout(() => scrollToElement(sectionId), 300)
+      })
+    })
+  } else {
+    // Already on home page, just scroll
+    scrollToElement(sectionId)
+  }
+}
+
+// Handle mobile clicks
+const handleMobileHomeClick = () => {
+  mobileMenuOpen.value = false
+  activeSection.value = ''
+  if (route.path === '/') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+
+const handleMobileHashClick = (event: Event, sectionId: string) => {
+  event.preventDefault()
+  mobileMenuOpen.value = false
+  
+  if (route.path !== '/') {
+    router.push('/').then(() => {
+      nextTick(() => {
+        setTimeout(() => scrollToElement(sectionId), 300)
+      })
+    })
+  } else {
+    scrollToElement(sectionId)
+  }
+}
+
+const closeMobileMenu = () => {
+  mobileMenuOpen.value = false
 }
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
 
-// Enhanced scroll handler with hide-on-scroll-down behavior
+// Scroll to specific element
+const scrollToElement = (sectionId: string) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    const headerHeight = 100
+    const elementPosition = element.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+    
+    activeSection.value = sectionId
+    history.replaceState(null, '', `#${sectionId}`)
+  }
+}
+
+// Enhanced scroll handler
 const handleScroll = () => {
   const currentScrollY = window.scrollY
   
-  // Determine if scrolled past threshold
   scrolled.value = currentScrollY > 20
   
-  // Hide navbar on scroll down, show on scroll up
   if (currentScrollY > lastScrollY.value && currentScrollY > 100) {
     isNavVisible.value = false
   } else {
@@ -182,9 +361,47 @@ const handleScroll = () => {
   }
   
   lastScrollY.value = currentScrollY
+  
+  if (route.path === '/') {
+    updateActiveSection()
+  }
 }
 
-// Close mobile menu when window is resized to desktop size
+// Update active section based on scroll position
+const updateActiveSection = () => {
+  const sections = ['about', 'donate', 'testimonials', 'kika']
+  const headerHeight = 120
+  let currentSection = ''
+  
+  if (window.scrollY < 100) {
+    currentSection = ''
+  } else {
+    for (const sectionId of sections) {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        const rect = element.getBoundingClientRect()
+        const elementTop = rect.top + window.pageYOffset
+        const elementBottom = elementTop + rect.height
+        const scrollTop = window.pageYOffset + headerHeight
+        
+        if (scrollTop >= elementTop && scrollTop < elementBottom) {
+          currentSection = sectionId
+          break
+        }
+      }
+    }
+  }
+  
+  if (currentSection !== activeSection.value) {
+    activeSection.value = currentSection
+    const newHash = currentSection ? `#${currentSection}` : ''
+    if (window.location.hash !== newHash) {
+      history.replaceState(null, '', window.location.pathname + newHash)
+    }
+  }
+}
+
+// Close mobile menu when window is resized
 const handleResize = () => {
   if (window.innerWidth >= 1024 && mobileMenuOpen.value) {
     mobileMenuOpen.value = false
@@ -199,42 +416,62 @@ const handleClickOutside = (event: MouseEvent) => {
   }
 }
 
-// Initialize animations when component is mounted
-const initAnimations = () => {
-  // Add staggered entrance animations for desktop nav items
-  const navLinks = document.querySelectorAll('.nav-link')
-  navLinks.forEach((link, index) => {
-    link.classList.add('animate-fade-in')
-    ;(link as HTMLElement).style.animationDelay = `${index * 100}ms`
-  })
-  
-  // Logo entrance animation
-  const logo = document.querySelector('.logo-container')
-  if (logo) {
-    logo.classList.add('animate-logo-entrance')
+// Handle initial hash on page load
+const handleInitialHash = () => {
+  if (typeof window !== 'undefined' && window.location.hash) {
+    const hash = window.location.hash.replace('#', '')
+    if (route.path === '/') {
+      nextTick(() => {
+        setTimeout(() => {
+          scrollToElement(hash)
+        }, 500)
+      })
+    }
   }
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
   window.addEventListener('resize', handleResize)
   document.addEventListener('click', handleClickOutside)
   
-  handleScroll() // Check initial scroll position
-  
-  // Initialize animations after a short delay
-  setTimeout(initAnimations, 100)
+  handleScroll()
+  handleInitialHash()
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-  window.removeEventListener('resize', handleResize)
-  document.removeEventListener('click', handleClickOutside)
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('scroll', handleScroll)
+    window.removeEventListener('resize', handleResize)
+    document.removeEventListener('click', handleClickOutside)
+  }
 })
 
-// Watch for route changes to close mobile menu and update active states
-watch(() => route.path, () => {
+// Watch for route changes
+watch(() => route.path, (newPath) => {
   mobileMenuOpen.value = false
+  
+  if (newPath === '/') {
+    nextTick(() => {
+      if (window.location.hash) {
+        const hash = window.location.hash.replace('#', '')
+        setTimeout(() => scrollToElement(hash), 200)
+      } else {
+        activeSection.value = ''
+        updateActiveSection()
+      }
+    })
+  } else {
+    activeSection.value = ''
+  }
+}, { immediate: true })
+
+// Watch for hash changes
+watch(() => route.hash, (newHash) => {
+  if (route.path === '/' && newHash) {
+    const sectionId = newHash.replace('#', '')
+    setTimeout(() => scrollToElement(sectionId), 100)
+  }
 })
 </script>
 
@@ -289,71 +526,7 @@ watch(() => route.path, () => {
   font-weight: 700;
 }
 
-/* Animation keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes logoEntrance {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotate(-10deg);
-  }
-  60% {
-    transform: scale(1.1) rotate(5deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1.2);
-    opacity: 0;
-  }
-}
-
-@keyframes navTextEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Applied animations */
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-.animate-logo-entrance {
-  animation: logoEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-.logo-pulse {
-  animation: pulse 1.5s infinite;
-}
-
+/* Animations */
 .nav-text {
   display: inline-block;
   transition: transform 0.3s;
@@ -366,14 +539,6 @@ watch(() => route.path, () => {
 /* Hamburger button animations */
 .hamburger-line {
   transition: all 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-}
-
-.hamburger-button:hover .hamburger-line:nth-child(1) {
-  width: 50%;
-}
-
-.hamburger-button:hover .hamburger-line:nth-child(3) {
-  width: 75%;
 }
 
 /* Mobile menu item animations */
@@ -395,7 +560,7 @@ watch(() => route.path, () => {
   }
 }
 
-/* Logo container styles */
+/* Logo styles */
 .logo-container {
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -409,11 +574,34 @@ watch(() => route.path, () => {
   transform: translateY(-2px);
 }
 
-/* Add extra padding to the navbar to accommodate the larger logo */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.logo-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Header styles */
 @media (min-width: 1024px) {
   nav {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
+}
+
+header {
+  transition: transform 0.3s ease-in-out;
 }
 </style>

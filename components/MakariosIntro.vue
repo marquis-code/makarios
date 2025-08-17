@@ -24,7 +24,7 @@
         </div>
       </div>
   
-      <div class="relative z-20 min-h-screen bg-white/95 backdrop-blur-lg m-5 rounded-3xl overflow-hidden shadow-2xl">
+      <div class="relative z-20 min-h-screen bg-white/95 backdrop-blur-lg lg:m-5 lg:rounded-3xl overflow-hidden shadow-2xl">
         <!-- Header Section -->
         <header class="relative bg-gradient-to-br from-indigo-600 to-purple-700 text-white px-8 py-16 text-center overflow-hidden">
           <!-- Animated Background Pattern -->
@@ -68,7 +68,7 @@
         </div>
   
         <!-- Main Content -->
-        <div class="px-8 py-16 max-w-7xl mx-auto">
+        <div class="px-4 lg:px-8 py-16 max-w-7xl mx-auto">
           <p class="text-xl md:text-2xl leading-relaxed mb-12 text-center text-gray-600 animate-fade-in-up">
             <strong>MAKARIOS Initiative</strong> is a registered non-government entity, passionately serving communities since 2017. 
             Our dedicated team of professionals—medics and non-medics alike—carries out 'boots-on-the-ground' health and 

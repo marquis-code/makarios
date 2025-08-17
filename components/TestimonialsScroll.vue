@@ -1,5 +1,5 @@
 <template>
-    <div id="testimonials" class="w-full overflow-hidden bg-gray-25">
+    <div id="testimonials" class="w-full pt-10 overflow-hidden bg-gray-25">
         <section class="pl-10 lg:pl-32">
         <div data-aos="fade-up" class="inline-block px-4 py-2.5 mb-6 bg-gray-50 rounded-full">
         <span class="text-[#284d79] font-medium">Pupils Testimonials</span>

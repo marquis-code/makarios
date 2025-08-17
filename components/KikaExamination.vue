@@ -27,7 +27,7 @@
     </div>
 
     <div
-      class="relative z-20 min-h-screen bg-white/95 backdrop-blur-lg m-5 rounded-3xl overflow-hidden shadow-2xl"
+      class="relative z-20 min-h-screen bg-white/95 backdrop-blur-lg lg:m-5 lg:rounded-3xl overflow-hidden shadow-2xl"
     >
       <!-- <header
         class="relative bg-gradient-to-br from-indigo-600 to-purple-700 text-white px-8 py-16 text-center overflow-hidden"
@@ -83,7 +83,7 @@
       </div> -->
 
       <!-- Book Hero Section -->
-      <div class="px-8 py-16 max-w-7xl mx-auto">
+      <div class="px-6 lg:px-8 py-16 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
           <!-- Book Image with Interactive Elements -->
           <div class="relative group">
@@ -188,7 +188,7 @@
                 <div
                   class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6"
                 >
-                  <h3 class="text-xl font-bold text-white mb-2">
+                  <h3 class="text-sm lg:text-xl font-bold text-white mb-2">
                     <!-- {{ activeVideo.title }} --> KIKA Examination Book Distribution Event
                   </h3>
                   <p class="text-gray-200 text-sm">
@@ -383,7 +383,7 @@
 
         <!-- Donation Section -->
         <div
-          class="bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-3xl p-8 md:p-12 text-center"
+          class="bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-3xl p-6 md:p-12 text-center"
         >
           <h2 class="text-4xl font-black mb-4">Make a Difference Today</h2>
           <p class="text-xl mb-8 opacity-90">

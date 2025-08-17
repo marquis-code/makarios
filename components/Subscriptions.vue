@@ -543,7 +543,7 @@
                 <ol class="text-sm text-yellow-700 space-y-1 list-decimal list-inside">
                   <li>Copy the account details above</li>
                   <li>Make your transfer using your preferred method</li>
-                  <li>Send transfer receipt to: donations@literacyfoundation.ng</li>
+                  <li>Send transfer receipt to: kika'sexamination@gmail.com</li>
                   <li>Include your full name and selected tier in the email</li>
                   <li>We'll confirm your donation within 24 hours</li>
                 </ol>
