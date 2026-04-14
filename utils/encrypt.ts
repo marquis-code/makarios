@@ -23,7 +23,7 @@ BwIDAQAB
 
 const publicKey = forge.pki.publicKeyFromPem(publicKeyPem);
 
-export function encryptData(data: string): string {
+export function encryptWithRSA(data: string): string {
   const encryptedData = publicKey.encrypt(forge.util.encodeUtf8(data), "RSA-OAEP");
   return forge.util.encode64(encryptedData); // Return the encrypted data as base64 encoded string
 }

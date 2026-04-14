@@ -61,16 +61,28 @@
                   :class="(route.path === '/' && activeSection === 'donate') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </a>
 
-          <!-- Testimonials Hash Link -->
+          <!-- Programs Hash Link -->
           <a
-            href="#testimonials"
-            @click="handleHashClick($event, 'testimonials')"
+            href="#programs"
+            @click="handleHashClick($event, 'programs')"
             class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'testimonials' }"
+            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'programs' }"
           >
-            <span class="nav-text relative block">Testimonials</span>
+            <span class="nav-text relative block">Our Impact</span>
             <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
-                  :class="(route.path === '/' && activeSection === 'testimonials') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+                  :class="(route.path === '/' && activeSection === 'programs') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
+          </a>
+
+          <!-- Impact Stories Hash Link -->
+          <a
+            href="#impact"
+            @click="handleHashClick($event, 'impact')"
+            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'impact' }"
+          >
+            <span class="nav-text relative block">Stories</span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+                  :class="(route.path === '/' && activeSection === 'impact') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </a>
 
           <NuxtLink
@@ -206,18 +218,32 @@
             Donate
           </a>
 
-          <!-- Mobile Testimonials -->
+          <!-- Mobile Programs -->
           <a
-            href="#testimonials"
-            @click="handleMobileHashClick($event, 'testimonials')"
+            href="#programs"
+            @click="handleMobileHashClick($event, 'programs')"
             class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
             :class="[
-              (route.path === '/' && activeSection === 'testimonials') 
+              (route.path === '/' && activeSection === 'programs') 
                 ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
                 : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
             ]"
           >
-            Testimonials
+            Our Impact
+          </a>
+
+          <!-- Mobile Impact Stories -->
+          <a
+            href="#impact"
+            @click="handleMobileHashClick($event, 'impact')"
+            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
+            :class="[
+              (route.path === '/' && activeSection === 'impact') 
+                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
+                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
+            ]"
+          >
+            Stories
           </a>
 
           <!-- Mobile News -->
@@ -369,7 +395,7 @@ const handleScroll = () => {
 
 // Update active section based on scroll position
 const updateActiveSection = () => {
-  const sections = ['about', 'donate', 'testimonials', 'kika']
+  const sections = ['about', 'donate', 'programs', 'impact', 'kika']
   const headerHeight = 120
   let currentSection = ''
   

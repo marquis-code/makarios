@@ -1,29 +1,30 @@
 <template>
     <main>
       <div ref="containerRef" class="relative w-full h-screen overflow-hidden">
-        <!-- Animated Background Patterns -->
-        <div class="absolute inset-0 opacity-20 pointer-events-none">
+        <!-- Optimized Animated Background Patterns - reduced count for performance -->
+        <div class="absolute inset-0 opacity-15 pointer-events-none">
           <div 
-            v-for="i in 50" 
+            v-for="i in 20" 
             :key="`particle-${i}`"
             class="absolute rounded-full bg-gradient-to-r from-emerald-400 to-teal-600 animate-pulse"
             :style="particleStyles[i-1]"
           />
         </div>
   
-        <!-- Video Background with Parallax -->
+        <!-- Video Background with Optimized Parallax -->
         <div 
-          class="absolute inset-0 transform transition-transform duration-1000 ease-out"
+          class="absolute inset-0 transform transition-transform duration-1000 ease-out will-change-transform"
           :style="{ transform: `scale(1.05) translate(${mousePosition.x * 8}px, ${mousePosition.y * 4}px)` }"
         >
           <video 
             ref="videoRef"
-            class="absolute top-0 left-0 w-full h-full object-cover transition-all duration-1000"
-            :class="{ 'brightness-40': true, 'brightness-50': !isVideoFocused }"
+            class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000"
+            :class="{ 'opacity-40': isVideoLoaded, 'opacity-0': !isVideoLoaded }"
             autoplay 
             muted 
             loop 
             playsinline
+            preload="metadata"
             @loadeddata="handleVideoLoaded"
           >
             <source :src="currentVideo" type="video/mp4">
@@ -33,10 +34,10 @@
           <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 transition-all duration-1000" />
           <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/20 to-teal-900/20 transition-all duration-1000" />
           
-          <!-- Animated Light Rays -->
-          <div class="absolute inset-0 opacity-10">
+          <!-- Reduced Animated Light Rays -->
+          <div class="absolute inset-0 opacity-5 pointer-events-none">
             <div 
-              v-for="ray in 6" 
+              v-for="ray in 3" 
               :key="`ray-${ray}`"
               class="absolute bg-gradient-to-b from-white/20 to-transparent animate-pulse"
               :style="rayStyles[ray-1]"
@@ -197,15 +198,15 @@
           </TransitionGroup>
         </div>
   
-        <!-- Floating Interactive Elements -->
+        <!-- Reduced Floating Interactive Elements -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            v-for="i in 15"
+            v-for="i in 8"
             :key="`float-${i}`"
-            class="absolute animate-float opacity-30"
+            class="absolute animate-float opacity-20"
             :style="floatingElementStyles[i-1]"
           >
-            <Icon :name="floatingIcons[i % floatingIcons.length]" class="w-4 h-4 text-emerald-400" />
+            <Icon :name="floatingIcons[i % floatingIcons.length]" class="w-4 h-4 text-emerald-300" />
           </div>
         </div>
   
@@ -346,40 +347,15 @@
   const mousePosition = ref({ x: 0, y: 0 });
   const isVideoPlaying = ref(true);
   const isVideoMuted = ref(true);
-  const isVideoFocused = ref(false);
+  const isVideoLoaded = ref(false);
   const containerRef = ref<HTMLElement | null>(null);
   const videoRef = ref<HTMLVideoElement | null>(null);
   
-  // Computed styles for animations
-  const particleStyles = computed(() => {
-    return Array.from({ length: 50 }, () => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      width: `${Math.random() * 4 + 1}px`,
-      height: `${Math.random() * 4 + 1}px`,
-      animationDelay: `${Math.random() * 3}s`,
-      animationDuration: `${Math.random() * 3 + 2}s`
-    }));
-  });
+  // Stable random styles generated on mount (Optimized)
+  const particleStyles = ref<any[]>([]);
+  const floatingElementStyles = ref<any[]>([]);
+  const rayStyles = ref<any[]>([]);
   
-  const rayStyles = computed(() => {
-    return Array.from({ length: 6 }, (_, i) => ({
-      left: `${i * 20}%`,
-      width: '2px',
-      height: '100%',
-      animationDelay: `${i * 0.5}s`,
-      animationDuration: '4s'
-    }));
-  });
-  
-  const floatingElementStyles = computed(() => {
-    return Array.from({ length: 15 }, () => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 5}s`,
-      animationDuration: `${3 + Math.random() * 4}s`
-    }));
-  });
   
   const floatingIcons = ['lucide:star', 'lucide:sparkles', 'lucide:heart', 'lucide:zap'];
   
@@ -418,7 +394,7 @@
   };
   
   const handleVideoLoaded = () => {
-    // Video loaded successfully
+    isVideoLoaded.value = true;
   };
   
   const handleStatHover = (index: number) => {
@@ -438,30 +414,58 @@
   
   // Lifecycle hooks
   onMounted(() => {
-    // Auto-advance slides
+    // Generate styles once to avoid re-calculation overhead
+    particleStyles.value = Array.from({ length: 20 }, () => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      width: `${Math.random() * 3 + 1}px`,
+      height: `${Math.random() * 3 + 1}px`,
+      animationDelay: `${Math.random() * 3}s`,
+      animationDuration: `${Math.random() * 4 + 2}s`
+    }));
+  
+    rayStyles.value = Array.from({ length: 3 }, (_, i) => ({
+      left: `${i * 40 + 10}%`,
+      width: '2px',
+      height: '100%',
+      animationDelay: `${i * 0.8}s`,
+      animationDuration: '6s'
+    }));
+  
+    floatingElementStyles.value = Array.from({ length: 8 }, () => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 5}s`,
+      animationDuration: `${4 + Math.random() * 5}s`
+    }));
+  
+    // Optimized Parallax with requestAnimationFrame or throttling
+    let rafId: number;
+    const handleMouseMove = (e: MouseEvent) => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        if (containerRef.value) {
+          const rect = containerRef.value.getBoundingClientRect();
+          mousePosition.value = {
+            x: ((e.clientX - rect.left) / rect.width) * 2 - 1,
+            y: ((e.clientY - rect.top) / rect.height) * 2 - 1
+          };
+        }
+      });
+    };
+  
     const slideInterval = setInterval(() => {
       currentIndex.value = (currentIndex.value + 1) % slides.value.length;
       currentVideo.value = videos[currentIndex.value % videos.length];
-    }, 8000);
+    }, 10000);
   
-    // Mouse tracking for parallax
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.value) {
-        const rect = containerRef.value.getBoundingClientRect();
-        mousePosition.value = {
-          x: ((e.clientX - rect.left) / rect.width) * 2 - 1,
-          y: ((e.clientY - rect.top) / rect.height) * 2 - 1
-        };
-      }
-    };
-  
-    // Add event listeners
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     
     // Cleanup
     onUnmounted(() => {
       clearInterval(slideInterval);
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
     });
   });
   </script>

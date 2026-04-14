@@ -2,7 +2,6 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   ssr: false,
-  target: "static",
   app: {
     head: {
       title: "Makarios Initiative - Improving Lives Through Health and Humanitarian Projects",
@@ -92,6 +91,13 @@ export default defineNuxtConfig({
     prerender: {
       enabled: false
     }
+  },
+
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
   },
 
   compatibilityDate: "2025-02-01",

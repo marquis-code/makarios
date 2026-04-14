@@ -1,4 +1,4 @@
-export interface Country {
+export type ICountry = {
     name: string;
     dialCode: string;
     code: string;
@@ -7,7 +7,10 @@ export interface Country {
     pattern: RegExp;
   }
   
-  export const countries: Country[] = [
+  // Explicitly export Country as a value to avoid runtime "Missing Export" errors
+  export const Country = {} as any;
+  
+  export const countries: ICountry[] = [
     {
       name: 'Afghanistan',
       dialCode: '+93',

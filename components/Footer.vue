@@ -187,7 +187,8 @@
 
 <script setup lang="ts">
 import { useCustomToast } from '@/composables/core/useCustomToast'
-import { countries, Country } from '@/types/country';
+import { countries, Country } from '@/data/countries';
+import type { ICountry } from '@/data/countries';
 import { computed, ref, watch } from 'vue';
 
 const { showToast } = useCustomToast()
@@ -226,7 +227,7 @@ const loading = ref(false);
 const showModal = ref(false);
 
 // Format phone number as user types based on country pattern
-const formatPhoneNumber = (value: string, country: Country) => {
+const formatPhoneNumber = (value: string, country: ICountry) => {
   // Remove all non-digit characters
   const numbers = value.replace(/\D/g, '');
   
@@ -271,9 +272,9 @@ const formatPhoneNumber = (value: string, country: Country) => {
 };
 
 // Watch for changes in phone input to format number
-watch([phoneInput, selectedCountry], ([newPhone, newCountry]) => {
-  if (phoneInput.value !== formatPhoneNumber(newPhone, newCountry)) {
-    phoneInput.value = formatPhoneNumber(newPhone, newCountry);
+watch([phoneInput, selectedCountry], ([newPhone, newICountry]) => {
+  if (phoneInput.value !== formatPhoneNumber(newPhone, newICountry)) {
+    phoneInput.value = formatPhoneNumber(newPhone, newICountry);
   }
 });
 
