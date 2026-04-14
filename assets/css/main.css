@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+html,
+body {
+  font-family: 'Onest', sans-serif;
+}
+
+* {
+  font-family: 'Onest', sans-serif;
+}
+
+h1 {
+  font-family: 'Onest', sans-serif;
+  font-weight: bold;
+}
+
+
 .bg-white {
   background-color: white;
 }

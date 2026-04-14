@@ -1,0 +1,1 @@
+import{$ as u,a0 as s,a1 as r,a2 as o,a3 as i,a4 as c}from"./DJCL2x3_.js";function n(t){const e=t||r();return e?.ssrContext?.head||e?.runWithContext(()=>{if(o())return i(c)})}function d(t,e={}){const a=n(e.nuxt);if(a)return s(t,{head:a,...e})}function x(t,e={}){const a=n(e.nuxt);if(a)return u(t,{head:a,...e})}function h(t,e={}){if(n(e.nuxt))return!1}export{h as a,x as b,d as u};

@@ -1,0 +1,15 @@
+# robots.txt for goMakarios Initiative.io
+User-agent: *
+Allow: /
+
+# Allow important content directories
+Allow: /news/
+Allow: /register/
+Allow: /safe-passage/
+Allow: /images/
+
+# Set crawl delay for all bots
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://makariosinitiative.org/sitemap.xml
