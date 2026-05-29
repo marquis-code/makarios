@@ -6,10 +6,10 @@
 
     <div class="container mx-auto px-6 py-32 relative z-10">
       <div class="max-w-4xl mb-24 space-y-6">
-        <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-xs uppercase tracking-[0.3em] rounded-full">
+        <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-xs  -[0.3em] rounded-full">
            Global Events
         </span>
-        <h1 class="text-6xl md:text-7xl font-black text-brand-dark tracking-tighter leading-none">
+        <h1 class="text-6xl md:text-7xl font-black text-brand-dark -tighter leading-none">
            Scientific <span class="text-gradient">Convergences</span>.
         </h1>
         <p class="text-xl text-slate-500 max-w-2xl font-medium leading-relaxed">
@@ -29,10 +29,10 @@
           <div class="lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center relative z-30">
             <div class="flex items-center gap-4 mb-8">
                <span class="w-12 h-[1px] bg-brand-cyan"></span>
-               <span class="text-xs font-black uppercase tracking-[0.4em] text-brand-cyan">Next Major Event</span>
+               <span class="text-xs font-black  -[0.4em] text-brand-cyan">Next Major Event</span>
             </div>
             
-            <h3 class="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">THE 2ND INTERNATIONAL <br/> CONGRES 2026.</h3>
+            <h3 class="text-4xl md:text-5xl font-black text-white mb-8 -tighter leading-tight">THE 2ND INTERNATIONAL <br/> CONGRES 2026.</h3>
             
             <p class="text-lg text-slate-400 mb-10 leading-relaxed font-medium">
               Join elite practitioners in Abuja for an intensive exploration of "Strengthening Laboratory Capacity in Africa" through the lens of modern oncology diagnosis.
@@ -40,14 +40,14 @@
 
             <div class="grid grid-cols-2 gap-10 mb-12">
                <div class="space-y-2">
-                 <p class="text-[10px] text-brand-cyan font-black uppercase tracking-widest">Date Range</p>
+                 <p class="text-[10px] text-brand-cyan font-black  -widest">Date Range</p>
                  <div class="flex items-center gap-3 text-white">
                     <LucideCalendar :size="18" class="text-brand-cyan" />
                     <p class="text-lg font-bold">Sept 27 — 30, 2026</p>
                  </div>
                </div>
                <div class="space-y-2">
-                 <p class="text-[10px] text-brand-cyan font-black uppercase tracking-widest">Venue</p>
+                 <p class="text-[10px] text-brand-cyan font-black  -widest">Venue</p>
                  <div class="flex items-center gap-3 text-white">
                     <LucideMapPin :size="18" class="text-brand-cyan" />
                     <p class="text-lg font-bold">Abuja — Nigeria</p>
@@ -65,8 +65,9 @@
 
       <!-- Past Conferences Heading -->
       <div class="flex items-center justify-between mb-16 px-2">
-         <h3 class="text-3xl font-black text-brand-dark tracking-tighter">Event Archives</h3>
-         <NuxtLink to="/" class="text-xs font-black uppercase tracking-[0.2em] text-brand-cyan flex items-center gap-2 group">
+         <h3 class="text-3xl font-black text-brand-dark -tighter">Event Archives</h3>
+         {{ conferences }}
+         <NuxtLink to="/" class="text-xs font-black  -[0.2em] text-brand-cyan flex items-center gap-2 group">
             View All History
             <LucideArrowRight :size="16" class="group-hover:translate-x-1 transition-transform" />
          </NuxtLink>
@@ -79,12 +80,12 @@
            <div class="h-2/3 overflow-hidden relative">
               <img :src="conference.image || 'https://scpsn.org.ng/wp-content/uploads/2021/10/banner.jpg'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" :alt="conference.title" />
               <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-all"></div>
-              <div class="absolute top-6 right-6 h-10 px-4 glass-dark rounded-xl flex items-center text-[10px] font-black text-white uppercase tracking-widest">
+              <div class="absolute top-6 right-6 h-10 px-4 glass-dark rounded-xl flex items-center text-[10px] font-black text-white  -widest">
                  {{ conference.date.split(',')[1]?.trim() || 'Archive' }}
               </div>
            </div>
            <div class="p-8 space-y-4">
-              <p class="text-[10px] font-black text-brand-cyan uppercase tracking-[0.2em]">{{ conference.date }}</p>
+              <p class="text-[10px] font-black text-brand-cyan  -[0.2em]">{{ conference.date }}</p>
               <h4 class="text-xl font-bold text-brand-dark leading-tight group-hover:text-brand-cyan transition-colors line-clamp-2">
                 {{ conference.title }}
               </h4>

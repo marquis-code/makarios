@@ -1,22 +1,56 @@
-import { ref } from 'vue';
+import { ref, shallowRef, onMounted, h } from 'vue'
+import ToastComponent from '@/components/core/Toast.vue'
+
+type ToastType = 'success' | 'error' | 'warning' | 'info'
 
 export interface ToastOptions {
-  title: string;
-  message: string;
-  toastType?: 'success' | 'error' | 'info' | 'warning';
-  duration?: number;
+  title: string
+  message: string
+  toastType: ToastType
+  duration?: number
 }
 
-export const useCustomToast = () => {
-  const showToast = (options: ToastOptions) => {
-    // In a real implementation with a toast library like vue-toastification
-    // we would call the library function here.
-    // For now, we use a basic reactive state or browser alert/log.
-    console.log(`[TOAST - ${options.toastType || 'info'}]: ${options.title} - ${options.message}`);
-    
-    // Example using a simple alert for visibility during dev if no library is linked
-    // alert(`${options.title}: ${options.message}`);
-  };
+// Create a singleton instance
+let toastApp: any = null
+let toastInstance: any = null
 
-  return { showToast };
-};
+export const useCustomToast = () => {
+  // Initialize toast on first call
+  const ensureToastInitialized = async () => {
+    if (!toastApp && typeof window !== 'undefined') {
+      const { createApp } = await import('vue');
+      // Create container
+      const toastContainer = document.createElement('div')
+      toastContainer.id = 'toast-container'
+      document.body.appendChild(toastContainer)
+      
+      // Create app instance
+      toastApp = createApp(ToastComponent)
+      toastInstance = toastApp.mount('#toast-container')
+    }
+  }
+  
+  // Show toast function
+  const showToast = async (options: ToastOptions) => {
+    if (typeof window === 'undefined') return;
+    
+    await ensureToastInitialized();
+    
+    if (!toastInstance) {
+      console.error('Toast component not initialized')
+      return
+    }
+    
+    const { title, message, toastType, duration = 5000 } = options
+    
+    // Map toastType to the type expected by the component
+    const type = toastType as ToastType
+    
+    // Call the exposed method
+    return toastInstance.showToast(title, message, type, duration)
+  }
+  
+  return {
+    showToast
+  }
+}

@@ -38,8 +38,12 @@ export default {
         sans: ['Inter', 'Roboto', 'sans-serif'],
       },
       boxShadow: {
-        'premium': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
-        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        'premium': 'none',
+        'glass': 'none',
+        sm: 'none', DEFAULT: 'none', md: 'none', lg: 'none', xl: 'none', '2xl': 'none', inner: 'none'
+      },
+      dropShadow: {
+        sm: 'none', DEFAULT: 'none', md: 'none', lg: 'none', xl: 'none', '2xl': 'none'
       }
     },
   },

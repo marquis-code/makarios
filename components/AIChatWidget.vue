@@ -34,7 +34,7 @@
 
     <!-- WhatsApp-style Chat Window Container -->
     <transition
-      enter-active-class="transition duration-400 cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+      enter-active-class="transition duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275)"
       enter-from-class="transform translate-y-20 opacity-0 scale-90"
       enter-to-class="transform translate-y-0 opacity-100 scale-100"
       leave-active-class="transition duration-300 ease-in"
@@ -260,7 +260,7 @@
                <p class="text-[11px] font-bold text-slate-500 mb-6 uppercase tracking-widest">Your session is inactive.</p>
                <div class="flex gap-3">
                  <button @click="markActive" class="flex-1 py-3 bg-[#075E54] text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-[#128C7E] transition-all">Continue</button>
-                 <button @click="endSession" class="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-slate-200 transition-all">End Session</button>
+                 <button @click="endSession" class="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-slate-200 transition-all">Logout</button>
                </div>
             </div>
           </div>
