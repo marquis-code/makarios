@@ -22,7 +22,7 @@
         leave-to-class="opacity-0 translate-x-10"
       >
         <div v-if="showProactiveTooltip && !isOpen" class="absolute right-20 bottom-2 bg-white text-slate-800 px-5 py-3 rounded-2xl text-[11px] font-bold shadow-2xl border border-slate-100 whitespace-nowrap min-w-[200px]">
-           <p class="text-[#075E54] mb-1 flex items-center gap-1.5 uppercase tracking-widest text-[9px]">
+           <p class="text-[#075E54] mb-1 flex items-center gap-1.5  text-[9px]">
              <span class="w-1.5 h-1.5 bg-[#25D366] rounded-full animate-pulse"></span>
              Contextual Support
            </p>
@@ -52,15 +52,15 @@
               <Icon name="lucide:bot" size="24" class="text-white/90" />
             </div>
             <div>
-              <h4 class="font-extrabold text-sm leading-tight uppercase tracking-tight">SCPSN Smart Bot</h4>
-              <p class="text-[9px] text-white/60 flex items-center gap-1.5 font-black uppercase tracking-[0.2em] mt-0.5">
+              <h4 class="font-extrabold text-base leading-tight  tracking-tight">SCPSN Smart Bot</h4>
+              <p class="text-[9px] text-white/60 flex items-center gap-1.5 font-black  tracking-[0.2em] mt-0.5">
                 <span class="w-2 h-2 bg-[#25D366] rounded-full animate-pulse"></span>
                 Active & Diagnostic
               </p>
             </div>
           </div>
           <div class="flex gap-1">
-            <button @click="requestTransfer" class="text-[9px] font-black uppercase tracking-widest bg-white/20 hover:bg-[#25D366] transition-all px-3 py-1.5 rounded-xl shadow-inner border border-white/10 shrink-0">
+            <button @click="requestTransfer" class="text-[9px] font-black  bg-white/20 hover:bg-[#25D366] transition-all px-3 py-1.5 rounded-xl shadow-inner border border-white/10 shrink-0">
                Live Agent
             </button>
           </div>
@@ -74,12 +74,12 @@
            
            <div class="text-center mb-10">
              <h5 class="text-xl font-black text-slate-800 tracking-tight mb-2">Initialize Session</h5>
-             <p class="text-xs font-bold text-slate-400 uppercase tracking-widest leading-relaxed">Please provide your details to<br/>access live administrative support.</p>
+             <p class="text-xs font-bold text-slate-400  leading-relaxed">Please provide your details to<br/>access live administrative support.</p>
            </div>
 
            <div class="w-full space-y-4">
              <div class="space-y-1.5">
-               <label class="text-[10px] font-black text-[#075E54] uppercase tracking-widest ml-1">Full Name</label>
+               <label class="text-[10px] font-black text-[#075E54]  ml-1">Full Name</label>
                <input 
                  v-model="guestName"
                  placeholder="e.g. Dr. Adamu"
@@ -88,7 +88,7 @@
              </div>
              
              <div class="space-y-1.5">
-               <label class="text-[10px] font-black text-[#075E54] uppercase tracking-widest ml-1">Email Address</label>
+               <label class="text-[10px] font-black text-[#075E54]  ml-1">Email Address</label>
                <input 
                  v-model="guestEmail"
                  type="email"
@@ -106,7 +106,7 @@
              </button>
            </div>
            
-           <p class="mt-10 text-[9px] font-bold text-slate-300 uppercase tracking-widest flex items-center gap-2">
+           <p class="mt-10 text-[9px] font-bold text-slate-300  flex items-center gap-2">
              <Icon name="lucide:shield-check" size="12" />
              End-to-End Encrypted Handshake
            </p>
@@ -117,7 +117,7 @@
           <!-- Messages Area -->
           <div class="flex-grow overflow-y-auto p-5 pb-8 space-y-4 z-10 scrollbar-thin scroll-smooth" ref="messageArea">
             <div class="flex justify-center my-6">
-               <span class="bg-[#D1E9FF]/90 backdrop-blur-sm shadow-md text-[9px] font-black text-[#075E54] px-4 py-1.5 rounded-xl uppercase tracking-[0.2em]">
+               <span class="bg-[#D1E9FF]/90 backdrop-blur-sm shadow-md text-[9px] font-black text-[#075E54] px-4 py-1.5 rounded-xl  tracking-[0.2em]">
                  Session Established
                </span>
             </div>
@@ -146,18 +146,18 @@
                     <img v-if="att.startsWith('data:image')" :src="att" class="w-full max-h-[300px] object-cover cursor-pointer hover:opacity-90 transition-opacity" />
                     <div v-else class="p-4 flex items-center gap-3 cursor-pointer hover:bg-black/5 transition-colors">
                       <Icon name="lucide:file" size="24" class="text-[#075E54] opacity-80" />
-                      <span class="text-[10px] font-bold text-slate-700 uppercase tracking-widest truncate">Attached Document</span>
+                      <span class="text-[10px] font-bold text-slate-700  truncate">Attached Document</span>
                     </div>
                  </div>
               </div>
 
               <!-- Page Source Label (if exists) -->
-              <div v-if="msg.pageTitle && msg.sender !== 'admin'" class="text-[8px] font-black text-[#075E54]/40 uppercase tracking-widest mb-2 pb-1 border-b border-black/5 flex items-center gap-1">
+              <div v-if="msg.pageTitle && msg.sender !== 'admin'" class="text-[8px] font-black text-[#075E54]/40  mb-2 pb-1 border-b border-black/5 flex items-center gap-1">
                  <Icon name="lucide:globe" size="10" />
                  From: {{ msg.pageTitle }}
               </div>
 
-              <div v-if="msg.sender !== 'user'" class="text-[9px] font-black text-[#075E54]/60 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+              <div v-if="msg.sender !== 'user'" class="text-[9px] font-black text-[#075E54]/60  mb-1.5 flex items-center gap-1">
                  <Icon v-if="msg.sender === 'ai'" name="lucide:bot" size="12" class="text-emerald-500" />
                  {{ msg.senderName || 'SCPSN Intelligence' }}
               </div>
@@ -165,7 +165,7 @@
               <p class="font-medium whitespace-pre-wrap tracking-tight">{{ msg.text }}</p>
 
               <div class="flex items-center justify-end gap-1.5 mt-2 opacity-60">
-                <span class="text-[9px] font-bold uppercase tracking-tighter">{{ formatTime(msg.createdAt) }}</span>
+                <span class="text-[9px] font-bold  tracking-tighter">{{ formatTime(msg.createdAt) }}</span>
                 <div v-if="msg.sender === 'user'" class="flex items-center">
                    <Icon v-if="msg.status === 'read'" name="lucide:check-check" size="12" class="text-sky-500" />
                    <Icon v-else-if="msg.status === 'delivered'" name="lucide:check-check" size="12" class="text-slate-400" />
@@ -242,11 +242,11 @@
                   <Icon name="lucide:star" size="32" class="text-[#075E54]" />
                </div>
                <h3 class="text-xl font-black text-slate-800 tracking-tight mb-2">Rate Your Session</h3>
-               <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">How was the support quality?</p>
+               <p class="text-xs font-bold text-slate-400  mb-8">How was the support quality?</p>
                <div class="flex gap-2 mb-8">
                  <button v-for="star in 5" :key="star" @click="submitRating(star)" class="text-4xl text-slate-300 hover:text-yellow-400 hover:scale-110 transition-all focus:text-yellow-400">★</button>
                </div>
-               <button @click="closeRating" class="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-600 underline">Skip & Close</button>
+               <button @click="closeRating" class="text-[10px] font-black text-slate-400  hover:text-slate-600 underline">Skip & Close</button>
             </div>
           </div>
           
@@ -257,10 +257,10 @@
                   <Icon name="lucide:clock-4" size="24" class="text-amber-500" />
                </div>
                <h4 class="text-lg font-black text-slate-800 mb-2">Are you still there?</h4>
-               <p class="text-[11px] font-bold text-slate-500 mb-6 uppercase tracking-widest">Your session is inactive.</p>
+               <p class="text-[11px] font-bold text-slate-500 mb-6 ">Your session is inactive.</p>
                <div class="flex gap-3">
-                 <button @click="markActive" class="flex-1 py-3 bg-[#075E54] text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-[#128C7E] transition-all">Continue</button>
-                 <button @click="endSession" class="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-slate-200 transition-all">Logout</button>
+                 <button @click="markActive" class="flex-1 py-3 bg-[#075E54] text-white rounded-xl text-[10px] font-black  tracking-[0.2em] hover:bg-[#128C7E] transition-all">Continue</button>
+                 <button @click="endSession" class="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black  tracking-[0.2em] hover:bg-slate-200 transition-all">Logout</button>
                </div>
             </div>
           </div>
@@ -288,7 +288,7 @@ const pendingAttachments = ref([])
 const fileInputClient = ref(null)
 const commonEmojis = ['👋', '👍', '😊', '✅', '🔬', '🏥', '📅', '💡', '⚠️', '📎', '👏', '🎉']
 
-// Activity Tracking
+// Activity 
 const showIdleWarning = ref(false)
 const showRating = ref(false)
 let idleTimer = null

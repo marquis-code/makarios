@@ -19,7 +19,7 @@
 
         <!-- Text Indicator -->
         <div class="flex flex-col items-center">
-          <h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-brand-blue mb-1">SCPSN Scientific Portal</h2>
+          <h2 class="text-[11px] font-black  -[0.4em] text-brand-blue mb-1">SCPSN Scientific Portal</h2>
           <div class="flex gap-1.5 mt-2">
             <span v-for="i in 3" :key="i" class="w-1.5 h-1.5 bg-brand-cyan rounded-full animate-bounce" :style="{ animationDelay: `${i * 150}ms` }"></span>
           </div>

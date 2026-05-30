@@ -1,16 +1,22 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { cms_api } from '@/api_factory/modules/cms'
-
 export const useCMS = () => {
   const cmsConfig = useState('cms_config', () => null)
   const loading = ref(false)
+  
+  // Try to use i18n, but gracefully handle if it's not available yet
+  let currentLocale = ref('en')
+  try {
+        currentLocale = locale
+  } catch (e) {
+    // fallback if used outside component setup
+  }
 
-  const loadCMS = async () => {
-    if (cmsConfig.value) return cmsConfig.value
-    
+  const loadCMS = async (forceLang?: string) => {
+    const langToUse = forceLang || currentLocale.value
     loading.value = true
     try {
-      const res = await cms_api.getConfig()
+      const res = await cms_api.getConfig(langToUse)
       cmsConfig.value = res.data
       return res.data
     } catch (error) {
@@ -20,6 +26,13 @@ export const useCMS = () => {
       loading.value = false
     }
   }
+
+  // Reload CMS when language changes
+  try {
+        watch(locale, (newLang) => {
+      loadCMS(newLang)
+    })
+  } catch (e) {}
 
   return {
     loading,

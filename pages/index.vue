@@ -14,7 +14,7 @@
         <div class="absolute inset-0 z-20 container mx-auto px-6 flex flex-col justify-center">
           <div class="max-w-4xl space-y-6 md:space-y-10" :class="activeSlide === index ? 'translate-y-0 opacity-100 transition-all duration-1000 delay-500' : 'translate-y-20 opacity-0'">
              <div class="flex">
-               <span class="px-5 py-2 glass text-brand-cyan font-black text-[10px] uppercase tracking-[0.3em] rounded-full border border-white/20">
+               <span class="px-5 py-2 glass text-brand-cyan font-black text-sm  tracking-[0.3em] rounded-full border border-white/20">
                  {{ slide.tag }}
                </span>
              </div>
@@ -52,7 +52,7 @@
                    <component :is="item.icon" :size="24" />
                 </div>
                 <div>
-                   <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">{{ item.tag }}</p>
+                   <p class="text-sm font-black  text-slate-400">{{ item.tag }}</p>
                    <p class="text-white font-bold">{{ item.label }}</p>
                 </div>
              </div>
@@ -62,8 +62,64 @@
                    <component :is="item.icon" :size="24" />
                 </div>
                 <div>
-                   <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">{{ item.tag }}</p>
+                   <p class="text-sm font-black  text-slate-400">{{ item.tag }}</p>
                    <p class="text-white font-bold">{{ item.label }}</p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+
+    <!-- AdBanner: BELOW_HERO -->
+    <section v-if="groupedAdverts.BELOW_HERO?.length" class="bg-white pt-16 pb-8">
+      <div class="container mx-auto px-6">
+        <AdBanner :adverts="groupedAdverts.BELOW_HERO" />
+      </div>
+    </section>
+
+    <!-- Upcoming Event Section -->
+    <section v-if="upcomingEvent" class="py-16 bg-white relative border-b border-slate-100">
+       <div class="container mx-auto px-6">
+          <div class="glass-dark bg-[#0f172a] rounded-[3rem] overflow-hidden border border-slate-800 shadow-2xl">
+             <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div class="p-12 lg:p-16 flex flex-col justify-center text-white">
+                   <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-cyan/20 text-brand-cyan rounded-full text-base font-black uppercase tracking-widest mb-8 w-max">
+                      <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                      Upcoming Event
+                   </div>
+                   <h2 class="text-4xl lg:text-5xl font-black tracking-tighter mb-6 leading-tight">
+                      {{ upcomingEvent.title }}
+                   </h2>
+                   <p class="text-slate-400 text-lg mb-8 line-clamp-3">
+                      {{ upcomingEvent.description }}
+                   </p>
+                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                      <div class="flex items-start gap-4">
+                         <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-brand-cyan shrink-0">
+                            <LucideCalendar :size="20" />
+                         </div>
+                         <div>
+                            <p class="text-sm font-black text-slate-500 uppercase tracking-widest mb-1">Date & Time</p>
+                            <p class="font-bold text-slate-200">{{ new Date(upcomingEvent.startDate).toLocaleDateString() }}</p>
+                         </div>
+                      </div>
+                      <div class="flex items-start gap-4">
+                         <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-brand-cyan shrink-0">
+                            <LucideMapPin :size="20" />
+                         </div>
+                         <div>
+                            <p class="text-sm font-black text-slate-500 uppercase tracking-widest mb-1">Location</p>
+                            <p class="font-bold text-slate-200">{{ upcomingEvent.venue }}</p>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="flex items-center gap-4">
+                      <NuxtLink to="/conferences" class="btn-premium">Register Now</NuxtLink>
+                   </div>
+                </div>
+                <div class="relative min-h-[400px] lg:min-h-full">
+                   <img :src="upcomingEvent.bannerImage" :alt="upcomingEvent.title" class="absolute inset-0 w-full h-full object-cover" />
+                   <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-transparent to-transparent"></div>
                 </div>
              </div>
           </div>
@@ -91,7 +147,7 @@
                    <component :is="p.icon" :size="28" />
                 </div>
                 <h3 class="text-2xl font-black text-brand-blue mb-4 leading-tight">{{ p.title }}</h3>
-                <p class="text-slate-500 leading-relaxed font-medium text-sm">{{ p.desc }}</p>
+                <p class="text-slate-500 leading-relaxed font-medium text-base">{{ p.desc }}</p>
              </div>
           </div>
        </div>
@@ -108,10 +164,17 @@
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
              <div v-for="s in activeStats" :key="s.label" class="text-center animate-on-scroll">
                 <div class="text-6xl font-black text-white tracking-tighter">{{ s.value }}<span class="text-brand-cyan">+</span></div>
-                <div class="text-xs font-black uppercase tracking-[0.3em] text-brand-cyan">{{ s.label }}</div>
+                <div class="text-base font-black  tracking-[0.3em] text-brand-cyan">{{ s.label }}</div>
              </div>
           </div>
        </div>
+    </section>
+
+    <!-- AdBanner: IN_CONTENT_1 -->
+    <section v-if="groupedAdverts.IN_CONTENT_1?.length" class="bg-white py-16">
+      <div class="container mx-auto px-6">
+        <AdBanner :adverts="groupedAdverts.IN_CONTENT_1" />
+      </div>
     </section>
 
     <!-- Cinematic Video Section -->
@@ -139,7 +202,7 @@
              <div class="pt-6">
                 <div class="inline-flex items-center gap-4 px-6 py-2 glass-dark rounded-full">
                    <span class="w-2 h-2 bg-brand-red rounded-full animate-ping"></span>
-                   <span class="text-[10px] font-black text-white uppercase tracking-widest leading-none">SCPSN Documentary Premiering 2026</span>
+                   <span class="text-sm font-black text-white  leading-none">SCPSN Documentary Premiering 2026</span>
                 </div>
              </div>
           </div>
@@ -186,9 +249,9 @@
                       </div>
                       <div class="space-y-4">
                          <h3 class="text-2xl font-black text-brand-blue group-hover:text-white transition-colors leading-tight">{{ ini.title }}</h3>
-                         <p class="text-slate-500 group-hover:text-slate-200 transition-colors font-medium text-sm leading-relaxed">{{ ini.desc }}</p>
+                         <p class="text-slate-500 group-hover:text-slate-200 transition-colors font-medium text-base leading-relaxed">{{ ini.desc }}</p>
                       </div>
-                      <NuxtLink :to="ini.to" class="flex items-center gap-3 text-xs font-black text-brand-red group-hover:text-brand-cyan transition-colors uppercase tracking-widest pt-4">
+                      <NuxtLink :to="ini.to" class="flex items-center gap-3 text-base font-black text-brand-red group-hover:text-brand-cyan transition-colors  pt-4">
                          Exploration
                          <LucideArrowRight :size="16" />
                       </NuxtLink>
@@ -199,10 +262,31 @@
        </div>
     </section>
 
-    <!-- Global Partnerships Marquee -->
-    <section class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
+    <!-- Dynamic Sponsors Marquee -->
+    <section v-if="sponsors.length > 0" class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
        <div class="container mx-auto px-6 mb-10 text-center">
-          <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Global Scientific Collaborations</p>
+          <p class="text-sm font-black text-slate-400  -[0.4em]">Global Scientific Collaborations & Sponsors</p>
+       </div>
+       <div class="flex items-center gap-16 animate-marquee whitespace-nowrap opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-500 px-10">
+          <div v-for="n in 10" :key="n" class="flex items-center gap-16">
+             <template v-for="sponsor in sponsors" :key="sponsor._id">
+                <a v-if="sponsor.websiteUrl" :href="sponsor.websiteUrl" target="_blank" class="block">
+                   <img v-if="sponsor.logoUrl" :src="sponsor.logoUrl" :alt="sponsor.name" class="h-12 object-contain" />
+                   <span v-else class="text-3xl font-black text-slate-300 tracking-tighter">{{ sponsor.name }}</span>
+                </a>
+                <div v-else>
+                   <img v-if="sponsor.logoUrl" :src="sponsor.logoUrl" :alt="sponsor.name" class="h-12 object-contain" />
+                   <span v-else class="text-3xl font-black text-slate-300 tracking-tighter">{{ sponsor.name }}</span>
+                </div>
+             </template>
+          </div>
+       </div>
+    </section>
+    
+    <!-- Static Marquee Fallback if no sponsors -->
+    <section v-else class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
+       <div class="container mx-auto px-6 mb-10 text-center">
+          <p class="text-sm font-black text-slate-400  -[0.4em]">Global Scientific Collaborations</p>
        </div>
        <div class="flex items-center gap-16 animate-marquee whitespace-nowrap opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-500 px-10">
           <div v-for="n in 10" :key="n" class="flex items-center gap-16 grayscale">
@@ -222,20 +306,27 @@
              <h2 class="text-5xl font-black text-brand-blue tracking-tighter">Member <span class="text-brand-red">Tiers</span></h2>
              <p class="text-slate-500 font-medium">Join our global community of scientific experts.</p>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-10">
              <div v-for="(tier, i) in activeTiers" :key="i" class="p-12 rounded-[3rem] border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 group">
                 <h3 class="text-2xl font-black text-brand-blue mb-2">{{ tier.title }}</h3>
-                <div class="text-4xl font-black text-brand-cyan mb-8">₦{{ tier.price }}<span class="text-xs text-slate-400 font-bold">/year</span></div>
+                <div class="text-4xl font-black text-brand-cyan mb-8">₦{{ tier.price }}<span class="text-base text-slate-400 font-bold">/year</span></div>
                 <ul class="space-y-4 mb-10">
-                   <li v-for="feat in tier.features" :key="feat" class="flex items-center gap-3 text-sm font-medium text-slate-500">
+                   <li v-for="feat in tier.features" :key="feat" class="flex items-center gap-3 text-base font-medium text-slate-500">
                       <LucideShieldCheck class="text-emerald-500" :size="16" />
                       {{ feat }}
                    </li>
                 </ul>
-                <NuxtLink to="/membership" class="block w-full py-4 text-center bg-brand-blue text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-red transition-colors">Join Now</NuxtLink>
+                <NuxtLink to="/membership" class="block w-full py-4 text-center bg-brand-blue text-white rounded-2xl text-base font-black  hover:bg-brand-red transition-colors">Join Now</NuxtLink>
              </div>
           </div>
        </div>
+    </section>
+
+    <!-- AdBanner: ABOVE_FOOTER -->
+    <section v-if="groupedAdverts.ABOVE_FOOTER?.length" class="bg-slate-50 pt-16 pb-8">
+      <div class="container mx-auto px-6">
+        <AdBanner :adverts="groupedAdverts.ABOVE_FOOTER" />
+      </div>
     </section>
 
     <!-- Leadership & Scientific Board Preview -->
@@ -260,7 +351,7 @@
                 </div>
 
                 <div class="absolute bottom-8 left-8 right-8 z-20">
-                   <p class="text-brand-cyan font-black uppercase tracking-[0.2em] text-[8px] mb-1.5">{{ member.designation || 'Board Member' }}</p>
+                   <p class="text-brand-cyan font-black  tracking-[0.2em] text-[8px] mb-1.5">{{ member.designation || 'Board Member' }}</p>
                    <h3 class="text-xl font-black text-white leading-tight">{{ member.fullName }}</h3>
                 </div>
              </div>
@@ -279,6 +370,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useGetBoardMembers } from '@/composables/modules/members/useGetBoardMembers'
+import { useAdverts } from '@/composables/modules/adverts/useAdverts'
+import { useSponsors } from '@/composables/modules/sponsors/useSponsors'
+import { useGetConferences } from '@/composables/modules/conferences/useGetConferences'
 import { useCMS } from '@/composables/useCMS'
 import hero1 from "@/assets/images/hero1.jpg"
 import hero2 from "@/assets/images/hero2.jpg"
@@ -287,6 +381,13 @@ import hero3 from "@/assets/images/hero3.jpg"
 const { cmsConfig } = useCMS()
 
 const { loading: loadingBoard, boardMembers, getBoardMembers } = useGetBoardMembers()
+const { groupedAdverts, fetchAdverts } = useAdverts()
+const { sponsors, fetchSponsors } = useSponsors()
+const { loading: loadingConferences, conferences, getConferences } = useGetConferences()
+
+const upcomingEvent = computed(() => {
+  return conferences.value.find(c => c.status === 'upcoming') || null
+})
 import { 
     LucideMicroscope, 
     LucideFlaskConical, 
@@ -301,8 +402,18 @@ import {
     LucidePlayCircle,
     LucideArrowLeft,
     LucideArrowRight,
-    LucideShieldCheck
+    LucideShieldCheck,
+    LucideUser,
+    LucideMapPin
 } from 'lucide-vue-next'
+
+const marqueeItems = ref([
+  { tag: 'Focus', label: 'Precision Diagnostics', icon: LucideMicroscope },
+  { tag: 'Focus', label: 'Cellular Analysis', icon: LucideFlaskConical },
+  { tag: 'Focus', label: 'Molecular Research', icon: LucideDna },
+  { tag: 'Focus', label: 'Global Collaboration', icon: LucideGlobe },
+  { tag: 'Focus', label: 'Professional Training', icon: LucideGraduationCap }
+])
 
 const activeSlide = ref(0)
 let timer = null
@@ -391,13 +502,15 @@ const activeTiers = computed(() => {
     return cmsConfig.value.public.home.tiers
   }
   return [
-    { title: 'Full Member', price: '50,000', features: ['Voting rights', 'Journal access', 'Conference discounts'] },
-    { title: 'Associate Member', price: '30,000', features: ['Journal access', 'Resource vault'] },
-    { title: 'Student Member', price: '10,000', features: ['Learning materials', 'Mentorship'] }
+    { title: 'New Registration', price: '20,000', features: ['Full association membership', 'Voting rights', 'Journal access', 'Conference discounts'] },
+    { title: 'Membership Renewal', price: '10,000', features: ['Maintain active status', 'Continuous journal access', 'Resource vault', 'Mentorship'] }
   ]
 })
 
 onMounted(() => {
+  fetchAdverts()
+  fetchSponsors()
+  getConferences()
   // Intersection Observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

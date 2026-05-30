@@ -4,7 +4,7 @@
       <LucideInbox :size="40" stroke-width="1" />
     </div>
     <h3 class="text-xl font-black text-brand-blue mb-2">{{ title }}</h3>
-    <p class="text-slate-500 max-w-sm mb-8 leading-relaxed font-medium text-sm">{{ message }}</p>
+    <p class="text-slate-500 max-w-sm mb-8 leading-relaxed font-medium text-base">{{ message }}</p>
     <slot>
       <NuxtLink v-if="action" :to="action.to" class="btn-premium px-8 py-3 text-[10px]">
         {{ action.label }}

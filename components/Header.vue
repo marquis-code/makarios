@@ -28,7 +28,7 @@
             <span class="text-[15px] font-black tracking-tight text-white">
               {{ cmsConfig?.global?.siteName || 'SCPSN' }}
             </span>
-            <span class="text-[8px] font-extrabold tracking-[0.3em] text-brand-cyan uppercase">Nigeria</span>
+            <span class="text-[8px] font-extrabold tracking-[0.3em] text-brand-cyan ">Nigeria</span>
           </div>
         </NuxtLink>
 
@@ -92,7 +92,7 @@
                         <span v-else class="text-[11px] font-black">{{ child.label.charAt(0) }}</span>
                       </div>
                       <div class="flex flex-col gap-0.5">
-                        <span class="text-[11px] font-black text-white tracking-wider uppercase leading-none">{{ child.label }}</span>
+                        <span class="text-[11px] font-black text-white tracking-wider  leading-none">{{ child.label }}</span>
                         <span v-if="child.description" class="text-[9px] text-white/40 tracking-wide">{{ child.description }}</span>
                       </div>
                     </NuxtLink>
@@ -103,16 +103,18 @@
           </template>
         </div>
 
-        <!-- ── Desktop CTA ── -->
+        <!-- ── Desktop CTA & Lang Switcher ── -->
         <div class="hidden lg:flex items-center gap-2.5">
+
+
           <NuxtLink to="/appointments" class="cta-ghost group flex items-center gap-2">
             <LucideCalendar :size="13" class="group-hover:rotate-12 transition-transform duration-300" />
             <span>Bookings</span>
           </NuxtLink>
-          <NuxtLink to="http://localhost:3003" class="cta-solid flex items-center gap-2">
+          <a href="https://member.scpsn.com/" class="cta-solid flex items-center gap-2">
             <LucideUser :size="13" />
             <span>Become a Member</span>
-          </NuxtLink>
+          </a>
         </div>
 
         <!-- ── Mobile hamburger ── -->
@@ -144,6 +146,8 @@
         <!-- Ambient blobs -->
         <div class="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-brand-cyan/8 rounded-full blur-[120px]"></div>
         <div class="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[100px]"></div>
+
+        
 
         <!-- Links -->
         <nav class="flex flex-col gap-0 relative z-10">
@@ -230,7 +234,7 @@
 
           <div class="flex items-center justify-between pt-4 border-t border-white/5">
             <div>
-              <p class="text-[8px] font-black tracking-[0.3em] text-white/30 uppercase mb-1">Official Inquiries</p>
+              <p class="text-[8px] font-black tracking-[0.3em] text-white/30  mb-1">Official Inquiries</p>
               <p class="text-[11px] font-bold text-white tracking-wide">info@scpsn.org.ng</p>
             </div>
             <a href="#" class="w-10 h-10 rounded-xl glass-btn flex items-center justify-center hover:text-brand-cyan hover:border-brand-cyan/30 transition-all">
@@ -251,10 +255,10 @@ import {
   LucideChevronDown,
   LucideBookOpen,
   LucideUsers,
+  LucideGlobe
 } from 'lucide-vue-next'
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useCMS } from '@/composables/useCMS'
-
 const { cmsConfig } = useCMS()
 const route = useRoute()
 
@@ -308,18 +312,20 @@ watch(() => route.path, () => {
   activeDropdown.value = null
 })
 
-const navigation = [
-  { label: 'Home', to: '/' },
+const navigation = computed(() => [
+  // { label: 'Home', to: '/' },
   {
     label: 'Science',
     children: [
-      { label: 'Board', to: '/about', icon: LucideUsers, description: 'Our scientific excellence' },
-      { label: 'Abstracts', to: '/abstracts', icon: LucideBookOpen, description: 'Research and publications' },
+      { label: 'Scientific Board', to: '/about', icon: LucideUsers, description: 'Our Scientific Excellence' },
+      { label: 'Abstracts & Journals', to: '/abstracts', icon: LucideBookOpen, description: 'Research and Publications' },
     ]
   },
   { label: 'Events', to: '/conferences' },
+  { label: 'Newsletters', to: '/newsletters' },
+  { label: 'Gallery', to: '/gallery' },
   { label: 'Contact', to: '/contact' },
-]
+])
 </script>
 
 <style scoped>
@@ -333,7 +339,7 @@ const navigation = [
 
 /* ── Nav pills ── */
 .nav-pill {
-  @apply px-4 py-2 text-[12px] font-bold tracking-widest uppercase text-white/70 hover:text-white rounded-xl transition-all duration-300 hover:bg-white/5 active:scale-95;
+  @apply px-4 py-2 text-[16px] font-bold   text-white/70 hover:text-white rounded-xl transition-all duration-300 hover:bg-white/5 active:scale-95;
 }
 .nav-pill--active {
   @apply text-brand-cyan;
@@ -357,10 +363,10 @@ const navigation = [
 
 /* ── CTA buttons ── */
 .cta-ghost {
-  @apply px-4 py-2 text-[10px] font-black tracking-[0.2em] uppercase rounded-xl border border-white/20 text-white/80 hover:text-white hover:border-brand-cyan/50 hover:bg-brand-cyan/5 transition-all duration-300 active:scale-95;
+  @apply px-4 py-2 text-[10px] font-black  rounded-xl border border-white/20 text-white/80 hover:text-white hover:border-brand-cyan/50 hover:bg-brand-cyan/5 transition-all duration-300 active:scale-95;
 }
 .cta-solid {
-  @apply px-4 py-2 text-[10px] font-black tracking-[0.2em] uppercase rounded-xl bg-brand-cyan text-brand-dark hover:bg-white transition-all duration-300 active:scale-95 shadow-[0_4px_20px_rgba(0,200,200,0.25)] hover:shadow-[0_4px_30px_rgba(0,200,200,0.45)];
+  @apply px-4 py-2 text-[10px] font-black  rounded-xl bg-brand-cyan text-brand-dark hover:bg-white transition-all duration-300 active:scale-95 shadow-[0_4px_20px_rgba(0,200,200,0.25)] hover:shadow-[0_4px_30px_rgba(0,200,200,0.45)];
 }
 
 /* ── Glass button (hamburger) ── */
@@ -377,7 +383,7 @@ const navigation = [
 
 /* ── Mobile index numbers ── */
 .index-num {
-  @apply text-[10px] font-black text-brand-cyan/35 tracking-[0.2em] font-mono;
+  @apply text-[10px] font-black text-brand-cyan/35 font-mono;
 }
 
 /* ── Scrollbar hide ── */

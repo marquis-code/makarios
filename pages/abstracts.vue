@@ -15,7 +15,7 @@
            Abstracts <span class="text-brand-blue">&</span> Publications.
         </h1>
         <p class="text-lg md:text-xl text-slate-500 max-w-2xl font-medium leading-relaxed">
-           The central portal for submitting investigative findings, accessing scientific archives, and tracking the evolution of cellular pathology in Nigeria.
+           The central portal for submitting investigative findings, accessing scientific archives, and  the evolution of cellular pathology in Nigeria.
         </p>
       </div>
 
@@ -38,12 +38,12 @@
                </div>
                
                <div class="space-y-6 bg-slate-50/50 p-6 md:p-8 rounded-[2rem] border border-slate-100">
-                  <h4 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Submission Guidelines</h4>
+                  <h4 class="text-[10px] font-black  text-slate-400 mb-6">Submission Guidelines</h4>
                   <div v-for="(g, i) in guidelines" :key="i" class="flex gap-5 group">
                      <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex flex-shrink-0 items-center justify-center text-brand-blue font-bold text-xs group-hover:bg-brand-blue group-hover:text-white group-hover:border-brand-blue shadow-sm transition-all duration-300">
                         {{ i + 1 }}
                      </div>
-                     <p class="text-sm text-slate-600 font-medium leading-relaxed">{{ g }}</p>
+                     <p class="text-base text-slate-600 font-medium leading-relaxed">{{ g }}</p>
                   </div>
                </div>
             </div>
@@ -54,10 +54,10 @@
                   
                   <!-- Mode Selector -->
                   <div class="flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 relative z-20">
-                     <button type="button" @click="submissionMode = 'write'" :class="['flex-1 py-3.5 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2', submissionMode === 'write' ? 'bg-white text-brand-blue shadow-sm' : 'text-slate-500 hover:text-slate-700']">
+                     <button type="button" @click="submissionMode = 'write'" :class="['flex-1 py-3.5 text-base font-bold rounded-xl transition-all flex items-center justify-center gap-2', submissionMode === 'write' ? 'bg-white text-brand-blue shadow-sm' : 'text-slate-500 hover:text-slate-700']">
                         <LucideEdit3 :size="16" /> Compose Abstract
                      </button>
-                     <button type="button" @click="submissionMode = 'upload'" :class="['flex-1 py-3.5 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2', submissionMode === 'upload' ? 'bg-white text-brand-blue shadow-sm' : 'text-slate-500 hover:text-slate-700']">
+                     <button type="button" @click="submissionMode = 'upload'" :class="['flex-1 py-3.5 text-base font-bold rounded-xl transition-all flex items-center justify-center gap-2', submissionMode === 'upload' ? 'bg-white text-brand-blue shadow-sm' : 'text-slate-500 hover:text-slate-700']">
                         <LucideUploadCloud :size="16" /> Upload Document
                      </button>
                   </div>
@@ -65,25 +65,25 @@
                   <!-- Author Details Group -->
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div class="space-y-2 relative group">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Lead Investigator</label>
+                        <label class="text-[10px] font-black  text-slate-500 ml-1">Lead Investigator</label>
                         <input v-model="form.primaryAuthor" type="text" class="premium-input" placeholder="Dr. Jane Doe" required />
                      </div>
                      <div class="space-y-2 relative group">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Email Address</label>
+                        <label class="text-[10px] font-black  text-slate-500 ml-1">Email Address</label>
                         <input v-model="form.email" type="email" class="premium-input" placeholder="jane.doe@institution.edu" required />
                      </div>
                   </div>
 
                   <!-- Affiliation / Institution (Custom Dropdown/Datalist) -->
                   <div class="space-y-2 relative">
-                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Affiliation / Institution (Nigeria)</label>
+                     <label class="text-[10px] font-black  text-slate-500 ml-1">Affiliation / Institution (Nigeria)</label>
                      <div class="relative">
                         <input v-model="form.affiliation" @focus="showUniversities = true" @blur="hideUniversitiesDelay" type="text" class="premium-input" placeholder="Search or enter institution..." required />
                         <LucideChevronDown class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" :size="18" />
                         
                         <!-- Custom Dropdown -->
                         <div v-if="showUniversities && filteredUniversities.length" class="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar p-2">
-                           <button type="button" v-for="uni in filteredUniversities" :key="uni" @click="selectUniversity(uni)" class="w-full text-left px-4 py-3 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand-blue font-medium rounded-xl transition-colors">
+                           <button type="button" v-for="uni in filteredUniversities" :key="uni" @click="selectUniversity(uni)" class="w-full text-left px-4 py-3 text-base text-slate-600 hover:bg-slate-50 hover:text-brand-blue font-medium rounded-xl transition-colors">
                               {{ uni }}
                            </button>
                         </div>
@@ -91,13 +91,13 @@
                   </div>
 
                   <div class="space-y-2">
-                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Scientific Title</label>
+                     <label class="text-[10px] font-black  text-slate-500 ml-1">Scientific Title</label>
                      <input v-model="form.title" type="text" class="premium-input !text-slate-900 font-bold" placeholder="Enter the full title of your research" required />
                   </div>
 
                   <!-- Keywords Mapping -->
                   <div class="space-y-3">
-                     <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Keywords</label>
+                     <label class="text-[10px] font-black  text-slate-500 ml-1">Keywords</label>
                      <input v-model="form.keywords" type="text" class="premium-input" placeholder="Type keywords separated by comma (e.g., Cytology, Genetics)" required />
                      
                      <div class="flex flex-wrap gap-2 pt-1 min-h-[30px]">
@@ -115,7 +115,7 @@
                         
                         <!-- WRITE MODE -->
                         <div v-if="submissionMode === 'write'" class="space-y-2">
-                           <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Abstract Body</label>
+                           <label class="text-[10px] font-black  text-slate-500 ml-1">Abstract Body</label>
                            <div class="relative group">
                              <textarea v-model="form.abstractBody" rows="7" class="premium-input !rounded-[24px] !py-5 !px-6 resize-none leading-relaxed" placeholder="Draft your research summary (Background, Methods, Results, Conclusion)..."></textarea>
                              <div class="absolute bottom-4 right-4 flex justify-between items-center bg-white px-4 py-1.5 rounded-full border border-slate-200 shadow-sm">
@@ -126,7 +126,7 @@
 
                         <!-- UPLOAD MODE -->
                         <div v-else class="space-y-2">
-                           <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Document Upload</label>
+                           <label class="text-[10px] font-black  text-slate-500 ml-1">Document Upload</label>
                            
                            <div v-if="!selectedFile" class="relative group cursor-pointer" @click="$refs.fileInput.click()">
                               <div class="absolute inset-0 bg-slate-50 rounded-[24px] group-hover:bg-brand-blue/5 transition-colors border border-dashed border-slate-300 group-hover:border-brand-blue/30"></div>
@@ -146,7 +146,7 @@
                                     <LucideFileText :size="24" />
                                  </div>
                                  <div>
-                                    <h4 class="text-slate-800 font-bold text-sm truncate max-w-[200px] sm:max-w-[300px]">{{ selectedFile.name }}</h4>
+                                    <h4 class="text-slate-800 font-bold text-base truncate max-w-[200px] sm:max-w-[300px]">{{ selectedFile.name }}</h4>
                                     <p class="text-xs text-slate-500">{{ (selectedFile.size / 1024 / 1024).toFixed(2) }} MB</p>
                                  </div>
                               </div>
@@ -160,7 +160,7 @@
                   </div>
 
                   <div class="pt-6">
-                     <button type="submit" :disabled="loading" class="btn-blue-solid group w-full !py-5 flex items-center justify-center gap-3 text-sm overflow-hidden relative">
+                     <button type="submit" :disabled="loading" class="btn-blue-solid group w-full !py-5 flex items-center justify-center gap-3 text-base overflow-hidden relative">
                         <span v-if="loading" class="flex items-center gap-2 relative z-10">
                           <LucideLoader2 class="animate-spin" :size="18" /> Transmitting Protocol...
                         </span>
@@ -282,7 +282,7 @@ onMounted(() => {
 }
 
 .btn-blue-solid {
-  @apply bg-brand-blue text-white font-black uppercase tracking-[0.2em] rounded-2xl transition-all duration-300 shadow-[0_10px_30px_rgba(0,51,102,0.2)] hover:shadow-[0_15px_40px_rgba(0,51,102,0.3)] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0;
+  @apply bg-brand-blue text-white font-black rounded-2xl transition-all duration-300 shadow-[0_10px_30px_rgba(0,51,102,0.2)] hover:shadow-[0_15px_40px_rgba(0,51,102,0.3)] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0;
 }
 
 /* Animations for keywords and transitions */

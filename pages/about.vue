@@ -2,7 +2,7 @@
   <div class="pt-32 pb-24">
     <section class="container mx-auto px-6">
       <div class="max-w-4xl space-y-8 mb-20">
-        <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-xs uppercase tracking-[0.3em] rounded-full border border-slate-200">
+        <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-xs  tracking-[0.3em] rounded-full border border-slate-200">
           Our Identity
         </span>
         <h1 class="text-6xl md:text-7xl font-black text-brand-blue tracking-tighter leading-none">

@@ -12,11 +12,11 @@
                <img :src="cmsConfig?.global?.logoUrl || '/_nuxt/assets/images/logo.jpeg'" alt="Logo" class="object-contain" />
             </div>
             <div>
-               <!-- <h3 class="text-sm font-black text-white uppercase tracking-tighter">SCPSN</h3> -->
-               <!-- <p class="text-[10px] font-bold text-brand-cyan uppercase tracking-widest leading-none">Instituting Excellence</p> -->
+               <!-- <h3 class="text-base font-black text-white  tracking-tighter">SCPSN</h3> -->
+               <!-- <p class="text-[10px] font-bold text-brand-cyan  leading-none">Instituting Excellence</p> -->
             </div>
           </NuxtLink>
-          <p class="text-slate-400 text-sm leading-relaxed font-medium">
+          <p class="text-slate-400 text-base leading-relaxed font-medium">
             Advancing the frontiers of cellular diagnosis and therapeutic laboratory science in Nigeria and beyond.
           </p>
           <div class="flex gap-4">
@@ -38,10 +38,10 @@
         <!-- Sitemap -->
         <div class="grid grid-cols-2 lg:col-span-2 gap-10">
           <div v-for="(group, title) in footerLinks" :key="title">
-             <h4 class="text-xs font-black text-white uppercase tracking-[0.2em] mb-8">{{ title }}</h4>
+             <h4 class="text-xs font-black text-white  tracking-[0.2em] mb-8">{{ title }}</h4>
              <ul class="space-y-4">
                 <li v-for="link in group" :key="link.to">
-                   <NuxtLink :to="link.to" class="text-sm text-slate-400 font-medium hover:text-brand-cyan transition-colors flex items-center group">
+                   <NuxtLink :to="link.to" class="text-base text-slate-400 font-medium hover:text-brand-cyan transition-colors flex items-center group">
                       <span class="w-0 group-hover:w-3 h-[1px] bg-brand-cyan transition-all duration-300 mr-0 group-hover:mr-2"></span>
                       {{ link.label }}
                    </NuxtLink>
@@ -52,8 +52,8 @@
 
         <!-- Newsletter -->
         <div class="space-y-8">
-           <h4 class="text-xs font-black text-white uppercase tracking-[0.2em]">Scientific Updates</h4>
-           <p class="text-sm text-slate-400 font-medium leading-relaxed">Join our mailing list for the latest research papers and conference alerts.</p>
+           <h4 class="text-xs font-black text-white  tracking-[0.2em]">Scientific Updates</h4>
+           <p class="text-base text-slate-400 font-medium leading-relaxed">Join our mailing list for the latest research papers and conference alerts.</p>
            <div class="relative group">
               <input v-model="email" type="email" placeholder="Email Address" class="form-input !py-4 pr-16 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-brand-cyan">
               <button 
@@ -69,12 +69,12 @@
       </div>
 
       <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+          <p class="text-[10px] font-black text-slate-500 ">
             &copy; {{ new Date().getFullYear() }} {{ cmsConfig?.global?.siteName || 'Society for Cellular Pathology Scientists of Nigeria' }}.
           </p>
          <div class="flex gap-8">
-            <NuxtLink to="/privacy" class="text-[10px] font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors">Privacy Policy</NuxtLink>
-            <NuxtLink to="/terms" class="text-[10px] font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors">Terms of Use</NuxtLink>
+            <NuxtLink to="/privacy" class="text-[10px] font-black text-slate-500  hover:text-white transition-colors">Privacy Policy</NuxtLink>
+            <NuxtLink to="/terms" class="text-[10px] font-black text-slate-500  hover:text-white transition-colors">Terms of Use</NuxtLink>
          </div>
       </div>
     </div>
@@ -111,6 +111,7 @@ const footerLinks = {
   'Resources': [
     { label: 'Journal Archives', to: '/abstracts' },
     { label: 'Protocol Guidelines', to: '/about' },
+    { label: 'Association Gallery', to: '/gallery' },
     { label: 'News & Media', to: '/' },
     { label: 'Contact Support', to: '/contact' },
   ]

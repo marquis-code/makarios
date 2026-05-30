@@ -23,11 +23,11 @@
                 <LucideShieldCheck :size="24" />
              </div>
              <div>
-                <p class="font-black text-brand-blue uppercase tracking-widest text-[10px]">Verified Transaction</p>
-                <p class="text-slate-500 text-sm font-medium">All payments are secured via Paystack & Flutterwave.</p>
+                <p class="font-black text-brand-blue  text-[10px]">Verified Transaction</p>
+                <p class="text-slate-500 text-base font-medium">All payments are secured via Paystack & Flutterwave.</p>
              </div>
           </div>
-          <NuxtLink to="/contact" class="text-brand-blue font-black uppercase tracking-widest text-[10px] hover:text-brand-cyan transition-colors">Payment Support</NuxtLink>
+          <NuxtLink to="/contact" class="text-brand-blue font-black  text-[10px] hover:text-brand-cyan transition-colors">Payment Support</NuxtLink>
        </div>
     </section>
   </div>

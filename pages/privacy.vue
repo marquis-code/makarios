@@ -8,7 +8,7 @@
           <p class="mb-6">We collect personal information such as name, email address, and professional credentials when you register for membership or conferences.</p>
           <h2 class="text-2xl font-bold text-brand-blue mt-12 mb-6">2. How We Use Data</h2>
           <p class="mb-6">Your data is used to provide membership services, process payments, and send scientific updates.</p>
-          <p class="mt-20 text-[10px] uppercase font-black tracking-widest text-slate-400">Last Updated: March 2026</p>
+          <p class="mt-20 text-[10px]  font-black tracking-widest text-slate-400">Last Updated: March 2026</p>
        </div>
     </div>
   </div>

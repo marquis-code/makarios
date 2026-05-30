@@ -6,6 +6,9 @@ export default defineNuxtConfig({
     port: 3002
   },
   modules: ['@nuxtjs/tailwindcss', 'lucide-nuxt', '@vueuse/nuxt', '@nuxt/icon'],
+  build: {
+    transpile: ['lucide-vue-next']
+  },
   css: ['~/assets/font/stylesheet.css', '~/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -23,6 +26,16 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
+    }
+  },
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+        'axios',
+        'socket.io-client'
       ]
     }
   }

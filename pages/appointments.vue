@@ -6,7 +6,7 @@
 
     <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl mx-auto text-center space-y-6 mb-20 animate-on-scroll">
-        <span class="inline-block px-4 py-1.5 glass text-brand-cyan font-black text-[10px] uppercase tracking-[0.3em] rounded-full border border-brand-cyan/20">
+        <span class="inline-block px-4 py-1.5 glass text-brand-cyan font-black text-[10px]  tracking-[0.3em] rounded-full border border-brand-cyan/20">
           Precision Consultations
         </span>
         <h1 class="text-5xl md:text-7xl font-black text-brand-dark tracking-tighter leading-none">
@@ -26,17 +26,17 @@
             <form @submit.prevent="handleSubmit" class="relative z-10 space-y-8">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark uppercase tracking-widest ml-4">Full Legal Name</label>
+                  <label class="text-[10px] font-black text-brand-dark  ml-4">Full Legal Name</label>
                   <input v-model="appointment.fullName" type="text" placeholder="Dr. John Doe" class="form-input" required />
                 </div>
                 <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark uppercase tracking-widest ml-4">Email Address</label>
+                  <label class="text-[10px] font-black text-brand-dark  ml-4">Email Address</label>
                   <input v-model="appointment.email" type="email" placeholder="john@scientific.ng" class="form-input" required />
                 </div>
               </div>
 
               <div class="space-y-2">
-                <label class="text-[10px] font-black text-brand-dark uppercase tracking-widest ml-4">Service Category</label>
+                <label class="text-[10px] font-black text-brand-dark  ml-4">Service Category</label>
                 <select v-model="appointment.purpose" class="form-input appearance-none cursor-pointer" required>
                   <option value="" disabled selected>Select a professional service</option>
                   <option>Histopathology Case Review</option>
@@ -49,17 +49,17 @@
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark uppercase tracking-widest ml-4">Preferred Date</label>
+                  <label class="text-[10px] font-black text-brand-dark  ml-4">Preferred Date</label>
                   <input v-model="appointment.date" type="date" class="form-input" required />
                 </div>
                 <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark uppercase tracking-widest ml-4">Preferred Time Slice</label>
+                  <label class="text-[10px] font-black text-brand-dark  ml-4">Preferred Time Slice</label>
                   <input v-model="appointment.time" type="time" class="form-input" required />
                 </div>
               </div>
 
               <div class="space-y-2">
-                <label class="text-[10px] font-black text-brand-dark uppercase tracking-widest ml-4">Case Summary / Inquiry</label>
+                <label class="text-[10px] font-black text-brand-dark  ml-4">Case Summary / Inquiry</label>
                 <textarea v-model="appointment.message" rows="4" placeholder="Briefly describe the clinical context or scientific inquiry..." class="form-input !py-3 !px-8 !rounded-[24px] resize-none pb-12"></textarea>
               </div>
 
@@ -82,34 +82,34 @@
           <div class="interactive-card p-10 bg-brand-dark text-white border-none group">
             <LucideShieldCheck :size="48" class="text-brand-cyan mb-8" />
             <h3 class="text-2xl font-black mb-4 tracking-tight">Scientific Integrity Guaranteed.</h3>
-            <p class="text-slate-300 text-sm leading-relaxed font-medium">
+            <p class="text-slate-300 text-base leading-relaxed font-medium">
               Every appointment is handled by board-certified Cellular Pathology Scientists under the strict guidelines of MDCN and scientific international standards.
             </p>
           </div>
 
           <div class="space-y-6">
-            <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] ml-2">Why Book With Us?</h4>
+            <h4 class="text-[10px] font-black text-slate-400  tracking-[0.3em] ml-2">Why Book With Us?</h4>
             <div v-for="(feat, i) in features" :key="i" class="flex gap-6 group">
               <div class="h-12 w-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center text-brand-dark group-hover:bg-brand-cyan group-hover:text-white transition-all duration-300">
                 <component :is="feat.icon" :size="20" />
               </div>
               <div class="space-y-1">
-                <p class="font-black text-brand-dark text-sm uppercase tracking-tight">{{ feat.title }}</p>
+                <p class="font-black text-brand-dark text-base  tracking-tight">{{ feat.title }}</p>
                 <p class="text-xs text-slate-400 leading-relaxed">{{ feat.desc }}</p>
               </div>
             </div>
           </div>
 
           <div class="glass p-8 rounded-[2.5rem] border-brand-cyan/10">
-            <p class="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Regional Support Hubs</p>
+            <p class="text-center text-[10px] font-black text-slate-400  mb-6">Regional Support Hubs</p>
             <div class="grid grid-cols-2 gap-4">
               <div class="p-4 bg-slate-50/50 rounded-2xl text-center space-y-1">
                 <p class="text-[10px] font-black text-brand-dark">ABUJA</p>
-                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Headquarters</p>
+                <p class="text-[9px] text-slate-400 font-bold ">Headquarters</p>
               </div>
               <div class="p-4 bg-slate-50/50 rounded-2xl text-center space-y-1">
                 <p class="text-[10px] font-black text-brand-dark">LAGOS</p>
-                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Coastal Hub</p>
+                <p class="text-[9px] text-slate-400 font-bold ">Coastal Hub</p>
               </div>
             </div>
           </div>

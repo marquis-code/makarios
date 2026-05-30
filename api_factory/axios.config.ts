@@ -11,7 +11,7 @@ const getComposables = () => {
   return { showToast, token, logOut, tokenManager };
 };
 
-const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL || "http://localhost:3000/api";
+const $GATEWAY_ENDPOINT = import.meta.env.VITE_BASE_URL || "http://localhost:3005/api";
 const $GATEWAY_ENDPOINT_WITHOUT_VERSION = $GATEWAY_ENDPOINT;
 const $GATEWAY_ENDPOINT_V2 = $GATEWAY_ENDPOINT + "/v2";
 const $IMAGE_UPLOAD_ENDPOINT = import.meta.env.VITE_IMAGE_UPLOAD_BASE_URL || $GATEWAY_ENDPOINT + "/upload";

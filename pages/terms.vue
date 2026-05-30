@@ -8,7 +8,7 @@
           <p class="mb-6">All members must adhere to the Ethical Code of Conduct for Medical Laboratory Scientists in Nigeria.</p>
           <h2 class="text-2xl font-bold text-brand-blue mt-12 mb-6">2. Intellectual Property</h2>
           <p class="mb-6">Scientific journals and abstracts accessed through this portal are protected material.</p>
-          <p class="mt-20 text-[10px] uppercase font-black tracking-widest text-slate-400">Last Updated: March 2026</p>
+          <p class="mt-20 text-[10px]  font-black tracking-widest text-slate-400">Last Updated: March 2026</p>
        </div>
     </div>
   </div>

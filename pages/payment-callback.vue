@@ -22,7 +22,7 @@
         </div>
         
         <div class="w-full space-y-4">
-           <div class="flex justify-between items-center text-[10px] font-black text-brand-dark uppercase tracking-widest px-1">
+           <div class="flex justify-between items-center text-[10px] font-black text-brand-dark  px-1">
               <span>Verification Sequence</span>
               <span class="text-brand-cyan">{{ progress }}%</span>
            </div>
