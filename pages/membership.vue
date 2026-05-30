@@ -293,7 +293,7 @@ definePageMeta({
 
 const { showToast } = useCustomToast()
 
-const API_BASE = import.meta.env.VITE_BASE_URL || 'http://localhost:3005/api'
+const API_BASE = import.meta.env.VITE_BASE_URL || 'https://spsn-backend.onrender.com/api'
 
 const activeStep = ref(1)
 const selectedFile = ref(null)
