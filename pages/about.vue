@@ -44,11 +44,54 @@
         </div>
       </div>
     </section>
+
+    <!-- Executives Section -->
+    <section class="container mx-auto px-6 mt-32">
+      <div class="text-center mb-16 space-y-4">
+        <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-xs tracking-[0.3em] rounded-full border border-slate-200">
+          Our Leadership
+        </span>
+        <h2 class="text-4xl md:text-5xl font-black text-brand-blue tracking-tighter">
+          Meet Our <span class="text-brand-cyan">Executives</span>
+        </h2>
+      </div>
+
+      <div v-if="loading" class="text-center text-slate-500 py-10">
+        Loading executives...
+      </div>
+      
+      <div v-else-if="excos.length === 0" class="text-center text-slate-500 py-10">
+        No executives found.
+      </div>
+      
+      <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div v-for="exco in excos" :key="exco._id" class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 text-center space-y-4">
+          <div class="w-full aspect-square sm:aspect-[4/5] mx-auto rounded-2xl overflow-hidden mb-5 bg-slate-50 border border-slate-100">
+            <img :src="exco.profilePicture || 'https://via.placeholder.com/150'" class="w-full h-full object-cover object-top" :alt="exco.name" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-brand-blue">{{ exco.name }}</h3>
+            <p class="text-brand-cyan font-medium text-sm">{{ exco.position }}</p>
+          </div>
+          <p class="text-slate-500 text-sm line-clamp-3">
+            {{ exco.bio }}
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
 import { LucideShieldCheck, LucideMicroscope, LucideGlobe } from 'lucide-vue-next'
+import { useGetExcos } from '@/composables/modules/excos/useGetExcos'
+import { onMounted } from 'vue'
+
+const { loading, excos, getExcos } = useGetExcos()
+
+onMounted(() => {
+  getExcos()
+})
 
 const values = [
   { title: 'Integrity', desc: 'Highest standards of scientific honesty and ethical laboratory practice.', icon: LucideShieldCheck },
