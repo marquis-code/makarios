@@ -25,8 +25,8 @@
                {{ slide.desc }}
              </p>
              <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4">
-               <NuxtLink to="/membership" class="btn-premium">Join the Society</NuxtLink>
-               <NuxtLink to="/about" class="btn-outline-premium !text-white !border-white/20 !glass">Our Mission</NuxtLink>
+               <NuxtLink to="/membership" class="text-sm font-black bg-black text-white px-6 py-3 text-center rounded-lg">Join the Society</NuxtLink>
+               <NuxtLink to="/about" class="text-sm font-black bg-black text-white px-6 py-3 rounded-lg text-center !glass">Our Mission</NuxtLink>
              </div>
           </div>
         </div>

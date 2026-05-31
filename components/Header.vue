@@ -116,7 +116,7 @@
             <LucideCalendar :size="13" class="group-hover:rotate-12 transition-transform duration-300" />
             <span>Bookings</span>
           </NuxtLink>
-          <a href="https://member.scpsn.com/" class="cta-solid flex items-center gap-2">
+          <a href="https://member.scpsn.com/" class="cta-solid py-3 flex items-center gap-2">
             <LucideUser :size="13" />
             <span>Become a Member</span>
           </a>
@@ -368,10 +368,10 @@ const navigation = computed(() => [
 
 /* ── CTA buttons ── */
 .cta-ghost {
-  @apply px-4 py-2 text-[10px] font-black  rounded-xl border border-white/20 text-white/80 hover:text-white hover:border-brand-cyan/50 hover:bg-brand-cyan/5 transition-all duration-300 active:scale-95;
+  @apply px-4 py-3 text-[14px] font-black  rounded-xl border border-white/20 text-white/80 hover:text-white hover:border-brand-cyan/50 hover:bg-brand-cyan/5 transition-all duration-300 active:scale-95;
 }
 .cta-solid {
-  @apply px-4 py-2 text-[10px] font-black  rounded-xl bg-brand-cyan text-brand-dark hover:bg-white transition-all duration-300 active:scale-95 shadow-[0_4px_20px_rgba(0,200,200,0.25)] hover:shadow-[0_4px_30px_rgba(0,200,200,0.45)];
+  @apply px-4 py-3 text-[14px] font-black  rounded-xl bg-brand-cyan text-brand-dark hover:bg-white transition-all duration-300 active:scale-95 shadow-[0_4px_20px_rgba(0,200,200,0.25)] hover:shadow-[0_4px_30px_rgba(0,200,200,0.45)];
 }
 
 /* ── Glass button (hamburger) ── */

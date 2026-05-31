@@ -9,7 +9,7 @@
         <div class="lg:col-span-1 space-y-8">
           <NuxtLink to="/" class="flex items-center gap-4 group">
             <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-2 shadow-xl group-hover:scale-110 transition-transform">
-               <img :src="cmsConfig?.global?.logoUrl || '/_nuxt/assets/images/logo.jpeg'" alt="Logo" class="object-contain" />
+               <img src="@/assets/images/logo.jpeg" alt="Logo" class="object-contain" />
             </div>
             <div>
                <!-- <h3 class="text-base font-black text-white  tracking-tighter">SCPSN</h3> -->
