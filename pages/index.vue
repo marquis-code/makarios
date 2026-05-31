@@ -374,9 +374,12 @@ import { useAdverts } from '@/composables/modules/adverts/useAdverts'
 import { useSponsors } from '@/composables/modules/sponsors/useSponsors'
 import { useGetConferences } from '@/composables/modules/conferences/useGetConferences'
 import { useCMS } from '@/composables/useCMS'
-import hero1 from "@/assets/images/hero1.jpg"
-import hero2 from "@/assets/images/hero2.jpg"
-import hero3 from "@/assets/images/hero3.jpg"
+// import hero1 from "@/assets/images/hero1.jpg"
+// import hero2 from "@/assets/images/hero2.jpg"
+// import hero3 from "@/assets/images/hero3.jpg"
+import hero1 from "@/assets/images/gallery/photo4.jpeg"
+import hero2 from "@/assets/images/gallery/photo3.jpeg"
+import hero3 from "@/assets/images/gallery/photo2.jpeg"
 
 const { cmsConfig } = useCMS()
 
@@ -432,13 +435,14 @@ const activeSlides = computed(() => {
       tag: 'Welcome to SCPSN',
       title: 'Precision in Cellular Pathology',
       desc: 'Empowering medical laboratory scientists specializing in Histopathology and Cytopathology through innovation and global excellence.',
-      image: hero2
+      image: hero1
     },
     {
       tag: 'Academic Mastery',
       title: 'The Future of Histology',
       desc: 'Setting the benchmark for laboratory practices in Nigeria and the West African sub-region through rigorous standardization.',
-      image: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=2070&auto=format&fit=crop'
+      image: hero2
+      // image: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=2070&auto=format&fit=crop'
     },
     {
       tag: 'Scientific Innovation',

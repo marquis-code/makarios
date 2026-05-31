@@ -53,7 +53,7 @@ h1 {
 
   /* Redesigned Buttons - Solid Brand Colors, Non-Gradient */
   .btn-premium {
-    @apply inline-flex items-center justify-center px-5 py-2 text-[9px] font-black   rounded-lg transition-all duration-300 relative overflow-hidden active:scale-95 !important;
+    @apply inline-flex items-center justify-center px-5 py-3.5 text-[16px] font-black   rounded-lg transition-all duration-300 relative overflow-hidden active:scale-95 !important;
     background: var(--brand-dark) !important;
     color: white !important;
     box-shadow: none !important; 

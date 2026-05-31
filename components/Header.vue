@@ -19,10 +19,15 @@
         <NuxtLink to="/" class="flex items-center gap-3 relative z-[110] group" @click="isMobileMenuOpen = false">
           <div class="logo-wrap w-10 h-10 rounded-xl overflow-hidden border border-white/20 shadow-lg group-hover:shadow-brand-cyan/30 transition-all duration-500">
             <img
-              :src="cmsConfig?.global?.logoUrl || '/_nuxt/assets/images/logo.jpeg'"
+              src="@/assets/images/logo.jpeg"
               alt="Logo"
               class="w-full h-full object-contain scale-105 group-hover:scale-110 transition-transform duration-500"
             />
+            <!-- <img
+              :src="cmsConfig?.global?.logoUrl || '/_nuxt/assets/images/logo.jpeg'"
+              alt="Logo"
+              class="w-full h-full object-contain scale-105 group-hover:scale-110 transition-transform duration-500"
+            /> -->
           </div>
           <div class="flex flex-col leading-none">
             <span class="text-[15px] font-black tracking-tight text-white">
