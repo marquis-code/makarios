@@ -72,7 +72,7 @@
                 <h4 class="font-bold text-base tracking-wider">Target Audience</h4>
               </div>
               <div class="flex flex-wrap gap-2">
-                <span v-for="(audience, idx) in activeAdvert.targetAudience" :key="idx" class="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-full">
+                <span v-for="(audience, idx) in activeAdvert.targetAudience" :key="idx" class="px-3 py-1 bg-purple-50 text-purple-700 text-sm font-bold rounded-full">
                   {{ audience }}
                 </span>
               </div>

@@ -316,7 +316,9 @@
                       {{ feat }}
                    </li>
                 </ul>
-                <NuxtLink to="/membership" class="block w-full py-4 text-center bg-brand-blue text-white rounded-2xl text-base font-black  hover:bg-brand-red transition-colors">Join Now</NuxtLink>
+                <NuxtLink to="/membership" class="block w-full py-4 text-center bg-brand-blue text-white rounded-2xl text-base font-black  hover:bg-brand-red transition-colors">
+                  {{ tier.title.includes('Renewal') ? 'Renew Now' : 'Join Now' }}
+                </NuxtLink>
              </div>
           </div>
        </div>
@@ -337,22 +339,22 @@
              <p class="text-slate-500 font-medium">Distinguished professionals leading the way in Nigerian Cellular Pathology.</p>
           </div>
 
-          <div v-if="loadingBoard" class="flex justify-center py-20">
+          <div v-if="loadingExcos" class="flex justify-center py-20">
              <div class="animate-spin rounded-xl h-10 w-10 border-t-2 border-brand-blue"></div>
           </div>
 
-          <div v-else-if="boardMembers.length > 0" class="grid grid-cols-1 md:grid-cols-3 gap-10">
-             <div v-for="member in boardMembers" :key="member._id" class="relative group overflow-hidden rounded-[2rem] aspect-[4/5] bg-white border border-slate-100 shadow-sm transition-all hover:shadow-xl">
+          <div v-else-if="excos.length > 0" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+             <div v-for="exco in excos" :key="exco._id" class="relative group overflow-hidden rounded-[2rem] aspect-[4/5] bg-white border border-slate-100 shadow-sm transition-all hover:shadow-xl">
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-100"></div>
                 
-                <img v-if="member.profileImage" :src="member.profileImage" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" :alt="member.fullName" />
+                <img v-if="exco.profilePicture" :src="exco.profilePicture" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" :alt="exco.name" />
                 <div v-else class="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
                    <LucideUser :size="64" />
                 </div>
 
                 <div class="absolute bottom-8 left-8 right-8 z-20">
-                   <p class="text-brand-cyan font-black  tracking-[0.2em] text-[8px] mb-1.5">{{ member.designation || 'Board Member' }}</p>
-                   <h3 class="text-xl font-black text-white leading-tight">{{ member.fullName }}</h3>
+                   <p class="text-brand-cyan font-black  tracking-[0.2em] text-[8px] mb-1.5">{{ exco.position || 'Executive Member' }}</p>
+                   <h3 class="text-xl font-black text-white leading-tight">{{ exco.name }}</h3>
                 </div>
              </div>
           </div>
@@ -369,7 +371,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { useGetBoardMembers } from '@/composables/modules/members/useGetBoardMembers'
+import { useGetExcos } from '@/composables/modules/excos/useGetExcos'
 import { useAdverts } from '@/composables/modules/adverts/useAdverts'
 import { useSponsors } from '@/composables/modules/sponsors/useSponsors'
 import { useGetConferences } from '@/composables/modules/conferences/useGetConferences'
@@ -383,7 +385,7 @@ import hero3 from "@/assets/images/gallery/photo2.jpeg"
 
 const { cmsConfig } = useCMS()
 
-const { loading: loadingBoard, boardMembers, getBoardMembers } = useGetBoardMembers()
+const { loading: loadingExcos, excos, getExcos } = useGetExcos()
 const { groupedAdverts, fetchAdverts } = useAdverts()
 const { sponsors, fetchSponsors } = useSponsors()
 const { loading: loadingConferences, conferences, getConferences } = useGetConferences()
@@ -515,6 +517,7 @@ onMounted(() => {
   fetchAdverts()
   fetchSponsors()
   getConferences()
+  getExcos()
   // Intersection Observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

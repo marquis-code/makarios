@@ -6,7 +6,7 @@
 
     <div class="container mx-auto px-6 py-32 relative z-10">
       <div class="max-w-4xl mb-24 space-y-6">
-        <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-xs  tracking-[0.3em] rounded-full">
+        <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-sm  tracking-[0.3em] rounded-full">
            Global Events
         </span>
         <h1 class="text-6xl md:text-7xl font-black text-brand-dark tracking-tighter leading-none">
@@ -29,7 +29,7 @@
           <div class="lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center relative z-30">
             <div class="flex items-center gap-4 mb-8">
                <span class="w-12 h-[1px] bg-brand-cyan"></span>
-               <span class="text-xs font-black  -[0.4em] text-brand-cyan">Next Major Event</span>
+               <span class="text-sm font-black  -[0.4em] text-brand-cyan">Next Major Event</span>
             </div>
             
             <h3 class="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">THE 2ND INTERNATIONAL <br/> CONGRES 2026.</h3>
@@ -66,8 +66,8 @@
       <!-- Past Conferences Heading -->
       <div class="flex items-center justify-between mb-16 px-2">
          <h3 class="text-3xl font-black text-brand-dark tracking-tighter">Event Archives</h3>
-         {{ conferences }}
-         <NuxtLink to="/" class="text-xs font-black  tracking-[0.2em] text-brand-cyan flex items-center gap-2 group">
+         <!-- {{ conferences }} -->
+         <NuxtLink to="/" class="text-sm font-black  tracking-[0.2em] text-brand-cyan flex items-center gap-2 group">
             View All History
             <LucideArrowRight :size="16" class="group-hover:translate-x-1 transition-transform" />
          </NuxtLink>
@@ -76,16 +76,16 @@
       <LoadingState v-if="loading" />
       
       <div v-else-if="conferences.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <div v-for="conference in conferences" :key="conference._id" class="interactive-card p-0 group overflow-hidden h-[450px]">
+        <div v-for="conference in conferences" :key="conference._id" @click="selectedArchive = conference; isArchiveModalOpen = true" class="interactive-card p-0 group overflow-hidden h-[450px] cursor-pointer">
            <div class="h-2/3 overflow-hidden relative">
-              <img :src="conference.image || 'https://scpsn.org.ng/wp-content/uploads/2021/10/banner.jpg'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" :alt="conference.title" />
+              <img :src="conference.bannerImage || 'https://scpsn.org.ng/wp-content/uploads/2021/10/banner.jpg'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" :alt="conference.title" />
               <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-all"></div>
               <div class="absolute top-6 right-6 h-10 px-4 glass-dark rounded-xl flex items-center text-[10px] font-black text-white  tracking-widest">
-                 {{ conference.date.split(',')[1]?.trim() || 'Archive' }}
+                 {{ conference.startDate ? new Date(conference.startDate).getFullYear() : 'Archive' }}
               </div>
            </div>
            <div class="p-8 space-y-4">
-              <p class="text-[10px] font-black text-brand-cyan  tracking-[0.2em]">{{ conference.date }}</p>
+              <p class="text-[10px] font-black text-brand-cyan  tracking-[0.2em]">{{ conference.startDate ? new Date(conference.startDate).toLocaleDateString() : '' }}</p>
               <h4 class="text-xl font-bold text-brand-dark leading-tight group-hover:text-brand-cyan transition-colors line-clamp-2">
                 {{ conference.title }}
               </h4>
@@ -93,11 +93,54 @@
         </div>
       </div>
 
-      <EmptyState 
-        v-else 
-        title="No specialized events found in the archives." 
-        message="Check back later for recent scientific updates and upcoming conferences." 
-      />
+    <EmptyState 
+      v-else 
+      title="No specialized events found in the archives." 
+      message="Check back later for recent scientific updates and upcoming conferences." 
+    />
+
+    <!-- Archive Modal -->
+    <div v-if="isArchiveModalOpen && selectedArchive" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" @click="isArchiveModalOpen = false"></div>
+      <div class="relative bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl z-10">
+        <div class="p-8">
+          <button @click="isArchiveModalOpen = false" class="absolute top-6 right-6 w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200 transition-colors">
+            <LucideX :size="20" />
+          </button>
+          
+          <div class="mb-8 pr-12">
+             <span class="inline-block px-3 py-1 bg-brand-cyan/10 text-brand-cyan font-black text-[10px] tracking-widest rounded-lg mb-4 uppercase">
+               Archived Event
+             </span>
+             <h2 class="text-3xl font-black text-brand-dark mb-4 leading-tight">{{ selectedArchive.title }}</h2>
+             <div class="flex flex-wrap gap-6 text-sm font-bold text-slate-500">
+               <div class="flex items-center gap-2 text-brand-cyan"><LucideCalendar :size="16" /> <span class="text-slate-600">{{ selectedArchive.startDate ? new Date(selectedArchive.startDate).toLocaleDateString() : 'TBA' }}</span></div>
+               <div class="flex items-center gap-2 text-brand-cyan"><LucideMapPin :size="16" /> <span class="text-slate-600">{{ selectedArchive.venue || 'TBA' }}</span></div>
+             </div>
+          </div>
+          
+          <div class="space-y-6">
+            <div v-if="selectedArchive.description">
+              <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Description</h3>
+              <p class="text-slate-600 leading-relaxed font-medium whitespace-pre-wrap">{{ selectedArchive.description }}</p>
+            </div>
+            <div v-if="selectedArchive.location">
+              <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Full Address</h3>
+              <p class="text-slate-600 leading-relaxed font-medium">{{ selectedArchive.location }}</p>
+            </div>
+            <div v-if="selectedArchive.pricing && selectedArchive.pricing.length">
+              <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Pricing</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                 <div v-for="price in selectedArchive.pricing" :key="price._id" class="p-4 rounded-xl border border-slate-100 bg-slate-50">
+                    <p class="text-sm font-bold text-slate-800 mb-1">{{ price.category }}</p>
+                    <p class="text-brand-cyan font-black">₦{{ price.amount.toLocaleString() }}</p>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -107,10 +150,14 @@ import {
   LucideCalendar, 
   LucideMapPin, 
   LucideArrowRight, 
-  LucideDatabase 
+  LucideDatabase,
+  LucideX
 } from 'lucide-vue-next'
 import { useGetConferences } from '@/composables/modules/conferences/useGetConferences'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+
+const isArchiveModalOpen = ref(false)
+const selectedArchive = ref(null)
 
 const { loading, conferences, getConferences } = useGetConferences()
 

@@ -17,7 +17,7 @@
            <h2 class="text-3xl font-black text-brand-dark tracking-tighter uppercase">Securing Payment.</h2>
            <p class="text-slate-500 font-medium leading-relaxed">
              Synchronizing with financial gateways to verify transaction: 
-             <span class="block mt-2 font-black text-xs text-brand-cyan tracking-widest uppercase">{{ $route.query.reference || 'VALIDATING...' }}</span>
+             <span class="block mt-2 font-black text-sm text-brand-cyan tracking-widest uppercase">{{ $route.query.reference || 'VALIDATING...' }}</span>
            </p>
         </div>
         

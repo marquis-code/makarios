@@ -38,7 +38,7 @@
         <!-- Sitemap -->
         <div class="grid grid-cols-2 lg:col-span-2 gap-10">
           <div v-for="(group, title) in footerLinks" :key="title">
-             <h4 class="text-xs font-black text-white  tracking-[0.2em] mb-8">{{ title }}</h4>
+             <h4 class="text-sm font-black text-white  tracking-[0.2em] mb-8">{{ title }}</h4>
              <ul class="space-y-4">
                 <li v-for="link in group" :key="link.to">
                    <NuxtLink :to="link.to" class="text-base text-slate-400 font-medium hover:text-brand-cyan transition-colors flex items-center group">
@@ -52,12 +52,12 @@
 
         <!-- Newsletter -->
         <div class="space-y-8">
-           <h4 class="text-xs font-black text-white  tracking-[0.2em]">Scientific Updates</h4>
+           <h4 class="text-sm font-black text-white  tracking-[0.2em]">Scientific Updates</h4>
            <p class="text-base text-slate-400 font-medium leading-relaxed">Join our mailing list for the latest research papers and conference alerts.</p>
            <div class="relative group">
               <input v-model="email" type="email" placeholder="Email Address" class="form-input !py-4 pr-16 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-brand-cyan">
-              <button 
-                @click="subscribe" 
+               <button 
+                @click="subscribeFooter" 
                 :disabled="loading"
                 class="absolute right-2 top-2 bottom-2 aspect-square bg-brand-cyan text-brand-dark rounded-xl flex items-center justify-center hover:scale-105 transition-all active:scale-95 disabled:opacity-50"
               >
@@ -93,7 +93,7 @@ import { useNewsletter } from '@/composables/modules/newsletters/useNewsletter'
 import { useCMS } from '@/composables/useCMS'
 
 const { cmsConfig } = useCMS()
-const { loading, email, subscribe } = useNewsletter()
+const { loading, email, subscribeFooter } = useNewsletter()
 
 const socials = [
   { icon: LucideFacebook },
@@ -105,8 +105,8 @@ const footerLinks = {
   'Quick Navigation': [
     { label: 'Scientific Board', to: '/about' },
     { label: 'Upcoming Conferences', to: '/conferences' },
-    { label: 'Membership Portal', to: 'http://localhost:3003' },
-    { label: 'Payment Verification', to: '/payment' },
+    { label: 'Membership Portal', to: 'https://member.scpsn.com' },
+    // { label: 'Payment Verification', to: '/payment' },
   ],
   'Resources': [
     { label: 'Journal Archives', to: '/abstracts' },

@@ -95,7 +95,7 @@
               </div>
               <div class="space-y-1">
                 <p class="font-black text-brand-dark text-base  tracking-tight">{{ feat.title }}</p>
-                <p class="text-xs text-slate-400 leading-relaxed">{{ feat.desc }}</p>
+                <p class="text-sm text-slate-400 leading-relaxed">{{ feat.desc }}</p>
               </div>
             </div>
           </div>

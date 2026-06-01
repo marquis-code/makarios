@@ -8,7 +8,7 @@
       <div class="max-w-6xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-20 space-y-4">
-          <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-xs tracking-[0.3em] rounded-full uppercase">
+          <span class="inline-block px-5 py-2 glass text-brand-cyan font-black text-sm tracking-[0.3em] rounded-full uppercase">
              Membership Registration
           </span>
           <h1 class="text-5xl md:text-7xl font-black text-brand-dark tracking-tighter leading-none">
@@ -40,14 +40,14 @@
                 <div class="flex justify-between items-center p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
                   <div>
                     <span class="text-sm font-bold text-slate-700">New Registration</span>
-                    <p class="text-xs text-slate-400 mt-0.5">First-time members</p>
+                    <p class="text-sm text-slate-400 mt-0.5">First-time members</p>
                   </div>
                   <span class="text-2xl font-black text-emerald-600">₦20,000</span>
                 </div>
                 <div class="flex justify-between items-center p-4 bg-blue-50 rounded-2xl border border-blue-100">
                   <div>
                     <span class="text-sm font-bold text-slate-700">Annual Renewal</span>
-                    <p class="text-xs text-slate-400 mt-0.5">Existing members</p>
+                    <p class="text-sm text-slate-400 mt-0.5">Existing members</p>
                   </div>
                   <span class="text-2xl font-black text-blue-600">₦10,000</span>
                 </div>
@@ -76,21 +76,21 @@
                <div class="flex border-b border-slate-100">
                   <button
                     @click="goToStep(1)"
-                    :class="['flex-1 py-6 text-xs font-bold tracking-wide transition-all relative', activeStep === 1 ? 'text-brand-dark' : 'text-slate-400']"
+                    :class="['flex-1 py-6 text-sm font-bold tracking-wide transition-all relative', activeStep === 1 ? 'text-brand-dark' : 'text-slate-400']"
                   >
                     01. Personal Info
                     <div v-if="activeStep === 1" class="absolute bottom-0 left-0 right-0 h-1 bg-brand-cyan rounded-t-full"></div>
                   </button>
                   <button
                     @click="goToStep(2)"
-                    :class="['flex-1 py-6 text-xs font-bold tracking-wide transition-all relative', activeStep === 2 ? 'text-brand-dark' : 'text-slate-400']"
+                    :class="['flex-1 py-6 text-sm font-bold tracking-wide transition-all relative', activeStep === 2 ? 'text-brand-dark' : 'text-slate-400']"
                   >
                     02. Work Details
                     <div v-if="activeStep === 2" class="absolute bottom-0 left-0 right-0 h-1 bg-brand-cyan rounded-t-full"></div>
                   </button>
                   <button
                     @click="goToStep(3)"
-                    :class="['flex-1 py-6 text-xs font-bold tracking-wide transition-all relative', activeStep === 3 ? 'text-brand-dark' : 'text-slate-400']"
+                    :class="['flex-1 py-6 text-sm font-bold tracking-wide transition-all relative', activeStep === 3 ? 'text-brand-dark' : 'text-slate-400']"
                   >
                     03. Payment
                     <div v-if="activeStep === 3" class="absolute bottom-0 left-0 right-0 h-1 bg-brand-cyan rounded-t-full"></div>
@@ -132,7 +132,7 @@
                            >
                               <p class="text-sm font-bold text-slate-600 mb-2">New Registration</p>
                               <p class="text-3xl font-black text-brand-dark">₦20,000</p>
-                              <p class="text-xs text-slate-400 mt-1">First-time member</p>
+                              <p class="text-sm text-slate-400 mt-1">First-time member</p>
                            </button>
                            <button
                              @click="form.membershipType = 'Renewal'"
@@ -140,7 +140,7 @@
                            >
                               <p class="text-sm font-bold text-slate-600 mb-2">Annual Renewal</p>
                               <p class="text-3xl font-black text-brand-dark">₦10,000</p>
-                              <p class="text-xs text-slate-400 mt-1">Existing member</p>
+                              <p class="text-sm text-slate-400 mt-1">Existing member</p>
                            </button>
                         </div>
                      </div>
@@ -156,16 +156,16 @@
                      <div class="bg-[#033958] p-8 md:p-10 rounded-[32px] text-white space-y-6 relative overflow-hidden">
                         <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
                         <div class="space-y-2 relative z-10">
-                           <p class="text-xs font-bold tracking-widest text-brand-cyan uppercase">Membership Dues Payment</p>
+                           <p class="text-sm font-bold tracking-widest text-brand-cyan uppercase">Membership Dues Payment</p>
                            <h4 class="text-2xl font-black tracking-tight">UBA (United Bank for Africa)</h4>
                         </div>
                         <div class="grid grid-cols-2 gap-8 relative z-10">
                            <div class="space-y-1">
-                              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Account Number</p>
+                              <p class="text-sm font-bold text-slate-400 uppercase tracking-wider">Account Number</p>
                               <p class="text-xl font-mono font-bold tracking-widest">1023844239</p>
                            </div>
                            <div class="space-y-1">
-                              <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Account Name</p>
+                              <p class="text-sm font-bold text-slate-400 uppercase tracking-wider">Account Name</p>
                               <p class="text-lg font-bold">SCPSN</p>
                            </div>
                         </div>
@@ -174,7 +174,7 @@
                              <LucideWallet :size="14" />
                              {{ form.membershipType === 'Renewal' ? 'Renewal: ₦10,000' : 'New Registration: ₦20,000' }}
                            </p>
-                           <button @click="copyToClipboard('1023844239')" class="flex items-center gap-1.5 text-xs font-bold text-white/60 hover:text-white transition-colors bg-white/10 px-3 py-1.5 rounded-lg">
+                           <button @click="copyToClipboard('1023844239')" class="flex items-center gap-1.5 text-sm font-bold text-white/60 hover:text-white transition-colors bg-white/10 px-3 py-1.5 rounded-lg">
                              <LucideCopy :size="12" />
                              Copy
                            </button>
@@ -184,7 +184,7 @@
                      <!-- Upload Payment Proof -->
                      <div class="space-y-4">
                         <h5 class="text-sm font-bold text-slate-700 ml-1">Upload Payment Receipt <span class="text-red-400">*</span></h5>
-                        <p class="text-xs text-slate-400 ml-1">After making your transfer, upload a screenshot or photo of your payment receipt below.</p>
+                        <p class="text-sm text-slate-400 ml-1">After making your transfer, upload a screenshot or photo of your payment receipt below.</p>
                         <div
                           @click="$refs.proofFile.click()"
                           class="p-10 border-2 border-dashed border-slate-200 rounded-[32px] text-center space-y-4 cursor-pointer hover:border-brand-cyan hover:bg-brand-cyan/5 transition-all group"
@@ -194,7 +194,7 @@
                                  <LucideUpload :size="24" />
                               </div>
                               <p class="text-sm font-bold text-slate-500">Click to upload your payment receipt</p>
-                              <p class="text-xs text-slate-400">PNG, JPG, or PDF — Max 5MB</p>
+                              <p class="text-sm text-slate-400">PNG, JPG, or PDF — Max 5MB</p>
                            </div>
                            <div v-else class="flex items-center justify-center gap-3 text-brand-cyan font-bold">
                               <LucideFileCheck :size="20" />
@@ -229,24 +229,24 @@
                 </div>
                 <div>
                   <h4 class="text-base font-black text-brand-dark">Conference Payments</h4>
-                  <p class="text-xs text-slate-400">For annual scientific conference registration</p>
+                  <p class="text-sm text-slate-400">For annual scientific conference registration</p>
                 </div>
               </div>
               <div class="grid grid-cols-3 gap-4 bg-white p-5 rounded-2xl border border-slate-100">
                 <div class="space-y-1">
-                  <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Bank</p>
+                  <p class="text-sm font-bold text-slate-400 uppercase tracking-wider">Bank</p>
                   <p class="text-sm font-black text-brand-dark">Access Bank</p>
                 </div>
                 <div class="space-y-1">
-                  <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Account No.</p>
+                  <p class="text-sm font-bold text-slate-400 uppercase tracking-wider">Account No.</p>
                   <p class="text-base font-mono font-bold text-brand-dark tracking-wider">0800585701</p>
                 </div>
                 <div class="space-y-1">
-                  <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Account Name</p>
+                  <p class="text-sm font-bold text-slate-400 uppercase tracking-wider">Account Name</p>
                   <p class="text-sm font-black text-brand-dark">SCPSN</p>
                 </div>
               </div>
-              <button @click="copyToClipboard('0800585701')" class="flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-brand-dark transition-colors">
+              <button @click="copyToClipboard('0800585701')" class="flex items-center gap-1.5 text-sm font-bold text-slate-400 hover:text-brand-dark transition-colors">
                 <LucideCopy :size="12" />
                 Copy conference account number
               </button>
@@ -255,7 +255,7 @@
             <!-- Help Contact -->
             <div class="mt-8 flex flex-wrap justify-between items-center px-4 gap-4">
                <div>
-                  <p class="text-xs font-bold text-slate-400 mb-1">Need help?</p>
+                  <p class="text-sm font-bold text-slate-400 mb-1">Need help?</p>
                   <p class="text-sm font-bold text-brand-dark">info@scpsn.org.ng</p>
                </div>
                <NuxtLink to="/contact" class="flex items-center gap-2 text-brand-cyan font-bold text-sm hover:translate-x-1 transition-transform">

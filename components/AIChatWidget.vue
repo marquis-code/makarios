@@ -74,7 +74,7 @@
            
            <div class="text-center mb-10">
              <h5 class="text-xl font-black text-slate-800 tracking-tight mb-2">Initialize Session</h5>
-             <p class="text-xs font-bold text-slate-400  leading-relaxed">Please provide your details to<br/>access live administrative support.</p>
+             <p class="text-sm font-bold text-slate-400  leading-relaxed">Please provide your details to<br/>access live administrative support.</p>
            </div>
 
            <div class="w-full space-y-4">
@@ -242,7 +242,7 @@
                   <Icon name="lucide:star" size="32" class="text-[#075E54]" />
                </div>
                <h3 class="text-xl font-black text-slate-800 tracking-tight mb-2">Rate Your Session</h3>
-               <p class="text-xs font-bold text-slate-400  mb-8">How was the support quality?</p>
+               <p class="text-sm font-bold text-slate-400  mb-8">How was the support quality?</p>
                <div class="flex gap-2 mb-8">
                  <button v-for="star in 5" :key="star" @click="submitRating(star)" class="text-4xl text-slate-300 hover:text-yellow-400 hover:scale-110 transition-all focus:text-yellow-400">★</button>
                </div>

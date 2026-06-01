@@ -85,6 +85,14 @@ instanceArray.forEach((instance) => {
       config.headers['X-Business-Id'] = businessId.value;
     }
 
+    let lang = 'en';
+    if (typeof document !== 'undefined') {
+      const match = document.cookie.match(new RegExp('(^| )i18n_redirected=([^;]+)'));
+      if (match && match[2]) lang = decodeURIComponent(match[2]);
+      else lang = localStorage.getItem('app-lang') || 'en';
+    }
+    config.headers['x-lang'] = lang;
+
     return config;
   });
 

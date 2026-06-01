@@ -4,7 +4,7 @@
     <section class="max-w-7xl mx-auto px-6 lg:px-8 mb-16 text-center">
       <div class="inline-flex items-center justify-center space-x-2 bg-blue-50/80 px-4 py-2 rounded-full mb-6 border border-blue-100">
         <div class="w-2 h-2 rounded-full bg-[#003366] animate-pulse"></div>
-        <span class="text-xs font-bold text-[#003366] tracking-widest uppercase">Moments</span>
+        <span class="text-sm font-bold text-[#003366] tracking-widest uppercase">Moments</span>
       </div>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight">
         Association <span class="text-[#003366]">Gallery</span>
@@ -107,7 +107,7 @@
             />
             
             <div class="text-center mt-6 max-w-2xl">
-              <span class="inline-block px-3 py-1 bg-white/10 text-white text-xs font-bold uppercase tracking-widest rounded-full mb-3">
+              <span class="inline-block px-3 py-1 bg-white/10 text-white text-sm font-bold uppercase tracking-widest rounded-full mb-3">
                 {{ currentLightboxItem.category }}
               </span>
               <h2 v-if="currentLightboxItem.title" class="text-2xl font-bold text-white">{{ currentLightboxItem.title }}</h2>

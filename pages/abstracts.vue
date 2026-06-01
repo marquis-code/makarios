@@ -7,7 +7,7 @@
     <div class="container mx-auto px-6 py-24 md:py-32 relative z-10 max-w-7xl">
       <!-- Hub Header -->
       <div class="max-w-4xl mb-16 md:mb-24 space-y-6 animate-on-scroll">
-        <span class="inline-flex items-center gap-3 px-4 py-2 bg-white text-brand-blue font-bold text-[10px] tracking-[0.3em] rounded-full border border-slate-200 shadow-sm">
+        <span class="inline-flex items-center gap-3 px-4 py-2 bg-white text-brand-blue font-bold text-sm tracking-[0.3em] rounded-full border border-slate-200 shadow-sm">
            <LucideFingerprint :size="14" class="text-brand-cyan" />
            SCIENTIFIC RESEARCH HUB
         </span>
@@ -38,9 +38,9 @@
                </div>
                
                <div class="space-y-6 bg-slate-50/50 p-6 md:p-8 rounded-[2rem] border border-slate-100">
-                  <h4 class="text-[10px] font-black  text-slate-400 mb-6">Submission Guidelines</h4>
+                  <h4 class="text-sm font-black  text-slate-400 mb-6">Submission Guidelines</h4>
                   <div v-for="(g, i) in guidelines" :key="i" class="flex gap-5 group">
-                     <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex flex-shrink-0 items-center justify-center text-brand-blue font-bold text-xs group-hover:bg-brand-blue group-hover:text-white group-hover:border-brand-blue shadow-sm transition-all duration-300">
+                     <div class="w-8 h-8 rounded-full bg-white border border-slate-200 flex flex-shrink-0 items-center justify-center text-brand-blue font-bold text-sm group-hover:bg-brand-blue group-hover:text-white group-hover:border-brand-blue shadow-sm transition-all duration-300">
                         {{ i + 1 }}
                      </div>
                      <p class="text-base text-slate-600 font-medium leading-relaxed">{{ g }}</p>
@@ -65,18 +65,18 @@
                   <!-- Author Details Group -->
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div class="space-y-2 relative group">
-                        <label class="text-[10px] font-black  text-slate-500 ml-1">Lead Investigator</label>
+                        <label class="text-sm font-black  text-slate-500 ml-1">Lead Investigator</label>
                         <input v-model="form.primaryAuthor" type="text" class="premium-input" placeholder="Dr. Jane Doe" required />
                      </div>
                      <div class="space-y-2 relative group">
-                        <label class="text-[10px] font-black  text-slate-500 ml-1">Email Address</label>
+                        <label class="text-sm font-black  text-slate-500 ml-1">Email Address</label>
                         <input v-model="form.email" type="email" class="premium-input" placeholder="jane.doe@institution.edu" required />
                      </div>
                   </div>
 
                   <!-- Affiliation / Institution (Custom Dropdown/Datalist) -->
                   <div class="space-y-2 relative">
-                     <label class="text-[10px] font-black  text-slate-500 ml-1">Affiliation / Institution (Nigeria)</label>
+                     <label class="text-sm font-black  text-slate-500 ml-1">Affiliation / Institution (Nigeria)</label>
                      <div class="relative">
                         <input v-model="form.affiliation" @focus="showUniversities = true" @blur="hideUniversitiesDelay" type="text" class="premium-input" placeholder="Search or enter institution..." required />
                         <LucideChevronDown class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" :size="18" />
@@ -91,18 +91,18 @@
                   </div>
 
                   <div class="space-y-2">
-                     <label class="text-[10px] font-black  text-slate-500 ml-1">Scientific Title</label>
+                     <label class="text-sm font-black  text-slate-500 ml-1">Scientific Title</label>
                      <input v-model="form.title" type="text" class="premium-input !text-slate-900 font-bold" placeholder="Enter the full title of your research" required />
                   </div>
 
                   <!-- Keywords Mapping -->
                   <div class="space-y-3">
-                     <label class="text-[10px] font-black  text-slate-500 ml-1">Keywords</label>
+                     <label class="text-sm font-black  text-slate-500 ml-1">Keywords</label>
                      <input v-model="form.keywords" type="text" class="premium-input" placeholder="Type keywords separated by comma (e.g., Cytology, Genetics)" required />
                      
                      <div class="flex flex-wrap gap-2 pt-1 min-h-[30px]">
                         <transition-group name="keyword">
-                           <span v-for="(kw, idx) in keywordArray" :key="idx" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-cyan/10 border border-brand-cyan/20 text-brand-blue rounded-lg text-xs font-bold tracking-wide">
+                           <span v-for="(kw, idx) in keywordArray" :key="idx" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-cyan/10 border border-brand-cyan/20 text-brand-blue rounded-lg text-sm font-bold tracking-wide">
                               <LucideHash :size="12" /> {{ kw }}
                            </span>
                         </transition-group>
@@ -115,18 +115,18 @@
                         
                         <!-- WRITE MODE -->
                         <div v-if="submissionMode === 'write'" class="space-y-2">
-                           <label class="text-[10px] font-black  text-slate-500 ml-1">Abstract Body</label>
+                           <label class="text-sm font-black  text-slate-500 ml-1">Abstract Body</label>
                            <div class="relative group">
                              <textarea v-model="form.abstractBody" rows="7" class="premium-input !rounded-[24px] !py-5 !px-6 resize-none leading-relaxed" placeholder="Draft your research summary (Background, Methods, Results, Conclusion)..."></textarea>
                              <div class="absolute bottom-4 right-4 flex justify-between items-center bg-white px-4 py-1.5 rounded-full border border-slate-200 shadow-sm">
-                                <p :class="['text-[10px] font-black font-mono', wordCount < 150 || wordCount > 250 ? 'text-rose-500' : 'text-brand-blue']">{{ wordCount }} / 250 Words</p>
+                                <p :class="['text-sm font-black font-mono', wordCount < 150 || wordCount > 250 ? 'text-rose-500' : 'text-brand-blue']">{{ wordCount }} / 250 Words</p>
                              </div>
                            </div>
                         </div>
 
                         <!-- UPLOAD MODE -->
                         <div v-else class="space-y-2">
-                           <label class="text-[10px] font-black  text-slate-500 ml-1">Document Upload</label>
+                           <label class="text-sm font-black  text-slate-500 ml-1">Document Upload</label>
                            
                            <div v-if="!selectedFile" class="relative group cursor-pointer" @click="$refs.fileInput.click()">
                               <div class="absolute inset-0 bg-slate-50 rounded-[24px] group-hover:bg-brand-blue/5 transition-colors border border-dashed border-slate-300 group-hover:border-brand-blue/30"></div>
@@ -135,7 +135,7 @@
                                     <LucideCloudUpload :size="28" />
                                  </div>
                                  <h4 class="text-slate-800 font-bold mb-1">Click to browse documents</h4>
-                                 <p class="text-xs text-slate-500 font-medium">Supports PDF, DOC, DOCX (Max 5MB)</p>
+                                 <p class="text-sm text-slate-500 font-medium">Supports PDF, DOC, DOCX (Max 5MB)</p>
                               </div>
                               <input type="file" ref="fileInput" @change="handleFileUpload" class="hidden" accept=".pdf,.doc,.docx" />
                            </div>
@@ -147,7 +147,7 @@
                                  </div>
                                  <div>
                                     <h4 class="text-slate-800 font-bold text-base truncate max-w-[200px] sm:max-w-[300px]">{{ selectedFile.name }}</h4>
-                                    <p class="text-xs text-slate-500">{{ (selectedFile.size / 1024 / 1024).toFixed(2) }} MB</p>
+                                    <p class="text-sm text-slate-500">{{ (selectedFile.size / 1024 / 1024).toFixed(2) }} MB</p>
                                  </div>
                               </div>
                               <button type="button" @click="removeFile" class="w-10 h-10 rounded-full bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-500 flex items-center justify-center transition-all border border-slate-200 shadow-sm">

@@ -33,29 +33,29 @@
             No newsletter categories available at the moment. Please check back later.
           </div>
 
-          <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div v-else class="space-y-4">
             <label 
               v-for="cat in activeCategories" 
               :key="cat._id"
-              :class="['relative p-6 rounded-2xl border-2 transition-all cursor-pointer flex flex-col h-full bg-white hover:shadow-xl', 
-                selectedCategories.includes(cat._id) ? 'border-brand-blue shadow-lg ring-4 ring-brand-blue/10' : 'border-slate-100 hover:border-slate-300'
+              :class="['relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center bg-white hover:shadow-md', 
+                selectedCategories.includes(cat._id) ? 'border-brand-blue ring-2 ring-brand-blue/10 shadow-sm' : 'border-slate-100 hover:border-slate-300'
               ]"
             >
-              <div class="absolute top-6 right-6">
+              <div class="flex-grow pr-6">
+                <h3 class="text-base font-black text-slate-800 mb-1">{{ cat.title }}</h3>
+                <p class="text-sm text-slate-500">{{ cat.description }}</p>
+              </div>
+              <div class="shrink-0 text-right mr-6">
+                <span class="text-xl font-black text-brand-cyan block leading-none">{{ cat.price === 0 ? 'Free' : '₦' + cat.price.toLocaleString() }}</span>
+                <span class="text-xs font-bold text-slate-400">/ subscription</span>
+              </div>
+              <div class="shrink-0 flex items-center justify-center">
                 <input 
                   type="checkbox" 
                   :value="cat._id" 
                   v-model="selectedCategories"
-                  class="w-5 h-5 text-brand-blue border-slate-300 rounded focus:ring-brand-blue cursor-pointer"
+                  class="w-6 h-6 text-brand-blue border-slate-300 rounded focus:ring-brand-blue cursor-pointer"
                 />
-              </div>
-              <div class="pr-10 flex-grow">
-                <h3 class="text-lg font-black text-slate-800 mb-2">{{ cat.title }}</h3>
-                <p class="text-base text-slate-500 leading-relaxed">{{ cat.description }}</p>
-              </div>
-              <div class="mt-6 pt-6 border-t border-slate-100">
-                <span class="text-xl font-black text-brand-cyan">{{ cat.price === 0 ? 'Free' : '₦' + cat.price.toLocaleString() }}</span>
-                <span class="text-xs font-bold text-slate-400 ml-1">/ subscription</span>
               </div>
             </label>
           </div>
@@ -86,25 +86,44 @@
 
             <form @submit.prevent="subscribe" class="space-y-4">
               <div>
-                <label class="block text-xs font-bold text-slate-600  tracking-wider mb-2">Full Name</label>
+                <label class="block text-sm font-bold text-slate-600 tracking-wider mb-2">Full Name</label>
                 <input v-model="fullName" type="text" placeholder="Dr. Jane Doe" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all" />
               </div>
               <div>
-                <label class="block text-xs font-bold text-slate-600  tracking-wider mb-2">Email Address</label>
+                <label class="block text-sm font-bold text-slate-600 tracking-wider mb-2">Email Address</label>
                 <input v-model="email" type="email" placeholder="jane@hospital.org" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all" />
               </div>
+              
+              <div v-if="totalPrice > 0" class="mt-6 pt-6 border-t border-slate-100">
+                <div class="bg-brand-blue/5 border border-brand-blue/20 rounded-xl p-4 mb-4">
+                   <h4 class="text-sm font-black text-brand-blue mb-2">Bank Transfer Details</h4>
+                   <p class="text-xs text-slate-600 mb-1">Please transfer <strong>₦{{ totalPrice.toLocaleString() }}</strong> to the SCPSN dues account below:</p>
+                   <div class="mt-2 space-y-1">
+                      <p class="text-sm"><span class="font-bold text-slate-500">Bank:</span> <span class="font-black text-slate-800">First Bank of Nigeria</span></p>
+                      <p class="text-sm"><span class="font-bold text-slate-500">Account No:</span> <span class="font-black text-slate-800">2012345678</span></p>
+                      <p class="text-sm"><span class="font-bold text-slate-500">Account Name:</span> <span class="font-black text-slate-800">SCPSN Dues</span></p>
+                   </div>
+                   <p class="text-xs text-slate-500 mt-3 border-t border-brand-blue/10 pt-2 italic">Transfer description must be: <strong>payment for new letter subscription</strong></p>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-bold text-slate-600 tracking-wider mb-2">Upload Proof of Payment</label>
+                  <input type="file" @change="e => proofFile = e.target.files[0]" accept="image/*,.pdf" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all text-sm" />
+                </div>
+              </div>
+
               <button 
                 type="submit" 
                 :disabled="loading || selectedCategories.length === 0"
-                class="w-full btn-premium !py-4 mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3"
+                class="w-full text-sm rounded-lg bg-black text-white py-4 mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3 transition-colors hover:bg-slate-800"
               >
                 <span v-if="loading" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                {{ totalPrice === 0 ? 'Subscribe Now' : 'Proceed to Payment' }}
+                {{ totalPrice === 0 ? 'Subscribe Now' : 'Submit Subscription' }}
               </button>
             </form>
             
-            <p class="text-[10px] text-center text-slate-400 mt-6 font-medium">
-              By subscribing, you agree to our Terms of Service and Privacy Policy. Secure payments are processed by Paystack.
+            <p class="text-sm text-center text-slate-400 mt-6 font-medium">
+              By subscribing, you agree to our Terms of Service and Privacy Policy.
             </p>
           </div>
         </div>
@@ -118,7 +137,7 @@
 import { onMounted, computed } from 'vue'
 import { useNewsletter } from '@/composables/modules/newsletters/useNewsletter'
 
-const { loading, email, fullName, categories, selectedCategories, fetchCategories, subscribe } = useNewsletter()
+const { loading, email, fullName, categories, selectedCategories, proofFile, fetchCategories, subscribe } = useNewsletter()
 
 onMounted(() => {
   fetchCategories()

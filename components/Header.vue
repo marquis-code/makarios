@@ -110,7 +110,7 @@
 
         <!-- ── Desktop CTA & Lang Switcher ── -->
         <div class="hidden lg:flex items-center gap-2.5">
-
+          <LanguageSwitcher class="text-white" />
 
           <NuxtLink to="/appointments" class="cta-ghost group flex items-center gap-2">
             <LucideCalendar :size="13" class="group-hover:rotate-12 transition-transform duration-300" />
@@ -263,6 +263,7 @@ import {
   LucideGlobe
 } from 'lucide-vue-next'
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import LanguageSwitcher from '@/components/core/LanguageSwitcher.vue'
 import { useCMS } from '@/composables/useCMS'
 const { cmsConfig } = useCMS()
 const route = useRoute()
