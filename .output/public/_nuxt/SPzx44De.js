@@ -1,0 +1,1 @@
+import{V as a,i as o}from"./D2j04dx0.js";const c={getAll:()=>a.get("/excos")},n=()=>{const s=o(!1),t=o([]);return{loading:s,excos:t,getExcos:async()=>{s.value=!0;try{const e=await c.getAll();t.value=e.data||e}catch(e){console.error("Failed to fetch excos",e)}finally{s.value=!1}}}};export{n as u};
