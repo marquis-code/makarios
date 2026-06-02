@@ -1,1 +1,0 @@
-import{c as n}from"./CDiZxB1V.js";import{q as o,s as a}from"./WT4-tNwc.js";const u=()=>{const e=o(!1),s=o([]),{showToast:r}=a();return{loading:e,conferences:s,getConferences:async()=>{e.value=!0;try{const t=await n.getConferences();s.value=t.data}catch{r({title:"Error",message:"Failed to fetch conferences",toastType:"error"})}finally{e.value=!1}}}};export{u};

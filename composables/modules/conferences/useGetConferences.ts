@@ -11,7 +11,7 @@ export const useGetConferences = () => {
         loading.value = true
         try {
             const res = await conferences_api.getConferences() as any
-            conferences.value = res.data
+            conferences.value = res.data.filter((c: any) => c.isVisible !== false)
         } catch (err: any) {
             showToast({ title: "Error", message: "Failed to fetch conferences", toastType: "error" })
         } finally {

@@ -91,7 +91,12 @@
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <div v-for="conference in upcomingConferences" :key="conference._id" class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 group">
+            <NuxtLink 
+              v-for="conference in upcomingConferences" 
+              :key="conference._id" 
+              :to="`/conferences/${conference._id}`"
+              class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 group block hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            >
                <div class="h-56 overflow-hidden relative bg-slate-100 flex items-center justify-center p-4">
                   <img :src="conference.bannerImage || 'https://scpsn.org.ng/wp-content/uploads/2021/10/banner.jpg'" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700" :alt="conference.title" />
                   <div class="absolute top-4 right-4 h-8 px-3 glass-dark rounded-lg flex items-center text-[10px] font-black text-white tracking-widest z-10">
@@ -107,9 +112,9 @@
                     {{ conference.title }}
                   </h4>
                   <p class="text-slate-500 line-clamp-3 text-sm">{{ conference.description }}</p>
-                  <NuxtLink :to="`/conferences/${conference._id}`" class="inline-block mt-4 text-sm font-black text-brand-blue hover:text-brand-cyan transition-colors">{{ $t('home.read_more') }} &rarr;</NuxtLink>
+                  <span class="inline-block mt-4 text-sm font-black text-brand-blue group-hover:text-brand-cyan transition-colors">{{ $t('home.read_more') }} &rarr;</span>
                </div>
-            </div>
+            </NuxtLink>
           </div>
        </div>
     </section>
@@ -383,7 +388,10 @@ const upcomingEvent = computed(() => {
 })
 
 const upcomingConferences = computed(() => {
-  return conferences.value.filter(c => c.status === 'upcoming').slice(0, 3)
+  return [...conferences.value]
+    .filter(c => c.status === 'upcoming')
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 3)
 })
 import { 
     LucideMicroscope, 
