@@ -8,11 +8,12 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', 'lucide-nuxt', '@vueuse/nuxt', '@nuxt/icon', '@nuxtjs/i18n'],
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', name: 'English' },
-      { code: 'fr', iso: 'fr-FR', name: 'Français' },
-      { code: 'es', iso: 'es-ES', name: 'Español' },
-      { code: 'pt', iso: 'pt-PT', name: 'Português' }
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'fr', language: 'fr-FR', name: 'Français', file: 'fr.json' },
+      { code: 'es', language: 'es-ES', name: 'Español', file: 'es.json' },
+      { code: 'pt', language: 'pt-PT', name: 'Português', file: 'pt.json' }
     ],
+    langDir: 'locales/',
     defaultLocale: 'en',
     strategy: 'no_prefix',
     detectBrowserLanguage: {

@@ -17,7 +17,7 @@
             </div>
           </NuxtLink>
           <p class="text-slate-400 text-base leading-relaxed font-medium">
-            Advancing the frontiers of cellular diagnosis and therapeutic laboratory science in Nigeria and beyond.
+            {{ $t('footer.desc') }}
           </p>
           <div class="flex gap-4">
             <a v-if="cmsConfig?.global?.socialLinks?.facebook" :href="cmsConfig.global.socialLinks.facebook" target="_blank" class="w-10 h-10 rounded-xl glass-dark flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-cyan transition-all duration-300">
@@ -52,10 +52,10 @@
 
         <!-- Newsletter -->
         <div class="space-y-8">
-           <h4 class="text-sm font-black text-white  tracking-[0.2em]">Scientific Updates</h4>
-           <p class="text-base text-slate-400 font-medium leading-relaxed">Join our mailing list for the latest research papers and conference alerts.</p>
+           <h4 class="text-sm font-black text-white  tracking-[0.2em]">{{ $t('footer.updates') }}</h4>
+           <p class="text-base text-slate-400 font-medium leading-relaxed">{{ $t('footer.mailing_list') }}</p>
            <div class="relative group">
-              <input v-model="email" type="email" placeholder="Email Address" class="form-input !py-4 pr-16 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-brand-cyan">
+              <input v-model="email" type="email" :placeholder="$t('footer.email_placeholder')" class="form-input !py-4 pr-16 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-brand-cyan">
                <button 
                 @click="subscribeFooter" 
                 :disabled="loading"
@@ -73,8 +73,8 @@
             &copy; {{ new Date().getFullYear() }} {{ cmsConfig?.global?.siteName || 'Society for Cellular Pathology Scientists of Nigeria' }}.
           </p>
          <div class="flex gap-8">
-            <NuxtLink to="/privacy" class="text-[10px] font-black text-slate-500  hover:text-white transition-colors">Privacy Policy</NuxtLink>
-            <NuxtLink to="/terms" class="text-[10px] font-black text-slate-500  hover:text-white transition-colors">Terms of Use</NuxtLink>
+            <NuxtLink to="/privacy" class="text-[10px] font-black text-slate-500  hover:text-white transition-colors">{{ $t('footer.privacy') }}</NuxtLink>
+            <NuxtLink to="/terms" class="text-[10px] font-black text-slate-500  hover:text-white transition-colors">{{ $t('footer.terms') }}</NuxtLink>
          </div>
       </div>
     </div>
@@ -101,19 +101,21 @@ const socials = [
   { icon: LucideLinkedin },
 ]
 
-const footerLinks = {
-  'Quick Navigation': [
-    { label: 'Scientific Board', to: '/about' },
-    { label: 'Upcoming Conferences', to: '/conferences' },
-    { label: 'Membership Portal', to: 'https://member.scpsn.com' },
+const { t } = useI18n()
+
+const footerLinks = computed(() => ({
+  [t('footer.quick_nav')]: [
+    { label: t('footer.scientific_board'), to: '/about' },
+    { label: t('footer.upcoming_conf'), to: '/conferences' },
+    { label: t('footer.member_portal'), to: 'https://member.scpsn.com' },
     // { label: 'Payment Verification', to: '/payment' },
   ],
-  'Resources': [
-    { label: 'Journal Archives', to: '/abstracts' },
-    { label: 'Protocol Guidelines', to: '/about' },
-    { label: 'Association Gallery', to: '/gallery' },
-    { label: 'News & Media', to: '/' },
-    { label: 'Contact Support', to: '/contact' },
+  [t('footer.resources')]: [
+    { label: t('footer.journal_archives'), to: '/abstracts' },
+    { label: t('footer.protocol_guidelines'), to: '/about' },
+    { label: t('footer.gallery'), to: '/gallery' },
+    { label: t('footer.news_media'), to: '/' },
+    { label: t('footer.contact_support'), to: '/contact' },
   ]
-}
+}))
 </script>

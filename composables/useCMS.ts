@@ -6,8 +6,11 @@ export const useCMS = () => {
   
   // Try to use i18n, but gracefully handle if it's not available yet
   let currentLocale = ref('en')
+  let localeRef = null
   try {
-        currentLocale = locale
+    const { locale } = useI18n()
+    localeRef = locale
+    currentLocale = locale
   } catch (e) {
     // fallback if used outside component setup
   }
@@ -29,9 +32,11 @@ export const useCMS = () => {
 
   // Reload CMS when language changes
   try {
-        watch(locale, (newLang) => {
-      loadCMS(newLang)
-    })
+    if (localeRef) {
+      watch(localeRef, (newLang) => {
+        loadCMS(newLang)
+      })
+    }
   } catch (e) {}
 
   return {

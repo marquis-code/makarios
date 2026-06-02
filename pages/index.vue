@@ -77,51 +77,39 @@
       </div>
     </section>
 
-    <!-- Upcoming Event Section -->
-    <section v-if="upcomingEvent" class="py-16 bg-white relative border-b border-slate-100">
+
+
+    <!-- Latest Happenings Section -->
+    <section v-if="upcomingConferences.length > 0" class="py-24 bg-slate-50 relative">
        <div class="container mx-auto px-6">
-          <div class="glass-dark bg-[#0f172a] rounded-[3rem] overflow-hidden border border-slate-800 shadow-2xl">
-             <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="p-12 lg:p-16 flex flex-col justify-center text-white">
-                   <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-cyan/20 text-brand-cyan rounded-full text-base font-black uppercase tracking-widest mb-8 w-max">
-                      <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
-                      Upcoming Event
-                   </div>
-                   <h2 class="text-4xl lg:text-5xl font-black tracking-tighter mb-6 leading-tight">
-                      {{ upcomingEvent.title }}
-                   </h2>
-                   <p class="text-slate-400 text-lg mb-8 line-clamp-3">
-                      {{ upcomingEvent.description }}
-                   </p>
-                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                      <div class="flex items-start gap-4">
-                         <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-brand-cyan shrink-0">
-                            <LucideCalendar :size="20" />
-                         </div>
-                         <div>
-                            <p class="text-sm font-black text-slate-500 uppercase tracking-widest mb-1">Date & Time</p>
-                            <p class="font-bold text-slate-200">{{ new Date(upcomingEvent.startDate).toLocaleDateString() }}</p>
-                         </div>
-                      </div>
-                      <div class="flex items-start gap-4">
-                         <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-brand-cyan shrink-0">
-                            <LucideMapPin :size="20" />
-                         </div>
-                         <div>
-                            <p class="text-sm font-black text-slate-500 uppercase tracking-widest mb-1">Location</p>
-                            <p class="font-bold text-slate-200">{{ upcomingEvent.venue }}</p>
-                         </div>
-                      </div>
-                   </div>
-                   <div class="flex items-center gap-4">
-                      <NuxtLink to="/conferences" class="btn-premium">Register Now</NuxtLink>
-                   </div>
-                </div>
-                <div class="relative min-h-[400px] lg:min-h-full">
-                   <img :src="upcomingEvent.bannerImage" :alt="upcomingEvent.title" class="absolute inset-0 w-full h-full object-cover" />
-                   <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-transparent to-transparent"></div>
-                </div>
-             </div>
+          <div class="flex items-center justify-between mb-16">
+             <h2 class="text-4xl md:text-5xl font-black text-brand-dark tracking-tighter">{{ $t('home.latest_happenings') }}</h2>
+             <NuxtLink to="/conferences" class="text-sm font-black tracking-[0.2em] text-brand-cyan flex items-center gap-2 group">
+                {{ $t('home.view_all_events') }}
+                <LucideArrowRight :size="16" class="group-hover:translate-x-1 transition-transform" />
+             </NuxtLink>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div v-for="conference in upcomingConferences" :key="conference._id" class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 group">
+               <div class="h-56 overflow-hidden relative bg-slate-100 flex items-center justify-center p-4">
+                  <img :src="conference.bannerImage || 'https://scpsn.org.ng/wp-content/uploads/2021/10/banner.jpg'" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700" :alt="conference.title" />
+                  <div class="absolute top-4 right-4 h-8 px-3 glass-dark rounded-lg flex items-center text-[10px] font-black text-white tracking-widest z-10">
+                     {{ conference.startDate ? new Date(conference.startDate).toLocaleDateString() : 'Upcoming' }}
+                  </div>
+               </div>
+               <div class="p-8 space-y-4">
+                  <div class="flex items-center gap-2 text-brand-cyan text-sm font-bold">
+                     <LucideMapPin :size="16" />
+                     <span>{{ conference.venue || 'TBA' }}</span>
+                  </div>
+                  <h4 class="text-xl font-bold text-brand-dark leading-tight group-hover:text-brand-cyan transition-colors line-clamp-2">
+                    {{ conference.title }}
+                  </h4>
+                  <p class="text-slate-500 line-clamp-3 text-sm">{{ conference.description }}</p>
+                  <NuxtLink :to="`/conferences/${conference._id}`" class="inline-block mt-4 text-sm font-black text-brand-blue hover:text-brand-cyan transition-colors">{{ $t('home.read_more') }} &rarr;</NuxtLink>
+               </div>
+            </div>
           </div>
        </div>
     </section>
@@ -132,13 +120,13 @@
           <div class="flex flex-col lg:flex-row justify-between items-end gap-10 mb-24">
              <div class="max-w-2xl space-y-6">
                 <h2 class="text-5xl md:text-6xl font-black text-brand-blue tracking-tighter">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.pillarsTitle || 'Advancing the Frontiers of Cellular Diagnosis' }}
+                   {{ cmsConfig?.public?.home?.homeHeaders?.pillarsTitle || $t('home.advancing_frontiers') }}
                 </h2>
                 <p class="text-lg text-slate-500 leading-relaxed font-medium">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.pillarsSubtitle || 'The Society for Cellular Pathology Scientists of Nigeria is committed to instituting excellence in laboratory medicine across Africa.' }}
+                   {{ cmsConfig?.public?.home?.homeHeaders?.pillarsSubtitle || $t('home.society_committed') }}
                 </p>
              </div>
-             <NuxtLink to="/about" class="btn-outline-premium">Learn More About Us</NuxtLink>
+             <NuxtLink to="/about" class="btn-outline-premium">{{ $t('home.learn_more') }}</NuxtLink>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -220,10 +208,10 @@
           <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-24">
              <div class="space-y-4">
                 <h2 class="text-5xl font-black text-brand-blue tracking-tighter">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.initiativesTitle || 'Strategic Initiatives' }}
+                   {{ cmsConfig?.public?.home?.homeHeaders?.initiativesTitle || $t('home.strategic_initiatives') }}
                 </h2>
                 <p class="text-slate-500 font-medium text-lg">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.initiativesSubtitle || 'Leading key scientific transformations in the healthcare sector.' }}
+                   {{ cmsConfig?.public?.home?.homeHeaders?.initiativesSubtitle || $t('home.leading_transformations') }}
                 </p>
              </div>
              <div class="flex gap-4">
@@ -252,7 +240,7 @@
                          <p class="text-slate-500 group-hover:text-slate-200 transition-colors font-medium text-base leading-relaxed">{{ ini.desc }}</p>
                       </div>
                       <NuxtLink :to="ini.to" class="flex items-center gap-3 text-base font-black text-brand-red group-hover:text-brand-cyan transition-colors  pt-4">
-                         Exploration
+                         {{ $t('home.exploration') }}
                          <LucideArrowRight :size="16" />
                       </NuxtLink>
                    </div>
@@ -265,7 +253,7 @@
     <!-- Dynamic Sponsors Marquee -->
     <section v-if="sponsors.length > 0" class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
        <div class="container mx-auto px-6 mb-10 text-center">
-          <p class="text-sm font-black text-slate-400  -[0.4em]">Global Scientific Collaborations & Sponsors</p>
+          <p class="text-sm font-black text-slate-400  -[0.4em]">{{ $t('home.global_collab_sponsors') }}</p>
        </div>
        <div class="flex items-center gap-16 animate-marquee whitespace-nowrap opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-500 px-10">
           <div v-for="n in 10" :key="n" class="flex items-center gap-16">
@@ -286,7 +274,7 @@
     <!-- Static Marquee Fallback if no sponsors -->
     <section v-else class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
        <div class="container mx-auto px-6 mb-10 text-center">
-          <p class="text-sm font-black text-slate-400  -[0.4em]">Global Scientific Collaborations</p>
+          <p class="text-sm font-black text-slate-400  -[0.4em]">{{ $t('home.global_collab') }}</p>
        </div>
        <div class="flex items-center gap-16 animate-marquee whitespace-nowrap opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-500 px-10">
           <div v-for="n in 10" :key="n" class="flex items-center gap-16 grayscale">
@@ -303,8 +291,8 @@
     <section class="py-32 bg-white relative">
        <div class="container mx-auto px-6">
           <div class="text-center max-w-3xl mx-auto mb-20 space-y-6">
-             <h2 class="text-5xl font-black text-brand-blue tracking-tighter">Member <span class="text-brand-red">Tiers</span></h2>
-             <p class="text-slate-500 font-medium">Join our global community of scientific experts.</p>
+             <h2 class="text-5xl font-black text-brand-blue tracking-tighter">{{ $t('home.member_tiers') }}</h2>
+             <p class="text-slate-500 font-medium">{{ $t('home.join_community') }}</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-10">
              <div v-for="(tier, i) in activeTiers" :key="i" class="p-12 rounded-[3rem] border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 group">
@@ -317,7 +305,7 @@
                    </li>
                 </ul>
                 <NuxtLink to="/membership" class="block w-full py-4 text-center bg-brand-blue text-white rounded-2xl text-base font-black  hover:bg-brand-red transition-colors">
-                  {{ tier.title.includes('Renewal') ? 'Renew Now' : 'Join Now' }}
+                  {{ tier.title.includes('Renewal') ? $t('home.renew_now') : $t('home.join_now') }}
                 </NuxtLink>
              </div>
           </div>
@@ -335,8 +323,8 @@
     <section class="py-32 bg-slate-50">
        <div class="container mx-auto px-6">
           <div class="text-center max-w-3xl mx-auto mb-20 space-y-6">
-             <h2 class="text-5xl font-black text-brand-blue tracking-tighter">Our Scientific Board</h2>
-             <p class="text-slate-500 font-medium">Distinguished professionals leading the way in Nigerian Cellular Pathology.</p>
+             <h2 class="text-5xl font-black text-brand-blue tracking-tighter">{{ $t('home.our_board') }}</h2>
+             <p class="text-slate-500 font-medium">{{ $t('home.board_subtitle') }}</p>
           </div>
 
           <div v-if="loadingExcos" class="flex justify-center py-20">
@@ -361,8 +349,8 @@
 
           <EmptyState 
             v-else 
-            title="Scientific Board Under Constitution" 
-            message="We are currently finalizing the appointments for our inaugural Scientific Board. Check back soon for updates."
+            :title="$t('home.board_under_constitution')" 
+            :message="$t('home.board_finalizing')"
           />
        </div>
     </section>
@@ -392,6 +380,10 @@ const { loading: loadingConferences, conferences, getConferences } = useGetConfe
 
 const upcomingEvent = computed(() => {
   return conferences.value.find(c => c.status === 'upcoming') || null
+})
+
+const upcomingConferences = computed(() => {
+  return conferences.value.filter(c => c.status === 'upcoming').slice(0, 3)
 })
 import { 
     LucideMicroscope, 

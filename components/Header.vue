@@ -114,11 +114,11 @@
 
           <NuxtLink to="/appointments" class="cta-ghost group flex items-center gap-2">
             <LucideCalendar :size="13" class="group-hover:rotate-12 transition-transform duration-300" />
-            <span>Bookings</span>
+            <span>{{ $t('nav.bookings') }}</span>
           </NuxtLink>
           <a href="https://member.scpsn.com/" class="cta-solid py-3 flex items-center gap-2">
             <LucideUser :size="13" />
-            <span>Become a Member</span>
+            <span>{{ $t('nav.become_member') }}</span>
           </a>
         </div>
 
@@ -148,6 +148,14 @@
         v-if="isMobileMenuOpen"
         class="lg:hidden fixed inset-0 bg-brand-dark z-[105] flex flex-col pt-28 pb-10 px-6 overflow-y-auto"
       >
+        <!-- Close button (explicit) -->
+        <button
+          class="absolute top-6 right-6 w-10 h-10 rounded-xl glass-btn flex items-center justify-center text-white hover:bg-white/10 transition-colors z-[120]"
+          @click="isMobileMenuOpen = false"
+          aria-label="Close menu"
+        >
+          <LucideX :size="20" />
+        </button>
         <!-- Ambient blobs -->
         <div class="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-brand-cyan/8 rounded-full blur-[120px]"></div>
         <div class="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[100px]"></div>
@@ -225,7 +233,7 @@
               class="cta-ghost !w-full !py-4 !text-[10px] flex items-center justify-center gap-2"
             >
               <LucideCalendar :size="14" />
-              Bookings
+              {{ $t('nav.bookings') }}
             </NuxtLink>
             <NuxtLink
               to="http://localhost:3003"
@@ -233,13 +241,13 @@
               class="cta-solid !w-full !py-4 !text-[10px] flex items-center justify-center gap-2"
             >
               <LucideUser :size="14" />
-              Become a Member
+              {{ $t('nav.become_member') }}
             </NuxtLink>
           </div>
 
           <div class="flex items-center justify-between pt-4 border-t border-white/5">
             <div>
-              <p class="text-[8px] font-black tracking-[0.3em] text-white/30  mb-1">Official Inquiries</p>
+              <p class="text-[8px] font-black tracking-[0.3em] text-white/30  mb-1">{{ $t('nav.official_inquiries') }}</p>
               <p class="text-[11px] font-bold text-white tracking-wide">info@scpsn.org.ng</p>
             </div>
             <a href="#" class="w-10 h-10 rounded-xl glass-btn flex items-center justify-center hover:text-brand-cyan hover:border-brand-cyan/30 transition-all">
@@ -260,12 +268,14 @@ import {
   LucideChevronDown,
   LucideBookOpen,
   LucideUsers,
-  LucideGlobe
+  LucideGlobe,
+  LucideX
 } from 'lucide-vue-next'
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import LanguageSwitcher from '@/components/core/LanguageSwitcher.vue'
 import { useCMS } from '@/composables/useCMS'
 const { cmsConfig } = useCMS()
+const { t } = useI18n()
 const route = useRoute()
 
 const isScrolled = ref(false)
@@ -321,16 +331,16 @@ watch(() => route.path, () => {
 const navigation = computed(() => [
   // { label: 'Home', to: '/' },
   {
-    label: 'Science',
+    label: t('nav.science'),
     children: [
-      { label: 'Scientific Board', to: '/about', icon: LucideUsers, description: 'Our Scientific Excellence' },
-      { label: 'Abstracts & Journals', to: '/abstracts', icon: LucideBookOpen, description: 'Research and Publications' },
+      { label: t('nav.scientific_board'), to: '/about', icon: LucideUsers, description: t('nav.scientific_excellence') },
+      { label: t('nav.abstracts'), to: '/abstracts', icon: LucideBookOpen, description: t('nav.research_pubs') },
     ]
   },
-  { label: 'Events', to: '/conferences' },
-  { label: 'Newsletters', to: '/newsletters' },
-  { label: 'Gallery', to: '/gallery' },
-  { label: 'Contact', to: '/contact' },
+  { label: t('nav.events'), to: '/conferences' },
+  { label: t('nav.newsletters'), to: '/newsletters' },
+  { label: t('nav.gallery'), to: '/gallery' },
+  { label: t('nav.contact'), to: '/contact' },
 ])
 </script>
 
