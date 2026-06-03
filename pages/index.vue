@@ -391,8 +391,8 @@ const upcomingConferences = computed(() => {
   return [...conferences.value]
     .filter(c => c.status === 'upcoming')
     .sort((a, b) => {
-      const orderA = a.order || 0;
-      const orderB = b.order || 0;
+      const orderA = a.order ?? 999;
+      const orderB = b.order ?? 999;
       if (orderA !== orderB) return orderA - orderB;
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     })
