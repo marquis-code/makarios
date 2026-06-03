@@ -390,7 +390,12 @@ const upcomingEvent = computed(() => {
 const upcomingConferences = computed(() => {
   return [...conferences.value]
     .filter(c => c.status === 'upcoming')
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort((a, b) => {
+      const orderA = a.order || 0;
+      const orderB = b.order || 0;
+      if (orderA !== orderB) return orderA - orderB;
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    })
     .slice(0, 3)
 })
 import { 
