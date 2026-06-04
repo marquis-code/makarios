@@ -1,0 +1,1 @@
+import{c as l,G as c,r as t}from"./BHb4BnM-.js";const n=l("chevron-right",[["path",{d:"m9 18 6-6-6-6",key:"mthhwq"}]]),i=()=>{const e=t(!1),r=t([]);return{loading:e,items:r,fetchPublicGallery:async()=>{e.value=!0;try{const a=await c.get("/gallery/public");r.value=a.data}catch(a){console.error("Failed to fetch public gallery",a)}finally{e.value=!1}}}};export{n as C,i as u};

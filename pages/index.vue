@@ -55,8 +55,8 @@
               <!-- Header row -->
               <div class="flex items-center justify-between mb-5">
                 <div>
-                  <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">Our people</p>
-                  <h3 class="text-[15px] font-bold text-slate-800">Meet the team</h3>
+                  <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">SCPSN Gallery</p>
+                  <h3 class="text-[15px] font-bold text-slate-800">From our archive</h3>
                 </div>
                 <div class="flex items-center gap-2">
                   <button
@@ -108,12 +108,12 @@
                       <!-- Gradient overlay -->
                       <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent" />
                       <!-- Name plate -->
-                      <div class="absolute bottom-0 left-0 right-0 p-5">
+                      <!-- <div class="absolute bottom-0 left-0 right-0 p-5">
                         <p class="text-[10px] font-semibold text-blue-300 tracking-widest uppercase mb-1">
                           {{ exco.position || 'Executive member' }}
                         </p>
                         <h4 class="text-[17px] font-bold text-white leading-tight">{{ exco.name }}</h4>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -143,24 +143,25 @@
           <div class="lg:hidden mt-8">
             <div class="flex items-center justify-between mb-4">
               <div>
-                <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">Our people</p>
-                <h3 class="text-[14px] font-bold text-slate-800">Meet the team</h3>
+                <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">SCPSN Gallery</p>
+                <h3 class="text-[14px] font-bold text-slate-800">From our archive</h3>
               </div>
               <NuxtLink to="/about" class="text-[12px] text-[#1d4e89] font-semibold inline-flex items-center gap-1">
                 View all <LucideArrowRight :size="12" />
               </NuxtLink>
             </div>
-            <div class="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
-              <div
-                v-for="exco in carouselExcos"
-                :key="exco._id"
-                class="flex-shrink-0 w-40 snap-start"
-              >
+            <div class="overflow-hidden pb-2">
+              <div class="ticker-track flex gap-3">
+                <div
+                  v-for="(exco, i) in [...carouselExcos, ...carouselExcos, ...carouselExcos, ...carouselExcos]"
+                  :key="exco._id + '-' + i"
+                  class="flex-shrink-0 w-40"
+                >
                 <div class="rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
                   <div class="h-44 bg-blue-50 relative overflow-hidden">
                     <img
-                      v-if="exco.profilePicture"
-                      :src="exco.profilePicture"
+                      v-if="exco.imageUrl"
+                      :src="exco.imageUrl"
                       :alt="exco.name"
                       class="w-full h-full object-cover"
                     />
@@ -168,13 +169,14 @@
                       <LucideUser :size="28" class="text-blue-200" />
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                    <div class="absolute bottom-0 left-0 right-0 p-3">
+                    <!-- <div class="absolute bottom-0 left-0 right-0 p-3">
                       <p class="text-[9px] font-semibold text-blue-300 uppercase tracking-wider mb-0.5">{{ exco.position || 'Member' }}</p>
                       <p class="text-[12px] font-bold text-white leading-tight">{{ exco.name }}</p>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
 
