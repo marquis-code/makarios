@@ -307,7 +307,7 @@ const proactiveMessage = ref('Hi! Need help with this page?')
 const hasInteracted = ref(false)
 
 const config = useRuntimeConfig()
-const apiBase = config.public.apiBase || 'http://localhost:3000/api'
+const apiBase = config.public.apiBase || 'https://spsn-backend.onrender.com/api'
 const messages = ref([])
 
 const identify = () => {
