@@ -1,6 +1,7 @@
 <template>
   <div>
     <ScreenLoader :loading="pageLoading" />
+    <AppToast />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

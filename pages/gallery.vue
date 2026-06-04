@@ -1,163 +1,238 @@
 <template>
-  <main class="min-h-screen bg-slate-50 pt-24 pb-20">
-    <!-- Header Section -->
-    <section class="max-w-7xl mx-auto px-6 lg:px-8 mb-16 text-center">
-      <div class="inline-flex items-center justify-center space-x-2 bg-blue-50/80 px-4 py-2 rounded-full mb-6 border border-blue-100">
-        <div class="w-2 h-2 rounded-full bg-[#003366] animate-pulse"></div>
-        <span class="text-sm font-bold text-[#003366] tracking-widest uppercase">Moments</span>
-      </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-        Association <span class="text-[#003366]">Gallery</span>
-      </h1>
-      <p class="text-lg text-slate-600 max-w-2xl mx-auto font-medium">
-        Explore highlights from our scientific conferences, events, and training programs across Nigeria.
-      </p>
-    </section>
+  <div class="min-h-screen bg-white font-body">
 
-    <!-- Filters -->
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-12 flex flex-wrap justify-center gap-3">
-      <button 
-        @click="activeCategory = 'all'"
-        :class="['px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300', activeCategory === 'all' ? 'bg-[#003366] text-white shadow-md shadow-[#003366]/20' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200']"
-      >
-        All Memories
-      </button>
-      <button 
-        v-for="cat in categories" 
-        :key="cat"
-        @click="activeCategory = cat"
-        :class="['px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 capitalize', activeCategory === cat ? 'bg-[#003366] text-white shadow-md shadow-[#003366]/20' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200']"
-      >
-        {{ cat }}
-      </button>
-    </div>
-
-    <!-- Gallery Masonry -->
-    <section class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div v-if="loading" class="flex flex-col items-center justify-center py-24 gap-4">
-        <div class="w-12 h-12 border-4 border-slate-200 border-t-[#003366] rounded-full animate-spin"></div>
-        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Loading Moments...</p>
-      </div>
-      
-      <div v-else-if="filteredItems.length === 0" class="text-center py-32 bg-white rounded-[2rem] border border-slate-200 shadow-sm">
-        <Icon name="lucide:image" size="48" class="text-slate-300 mx-auto mb-4" />
-        <h3 class="text-xl font-bold text-slate-800 mb-2">No Images Found</h3>
-        <p class="text-slate-500">Check back later for new additions to our gallery.</p>
-      </div>
-
-      <!-- CSS Columns Masonry -->
-      <div v-else class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-        <div 
-          v-for="(item, index) in filteredItems" 
-          :key="item._id"
-          class="group relative bg-slate-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer break-inside-avoid"
-          @click="openLightbox(index)"
-        >
-          <!-- Image -->
-          <img 
-            :src="item.imageUrl" 
-            :alt="item.title || 'SCPSN Gallery Image'"
-            class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-          />
-          
-          <!-- Gradient Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-            <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest rounded-lg mb-2 w-fit">
-              {{ item.category }}
-            </span>
-            <h3 v-if="item.title" class="text-white font-bold text-lg leading-tight transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-md">
-              {{ item.title }}
-            </h3>
+    <!-- ─── HERO ─────────────────────────────────────────────── -->
+    <section class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pb-20">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 bg-blue-50 text-[#1d4e89] text-xs font-semibold px-4 py-2 rounded-full mb-7 border border-blue-100">
+            <LucideImage :size="13" />
+            Moments
           </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
+            Association
+            <span class="text-[#1d4e89]"> Gallery.</span>
+          </h1>
+          <p class="text-[16px] text-slate-500 leading-relaxed max-w-[540px]">
+            Explore highlights from our scientific conferences, events, and training programs across Nigeria.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Lightbox -->
+
+    <!-- ─── FILTERS ──────────────────────────────────────────── -->
+    <section class="bg-slate-50 border-b border-slate-100 sticky top-0 z-30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex flex-wrap gap-2">
+          <button
+            @click="activeCategory = 'all'"
+            :class="[
+              'px-5 py-2 rounded-xl text-[13px] font-semibold transition-all duration-200',
+              activeCategory === 'all'
+                ? 'bg-[#1d4e89] text-white'
+                : 'bg-white border border-slate-200 text-slate-500 hover:border-blue-200 hover:text-[#1d4e89]'
+            ]"
+          >
+            All memories
+          </button>
+          <button
+            v-for="cat in categories"
+            :key="cat"
+            @click="activeCategory = cat"
+            :class="[
+              'px-5 py-2 rounded-xl text-[13px] font-semibold transition-all duration-200 capitalize',
+              activeCategory === cat
+                ? 'bg-[#1d4e89] text-white'
+                : 'bg-white border border-slate-200 text-slate-500 hover:border-blue-200 hover:text-[#1d4e89]'
+            ]"
+          >
+            {{ cat }}
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── GALLERY ──────────────────────────────────────────── -->
+    <section class="bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+
+        <!-- Loading -->
+        <div v-if="loading" class="flex flex-col items-center justify-center py-24 gap-4">
+          <div class="w-8 h-8 border-2 border-blue-700 border-t-transparent rounded-full animate-spin" />
+          <p class="text-[13px] font-semibold text-slate-400 tracking-wide">Loading moments...</p>
+        </div>
+
+        <!-- Empty -->
+        <div
+          v-else-if="filteredItems.length === 0"
+          class="text-center py-24 bg-slate-50 rounded-2xl border border-slate-200"
+        >
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mx-auto mb-4">
+            <LucideImage :size="24" class="text-blue-300" />
+          </div>
+          <p class="text-[15px] font-semibold text-slate-700 mb-1">No images found</p>
+          <p class="text-[13px] text-slate-400">Check back later for new additions to our gallery.</p>
+        </div>
+
+        <!-- Masonry grid -->
+        <div v-else class="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
+          <div
+            v-for="(item, index) in filteredItems"
+            :key="item._id"
+            class="group relative bg-slate-100 rounded-2xl overflow-hidden border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all duration-300 cursor-pointer break-inside-avoid"
+            @click="openLightbox(index)"
+          >
+            <!-- Image -->
+            <img
+              :src="item.imageUrl"
+              :alt="item.title || 'SCPSN Gallery Image'"
+              class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+
+            <!-- Hover overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+              <span
+                v-if="item.category"
+                class="inline-block px-2.5 py-1 bg-white/15 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-widest rounded-lg mb-2 w-fit border border-white/20"
+              >
+                {{ item.category }}
+              </span>
+              <h3
+                v-if="item.title"
+                class="text-white font-semibold text-[15px] leading-snug translate-y-3 group-hover:translate-y-0 transition-transform duration-300"
+              >
+                {{ item.title }}
+              </h3>
+            </div>
+
+            <!-- Expand icon -->
+            <div class="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 border border-white/60">
+              <LucideExpand :size="14" class="text-slate-700" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ─── LIGHTBOX ─────────────────────────────────────────── -->
     <Teleport to="body">
       <Transition
-        enter-active-class="transition duration-300 ease-out"
+        enter-active-class="transition duration-250 ease-out"
         enter-from-class="opacity-0"
         enter-to-class="opacity-100"
         leave-active-class="transition duration-200 ease-in"
         leave-from-class="opacity-100"
         leave-to-class="opacity-0"
       >
-        <div v-if="lightboxOpen" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-xl">
-          <!-- Close Button -->
-          <button @click="closeLightbox" class="absolute top-6 right-6 p-3 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-50 focus:outline-none focus:ring-2 focus:ring-white/20">
-            <Icon name="lucide:x" size="28" />
-          </button>
-          
-          <!-- Navigation -->
-          <button @click="prevImage" class="absolute left-4 lg:left-10 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-50 hidden sm:block focus:outline-none focus:ring-2 focus:ring-white/20">
-            <Icon name="lucide:chevron-left" size="32" />
-          </button>
-          <button @click="nextImage" class="absolute right-4 lg:right-10 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all z-50 hidden sm:block focus:outline-none focus:ring-2 focus:ring-white/20">
-            <Icon name="lucide:chevron-right" size="32" />
+        <div
+          v-if="lightboxOpen"
+          class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/95 backdrop-blur-md"
+          @click.self="closeLightbox"
+        >
+
+          <!-- Close -->
+          <button
+            @click="closeLightbox"
+            class="absolute top-5 right-5 w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all z-50"
+            aria-label="Close lightbox"
+          >
+            <LucideX :size="18" />
           </button>
 
-          <!-- Content -->
-          <div v-if="currentLightboxItem" class="relative max-w-6xl w-full mx-auto px-4 lg:px-24 flex flex-col items-center">
-            <img 
-              :src="currentLightboxItem.imageUrl" 
-              :alt="currentLightboxItem.title || 'Gallery Image'"
-              class="max-h-[80vh] w-auto object-contain rounded-lg shadow-2xl"
+          <!-- Prev -->
+          <button
+            @click="prevImage"
+            class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all z-50 hidden sm:flex"
+            aria-label="Previous image"
+          >
+            <LucideChevronLeft :size="20" />
+          </button>
+
+          <!-- Next -->
+          <button
+            @click="nextImage"
+            class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-all z-50 hidden sm:flex"
+            aria-label="Next image"
+          >
+            <LucideChevronRight :size="20" />
+          </button>
+
+          <!-- Image + caption -->
+          <div
+            v-if="currentLightboxItem"
+            class="relative max-w-5xl w-full mx-auto px-4 sm:px-16 lg:px-24 flex flex-col items-center"
+          >
+            <img
+              :src="currentLightboxItem.imageUrl"
+              :alt="currentLightboxItem.title || 'Gallery image'"
+              class="max-h-[78vh] w-auto object-contain rounded-xl shadow-2xl border border-white/10"
             />
-            
-            <div class="text-center mt-6 max-w-2xl">
-              <span class="inline-block px-3 py-1 bg-white/10 text-white text-sm font-bold uppercase tracking-widest rounded-full mb-3">
+
+            <div class="text-center mt-5 max-w-xl">
+              <span
+                v-if="currentLightboxItem.category"
+                class="inline-block px-3 py-1 bg-white/10 border border-white/10 text-white/80 text-[11px] font-semibold uppercase tracking-widest rounded-lg mb-2"
+              >
                 {{ currentLightboxItem.category }}
               </span>
-              <h2 v-if="currentLightboxItem.title" class="text-2xl font-bold text-white">{{ currentLightboxItem.title }}</h2>
-              <p class="text-white/50 text-sm mt-3 font-medium tracking-widest uppercase">
+              <h2
+                v-if="currentLightboxItem.title"
+                class="text-[17px] font-semibold text-white leading-snug"
+              >
+                {{ currentLightboxItem.title }}
+              </h2>
+              <p class="text-white/30 text-[12px] font-medium mt-2 tracking-widest uppercase">
                 {{ currentImageIndex + 1 }} / {{ filteredItems.length }}
               </p>
             </div>
           </div>
+
         </div>
       </Transition>
     </Teleport>
-  </main>
+
+  </div>
 </template>
 
+
 <script setup>
+import {
+  LucideImage,
+  LucideExpand,
+  LucideX,
+  LucideChevronLeft,
+  LucideChevronRight,
+} from 'lucide-vue-next'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useGallery } from '@/composables/useGallery'
 
-definePageMeta({
-  layout: 'default'
-})
+definePageMeta({ layout: 'default' })
 
 const { loading, items, fetchPublicGallery } = useGallery()
 
-const activeCategory = ref('all')
-const lightboxOpen = ref(false)
+const activeCategory  = ref('all')
+const lightboxOpen    = ref(false)
 const currentImageIndex = ref(0)
 
 const categories = computed(() => {
-  const cats = new Set(items.value.map(item => item.category))
+  const cats = new Set(items.value.map(item => item.category).filter(Boolean))
   return Array.from(cats).sort()
 })
 
-const filteredItems = computed(() => {
-  if (activeCategory.value === 'all') return items.value
-  return items.value.filter(item => item.category === activeCategory.value)
-})
+const filteredItems = computed(() =>
+  activeCategory.value === 'all'
+    ? items.value
+    : items.value.filter(item => item.category === activeCategory.value)
+)
 
-const currentLightboxItem = computed(() => {
-  return filteredItems.value[currentImageIndex.value]
-})
-
-onMounted(() => {
-  fetchPublicGallery()
-  window.addEventListener('keydown', handleKeydown)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown)
-})
+const currentLightboxItem = computed(() =>
+  filteredItems.value[currentImageIndex.value]
+)
 
 const openLightbox = (index) => {
   currentImageIndex.value = index
@@ -171,36 +246,42 @@ const closeLightbox = () => {
 }
 
 const nextImage = () => {
-  if (currentImageIndex.value < filteredItems.value.length - 1) {
-    currentImageIndex.value++
-  } else {
-    currentImageIndex.value = 0
-  }
+  currentImageIndex.value =
+    currentImageIndex.value < filteredItems.value.length - 1
+      ? currentImageIndex.value + 1
+      : 0
 }
 
 const prevImage = () => {
-  if (currentImageIndex.value > 0) {
-    currentImageIndex.value--
-  } else {
-    currentImageIndex.value = filteredItems.value.length - 1
-  }
+  currentImageIndex.value =
+    currentImageIndex.value > 0
+      ? currentImageIndex.value - 1
+      : filteredItems.value.length - 1
 }
 
 const handleKeydown = (e) => {
   if (!lightboxOpen.value) return
-  if (e.key === 'Escape') closeLightbox()
-  if (e.key === 'ArrowRight') nextImage()
-  if (e.key === 'ArrowLeft') prevImage()
+  if (e.key === 'Escape')      closeLightbox()
+  if (e.key === 'ArrowRight')  nextImage()
+  if (e.key === 'ArrowLeft')   prevImage()
 }
+
+onMounted(() => {
+  fetchPublicGallery()
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
 </script>
 
+
 <style scoped>
-/* Smooth rendering for masonry items */
+.font-body {
+  font-family: 'DM Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+}
 .break-inside-avoid {
   break-inside: avoid;
-}
-::selection {
-  background: #003366;
-  color: white;
 }
 </style>

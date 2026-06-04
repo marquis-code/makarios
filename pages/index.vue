@@ -1,577 +1,812 @@
 <template>
-  <div class="overflow-hidden">
-    <!-- Premium Hero Section -->
-    <section class="relative h-screen min-h-[750px] overflow-hidden flex items-center justify-center">
-      <div 
-        v-for="(slide, index) in activeSlides" 
-        :key="index"
-        :class="['absolute inset-0 transition-all duration-[2000ms] ease-out', activeSlide === index ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none']"
-      >
-        <div class="absolute inset-0 bg-black/60 z-10"></div>
-        <div class="absolute inset-0 bg-gradient-to-tr from-[#033958] via-transparent to-black/40 z-10"></div>
-        <img :src="slide.image" class="w-full h-full object-cover" :alt="slide.title" />
-        
-        <div class="absolute inset-0 z-20 container mx-auto px-6 flex flex-col justify-center">
-          <div class="max-w-4xl space-y-6 md:space-y-10" :class="activeSlide === index ? 'translate-y-0 opacity-100 transition-all duration-1000 delay-500' : 'translate-y-20 opacity-0'">
-             <div class="flex">
-               <span class="px-5 py-2 glass text-brand-cyan font-black text-sm  tracking-[0.3em] rounded-full border border-white/20">
-                 {{ slide.tag }}
-               </span>
-             </div>
-             <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-[1] tracking-tighter drop-shadow-2xl">
-               {{ slide.title }}<span class="text-brand-accent">.</span>
-             </h1>
-             <p class="text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed font-medium drop-shadow-lg opacity-90">
-               {{ slide.desc }}
-             </p>
-             <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4">
-               <NuxtLink to="/membership" class="text-sm font-black bg-black text-white px-6 py-3 text-center rounded-lg">Join the Society</NuxtLink>
-               <NuxtLink to="/about" class="text-sm font-black bg-black text-white px-6 py-3 rounded-lg text-center !glass">Our Mission</NuxtLink>
-             </div>
+  <div class="min-h-screen bg-white font-body">
+
+
+    <!-- {{ excos }} -->
+
+    <!-- ─── HERO ───────────────────────────────────────────────── -->
+    <section class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-32">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+          <!-- Left -->
+          <div>
+            <div class="inline-flex items-center gap-2 bg-blue-50 text-[#1d4e89] text-xs font-semibold px-4 py-2 rounded-full mb-7 border border-blue-100">
+              <LucideFlaskConical :size="13" />
+              Society of Cellular Pathology Sciences of Nigeria
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
+              Precision in<br />
+              <span class="text-[#1d4e89]">Cellular Pathology.</span><br />
+              Excellence in Science.
+            </h1>
+            <p class="text-[16px] text-slate-500 leading-relaxed max-w-[480px] mb-9">
+              Empowering medical laboratory scientists specialising in Histopathology and Cytopathology through innovation, global collaboration, and rigorous scientific standards.
+            </p>
+            <div class="flex flex-wrap gap-3 mb-12">
+              <NuxtLink
+                to="/membership"
+                class="inline-flex items-center gap-2 bg-[#1d4e89] hover:bg-blue-800 text-white text-[14px] font-semibold px-6 py-3 rounded-xl transition-colors duration-200"
+              >
+                Become a member
+                <LucideArrowRight :size="15" />
+              </NuxtLink>
+              <NuxtLink
+                to="/about"
+                class="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 text-[14px] font-semibold px-6 py-3 rounded-xl transition-colors duration-200"
+              >
+                Our mission
+              </NuxtLink>
+            </div>
+
+            <!-- Stats row -->
+            <div class="flex flex-wrap gap-8">
+              <div v-for="stat in heroStats" :key="stat.label">
+                <div class="text-2xl font-bold text-[#1d4e89]">{{ stat.value }}</div>
+                <div class="text-[12px] text-slate-400 font-medium mt-0.5">{{ stat.label }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Team carousel -->
+          <div class="hidden lg:block">
+            <div class="relative">
+
+              <!-- Header row -->
+              <div class="flex items-center justify-between mb-5">
+                <div>
+                  <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">Our people</p>
+                  <h3 class="text-[15px] font-bold text-slate-800">Meet the team</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button
+                    class="w-8 h-8 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:border-blue-300 hover:text-[#1d4e89] hover:bg-blue-50 transition-all duration-200 disabled:opacity-30"
+                    :disabled="carouselIndex === 0"
+                    aria-label="Previous member"
+                    @click="prevSlide"
+                  >
+                    <LucideChevronLeft :size="15" />
+                  </button>
+                  <button
+                    class="w-8 h-8 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:border-blue-300 hover:text-[#1d4e89] hover:bg-blue-50 transition-all duration-200 disabled:opacity-30"
+                    :disabled="carouselIndex >= carouselLastIndex"
+                    aria-label="Next member"
+                    @click="nextSlide"
+                  >
+                    <LucideChevronRight :size="15" />
+                  </button>
+                </div>
+              </div>
+
+              <!-- Carousel viewport -->
+              <div class="overflow-hidden rounded-2xl border border-slate-100" ref="carouselRef">
+                <div
+                  class="flex transition-transform duration-700 ease-in-out"
+                  :style="{ transform: `translateX(-${carouselIndex * 100}%)` }"
+                >
+                  <div
+                    v-for="exco in carouselExcos"
+                    :key="exco._id"
+                    class="min-w-full relative"
+                  >
+                    <!-- Image -->
+                    <div class="aspect-[4/3] bg-blue-50 relative overflow-hidden">
+                      <img
+                        v-if="exco.imageUrl"
+                        :src="exco.imageUrl"
+                        :alt="exco.name"
+                        class="w-full h-full object-cover"
+                      />
+                      <div
+                        v-else
+                        class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-slate-100"
+                      >
+                        <div class="w-20 h-20 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm">
+                          <LucideUser :size="32" class="text-blue-300" />
+                        </div>
+                      </div>
+                      <!-- Gradient overlay -->
+                      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent" />
+                      <!-- Name plate -->
+                      <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <p class="text-[10px] font-semibold text-blue-300 tracking-widest uppercase mb-1">
+                          {{ exco.position || 'Executive member' }}
+                        </p>
+                        <h4 class="text-[17px] font-bold text-white leading-tight">{{ exco.name }}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dot indicators -->
+              <div class="flex items-center justify-center gap-1.5 mt-4">
+                <button
+                  v-for="(_, i) in carouselExcos"
+                  :key="i"
+                  class="transition-all duration-300 rounded-full"
+                  :class="carouselIndex === i
+                    ? 'w-5 h-1.5 bg-[#1d4e89]'
+                    : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-400'"
+                  :aria-label="`Go to member ${i + 1}`"
+                  @click="goToSlide(i)"
+                />
+              </div>
+
+              <!-- Loading skeleton -->
+              <div v-if="loadingExcos" class="aspect-[4/3] rounded-2xl bg-slate-100 animate-pulse" />
+
+            </div>
+          </div>
+
+          <!-- Mobile: compact carousel strip (shown only on sm/md, hidden lg+) -->
+          <div class="lg:hidden mt-8">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">Our people</p>
+                <h3 class="text-[14px] font-bold text-slate-800">Meet the team</h3>
+              </div>
+              <NuxtLink to="/about" class="text-[12px] text-[#1d4e89] font-semibold inline-flex items-center gap-1">
+                View all <LucideArrowRight :size="12" />
+              </NuxtLink>
+            </div>
+            <div class="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
+              <div
+                v-for="exco in carouselExcos"
+                :key="exco._id"
+                class="flex-shrink-0 w-40 snap-start"
+              >
+                <div class="rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
+                  <div class="h-44 bg-blue-50 relative overflow-hidden">
+                    <img
+                      v-if="exco.profilePicture"
+                      :src="exco.profilePicture"
+                      :alt="exco.name"
+                      class="w-full h-full object-cover"
+                    />
+                    <div v-else class="w-full h-full flex items-center justify-center">
+                      <LucideUser :size="28" class="text-blue-200" />
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                    <div class="absolute bottom-0 left-0 right-0 p-3">
+                      <p class="text-[9px] font-semibold text-blue-300 uppercase tracking-wider mb-0.5">{{ exco.position || 'Member' }}</p>
+                      <p class="text-[12px] font-bold text-white leading-tight">{{ exco.name }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── TICKER ─────────────────────────────────────────────── -->
+    <div class="bg-slate-50 border-b border-slate-100 overflow-hidden py-3.5">
+      <div class="ticker-track flex gap-10 whitespace-nowrap">
+        <div
+          v-for="(item, i) in [...tickerItems, ...tickerItems]"
+          :key="i"
+          class="flex items-center gap-2.5 text-[13px] text-slate-500 font-medium flex-shrink-0"
+        >
+          <component :is="item.icon" :size="14" class="text-blue-600 flex-shrink-0" />
+          {{ item.label }}
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ─── UPCOMING EVENTS ────────────────────────────────────── -->
+    <section v-if="upcomingConferences.length > 0" class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="flex items-end justify-between mb-10 flex-wrap gap-4">
+          <div>
+            <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-2">Latest happenings</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Upcoming conferences</h2>
+          </div>
+          <NuxtLink
+            to="/conferences"
+            class="inline-flex items-center gap-1.5 text-[13px] text-[#1d4e89] font-semibold hover:underline"
+          >
+            View all events
+            <LucideArrowRight :size="14" />
+          </NuxtLink>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <NuxtLink
+            v-for="conf in upcomingConferences"
+            :key="conf._id"
+            :to="`/conferences/${conf._id}`"
+            class="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-blue-200 hover:shadow-md transition-all duration-300 block"
+          >
+            <div class="h-36 bg-blue-50 flex items-center justify-center relative overflow-hidden">
+              <img
+                v-if="conf.bannerImage"
+                :src="conf.bannerImage"
+                :alt="conf.title"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <LucideMicroscope v-else :size="40" class="text-blue-200" />
+              <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[10px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg border border-slate-100">
+                {{ conf.startDate ? new Date(conf.startDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Upcoming' }}
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-1.5 text-[12px] text-blue-600 font-medium mb-2.5">
+                <LucideMapPin :size="12" />
+                {{ conf.venue || 'TBA' }}
+              </div>
+              <h3 class="text-[15px] font-semibold text-slate-800 leading-snug mb-2 line-clamp-2 group-hover:text-[#1d4e89] transition-colors">
+                {{ conf.title }}
+              </h3>
+              <p class="text-[13px] text-slate-400 line-clamp-2 mb-4">{{ conf.description }}</p>
+              <span class="text-[12px] font-semibold text-[#1d4e89] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                Read more <LucideArrowRight :size="12" />
+              </span>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── CORE PILLARS ───────────────────────────────────────── -->
+    <section class="bg-slate-50 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div>
+            <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-2">Core pillars</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight max-w-xl">
+              {{ cmsConfig?.public?.home?.homeHeaders?.pillarsTitle || 'Advancing the frontiers of cellular pathology' }}
+            </h2>
+          </div>
+          <p class="text-[15px] text-slate-500 leading-relaxed max-w-md">
+            {{ cmsConfig?.public?.home?.homeHeaders?.pillarsSubtitle || 'A society committed to scientific mastery, diagnostic precision, and the next generation of pathology professionals.' }}
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div
+            v-for="(pillar, i) in activePillars"
+            :key="i"
+            class="bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-200 hover:shadow-sm transition-all duration-300 group"
+          >
+            <div
+              class="w-10 h-10 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300"
+              :class="pillarColors[i % pillarColors.length].bg"
+            >
+              <component :is="pillar.icon" :size="20" :class="pillarColors[i % pillarColors.length].icon" />
+            </div>
+            <h3 class="text-[15px] font-semibold text-slate-800 mb-2">{{ pillar.title }}</h3>
+            <p class="text-[13px] text-slate-500 leading-relaxed">{{ pillar.desc }}</p>
           </div>
         </div>
       </div>
-
-      <!-- Slide Controls -->
-      <div class="absolute bottom-12 right-12 z-30 flex items-center gap-6">
-        <button 
-          v-for="i in activeSlides.length" 
-          :key="i"
-          @click="activeSlide = i-1"
-          :class="['h-1.5 transition-all duration-500 rounded-full', activeSlide === i-1 ? 'w-20 bg-brand-cyan' : 'w-4 bg-white/30']"
-        ></button>
-      </div>
     </section>
 
-    <!-- Infinite Scroll Marquee -->
-    <section class="py-12 bg-slate-900 overflow-hidden relative border-y border-white/5">
-       <div class="marquee-container">
-          <div class="marquee-content">
-             <div v-for="(item, i) in marqueeItems" :key="i" class="glass-dark px-10 py-6 rounded-2xl flex items-center gap-6 border border-white/5">
-                <div class="w-12 h-12 bg-brand-cyan/20 rounded-xl flex items-center justify-center text-brand-cyan">
-                   <component :is="item.icon" :size="24" />
-                </div>
-                <div>
-                   <p class="text-sm font-black  text-slate-400">{{ item.tag }}</p>
-                   <p class="text-white font-bold">{{ item.label }}</p>
-                </div>
-             </div>
-             <!-- Duplicate for seamless scroll -->
-             <div v-for="(item, i) in marqueeItems" :key="'dup-'+i" class="glass-dark px-10 py-6 rounded-2xl flex items-center gap-6 border border-white/5">
-                <div class="w-12 h-12 bg-brand-cyan/20 rounded-xl flex items-center justify-center text-brand-cyan">
-                   <component :is="item.icon" :size="24" />
-                </div>
-                <div>
-                   <p class="text-sm font-black  text-slate-400">{{ item.tag }}</p>
-                   <p class="text-white font-bold">{{ item.label }}</p>
-                </div>
-             </div>
+
+    <!-- ─── STATS BAND ─────────────────────────────────────────── -->
+    <section class="bg-[#1d4e89]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div v-for="stat in activeStats" :key="stat.label">
+            <div class="text-4xl sm:text-5xl font-bold text-white mb-1">{{ stat.value }}<span class="text-blue-300">+</span></div>
+            <div class="text-[12px] text-blue-200 font-medium tracking-wide uppercase">{{ stat.label }}</div>
           </div>
-       </div>
-    </section>
-
-    <!-- AdBanner: BELOW_HERO -->
-    <section v-if="groupedAdverts.BELOW_HERO?.length" class="bg-white pt-16 pb-8">
-      <div class="container mx-auto px-6">
-        <AdBanner :adverts="groupedAdverts.BELOW_HERO" />
+        </div>
       </div>
     </section>
 
 
-
-    <!-- Latest Happenings Section -->
-    <section v-if="upcomingConferences.length > 0" class="py-24 bg-slate-50 relative">
-       <div class="container mx-auto px-6">
-          <div class="flex items-center justify-between mb-16">
-             <h2 class="text-4xl md:text-5xl font-black text-brand-dark tracking-tighter">{{ $t('home.latest_happenings') }}</h2>
-             <NuxtLink to="/conferences" class="text-sm font-black tracking-[0.2em] text-brand-cyan flex items-center gap-2 group">
-                {{ $t('home.view_all_events') }}
-                <LucideArrowRight :size="16" class="group-hover:translate-x-1 transition-transform" />
-             </NuxtLink>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <NuxtLink 
-              v-for="conference in upcomingConferences" 
-              :key="conference._id" 
-              :to="`/conferences/${conference._id}`"
-              class="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 group block hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-            >
-               <div class="h-56 overflow-hidden relative bg-slate-100 flex items-center justify-center p-4">
-                  <img :src="conference.bannerImage || 'https://scpsn.org.ng/wp-content/uploads/2021/10/banner.jpg'" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700" :alt="conference.title" />
-                  <div class="absolute top-4 right-4 h-8 px-3 glass-dark rounded-lg flex items-center text-[10px] font-black text-white tracking-widest z-10">
-                     {{ conference.startDate ? new Date(conference.startDate).toLocaleDateString() : 'Upcoming' }}
-                  </div>
-               </div>
-               <div class="p-8 space-y-4">
-                  <div class="flex items-center gap-2 text-brand-cyan text-sm font-bold">
-                     <LucideMapPin :size="16" />
-                     <span>{{ conference.venue || 'TBA' }}</span>
-                  </div>
-                  <h4 class="text-xl font-bold text-brand-dark leading-tight group-hover:text-brand-cyan transition-colors line-clamp-2">
-                    {{ conference.title }}
-                  </h4>
-                  <p class="text-slate-500 line-clamp-3 text-sm">{{ conference.description }}</p>
-                  <span class="inline-block mt-4 text-sm font-black text-brand-blue group-hover:text-brand-cyan transition-colors">{{ $t('home.read_more') }} &rarr;</span>
-               </div>
-            </NuxtLink>
-          </div>
-       </div>
-    </section>
-
-    <!-- Core Pillars Section -->
-    <section class="py-32 bg-white relative">
-       <div class="container mx-auto px-6">
-          <div class="flex flex-col lg:flex-row justify-between items-end gap-10 mb-24">
-             <div class="max-w-2xl space-y-6">
-                <h2 class="text-5xl md:text-6xl font-black text-brand-blue tracking-tighter">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.pillarsTitle || $t('home.advancing_frontiers') }}
-                </h2>
-                <p class="text-lg text-slate-500 leading-relaxed font-medium">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.pillarsSubtitle || $t('home.society_committed') }}
-                </p>
-             </div>
-             <NuxtLink to="/about" class="btn-outline-premium">{{ $t('home.learn_more') }}</NuxtLink>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-             <div v-for="(p, i) in activePillars" :key="i" class="p-10 bg-slate-50 rounded-[40px] border border-slate-100 hover:border-brand-cyan/30 hover:shadow-2xl hover:shadow-cyan-900/5 transition-all duration-500 group">
-                <div class="w-16 h-16 bg-white shadow-xl rounded-2xl flex items-center justify-center text-brand-blue mb-8 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-500">
-                   <component :is="p.icon" :size="28" />
-                </div>
-                <h3 class="text-2xl font-black text-brand-blue mb-4 leading-tight">{{ p.title }}</h3>
-                <p class="text-slate-500 leading-relaxed font-medium text-base">{{ p.desc }}</p>
-             </div>
-          </div>
-       </div>
-    </section>
-
-    <!-- Scientific Excellence Stats -->
-    <section class="py-24 bg-brand-blue overflow-hidden relative">
-       <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-          <div class="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] bg-brand-cyan rounded-full blur-[160px]"></div>
-          <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-brand-red rounded-full blur-[160px]"></div>
-       </div>
-       
-       <div class="container mx-auto px-6 relative z-10">
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
-             <div v-for="s in activeStats" :key="s.label" class="text-center animate-on-scroll">
-                <div class="text-6xl font-black text-white tracking-tighter">{{ s.value }}<span class="text-brand-cyan">+</span></div>
-                <div class="text-base font-black  tracking-[0.3em] text-brand-cyan">{{ s.label }}</div>
-             </div>
-          </div>
-       </div>
-    </section>
-
-    <!-- AdBanner: IN_CONTENT_1 -->
-    <section v-if="groupedAdverts.IN_CONTENT_1?.length" class="bg-white py-16">
-      <div class="container mx-auto px-6">
+    <!-- ─── AD BANNER: IN_CONTENT_1 ──────────────────────────── -->
+    <section v-if="groupedAdverts.IN_CONTENT_1?.length" class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <AdBanner :adverts="groupedAdverts.IN_CONTENT_1" />
       </div>
     </section>
 
-    <!-- Cinematic Video Section -->
-    <!-- <section class="relative h-[80vh] min-h-[600px] overflow-hidden flex items-center justify-center">
-       <div class="absolute inset-0 z-0">
-          <div class="absolute inset-0 bg-brand-blue/60 backdrop-blur-[2px] z-10"></div>
-          <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            class="w-full h-full object-cover scale-110"
+
+    <!-- ─── STRATEGIC INITIATIVES ─────────────────────────────── -->
+    <section class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="mb-12">
+          <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-2">Strategic initiatives</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+            {{ cmsConfig?.public?.home?.homeHeaders?.initiativesTitle || 'Leading transformations in science' }}
+          </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div
+            v-for="(ini, i) in activeInitiatives"
+            :key="i"
+            class="border border-slate-200 rounded-2xl p-7 hover:border-blue-200 hover:shadow-sm transition-all duration-300 group relative overflow-hidden"
           >
-             <source src="@/assets/images/intro.mp4" type="video/mp4">
-          </video>
-       </div>
+            <!-- Ghost bg icon -->
+            <component
+              :is="ini.icon"
+              :size="120"
+              class="absolute -right-6 -bottom-6 opacity-[0.04] text-blue-800 pointer-events-none"
+            />
 
-       <div class="container mx-auto px-6 relative z-20">
-          <div class="max-w-4xl mx-auto glass p-12 md:p-20 rounded-[4rem] border border-white/20 shadow-2xl text-center space-y-8 animate-on-scroll">
-             <LucidePlayCircle :size="80" class="mx-auto text-brand-cyan animate-pulse cursor-pointer hover:scale-110 transition-transform" />
-             <h2 class="text-4xl md:text-6xl font-black text-white tracking-tighter">Advancing Diagnostics <br/> <span class="text-brand-cyan">With Every Slide.</span></h2>
-             <p class="text-xl text-slate-200 font-medium leading-relaxed max-w-2xl mx-auto">
-                "Our commitment to precision in cellular diagnosis is not just a standard—it's a promise to the patients whose lives depend on our scientific mastery."
-             </p>
-             <div class="pt-6">
-                <div class="inline-flex items-center gap-4 px-6 py-2 glass-dark rounded-full">
-                   <span class="w-2 h-2 bg-brand-red rounded-full animate-ping"></span>
-                   <span class="text-sm font-black text-white  leading-none">SCPSN Documentary Premiering 2026</span>
-                </div>
-             </div>
+            <div
+              class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+              :class="initiativeColors[i % initiativeColors.length].bg"
+            >
+              <component :is="ini.icon" :size="20" :class="initiativeColors[i % initiativeColors.length].icon" />
+            </div>
+            <h3 class="text-[16px] font-semibold text-slate-800 mb-3 leading-snug">{{ ini.title }}</h3>
+            <p class="text-[13px] text-slate-500 leading-relaxed mb-6">{{ ini.desc }}</p>
+            <NuxtLink
+              :to="ini.to"
+              class="inline-flex items-center gap-1.5 text-[13px] font-semibold transition-all"
+              :class="initiativeColors[i % initiativeColors.length].link"
+            >
+              {{ $t('home.exploration') }}
+              <LucideArrowRight :size="13" class="group-hover:translate-x-0.5 transition-transform" />
+            </NuxtLink>
           </div>
-       </div>
-    </section> -->
-
-    <!-- Project Scientific Initiatives -->
-    <section class="py-32 bg-white relative overflow-hidden">
-       <!-- Subtle Background Accents -->
-       <div class="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
-          <LucideDna :size="800" class="absolute -top-40 -left-60 text-brand-blue rotate-12" />
-       </div>
-
-       <div class="container mx-auto px-6 relative z-10">
-          <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-24">
-             <div class="space-y-4">
-                <h2 class="text-5xl font-black text-brand-blue tracking-tighter">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.initiativesTitle || $t('home.strategic_initiatives') }}
-                </h2>
-                <p class="text-slate-500 font-medium text-lg">
-                   {{ cmsConfig?.public?.home?.homeHeaders?.initiativesSubtitle || $t('home.leading_transformations') }}
-                </p>
-             </div>
-             <div class="flex gap-4">
-                <button class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-brand-blue hover:text-white transition-all duration-300">
-                   <LucideArrowLeft :size="20" />
-                </button>
-                <button class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-brand-blue hover:text-white transition-all duration-300">
-                   <LucideArrowRight :size="20" />
-                </button>
-             </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-             <div v-for="(ini, i) in activeInitiatives" :key="i" class="initiative-card group p-1 tracking-tight">
-                <div class="bg-slate-50 rounded-[3rem] p-12 h-full border border-slate-100 group-hover:bg-brand-blue group-hover:border-brand-blue transition-all duration-500 relative overflow-hidden">
-                   <div class="absolute -right-10 -bottom-10 opacity-[0.05] group-hover:opacity-10 text-brand-blue group-hover:text-white transition-all">
-                      <component :is="ini.icon" :size="200" />
-                   </div>
-                   
-                   <div class="relative z-10 space-y-8">
-                      <div class="w-14 h-14 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-blue group-hover:scale-110 transition-transform duration-500">
-                         <component :is="ini.icon" :size="24" />
-                      </div>
-                      <div class="space-y-4">
-                         <h3 class="text-2xl font-black text-brand-blue group-hover:text-white transition-colors leading-tight">{{ ini.title }}</h3>
-                         <p class="text-slate-500 group-hover:text-slate-200 transition-colors font-medium text-base leading-relaxed">{{ ini.desc }}</p>
-                      </div>
-                      <NuxtLink :to="ini.to" class="flex items-center gap-3 text-base font-black text-brand-red group-hover:text-brand-cyan transition-colors  pt-4">
-                         {{ $t('home.exploration') }}
-                         <LucideArrowRight :size="16" />
-                      </NuxtLink>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Dynamic Sponsors Marquee -->
-    <section v-if="sponsors.length > 0" class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
-       <div class="container mx-auto px-6 mb-10 text-center">
-          <p class="text-sm font-black text-slate-400  -[0.4em]">{{ $t('home.global_collab_sponsors') }}</p>
-       </div>
-       <div class="flex items-center gap-16 animate-marquee whitespace-nowrap opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-500 px-10">
-          <div v-for="n in 10" :key="n" class="flex items-center gap-16">
-             <template v-for="sponsor in sponsors" :key="sponsor._id">
-                <a v-if="sponsor.websiteUrl" :href="sponsor.websiteUrl" target="_blank" class="block">
-                   <img v-if="sponsor.logoUrl" :src="sponsor.logoUrl" :alt="sponsor.name" class="h-12 object-contain" />
-                   <span v-else class="text-3xl font-black text-slate-300 tracking-tighter">{{ sponsor.name }}</span>
-                </a>
-                <div v-else>
-                   <img v-if="sponsor.logoUrl" :src="sponsor.logoUrl" :alt="sponsor.name" class="h-12 object-contain" />
-                   <span v-else class="text-3xl font-black text-slate-300 tracking-tighter">{{ sponsor.name }}</span>
-                </div>
-             </template>
+
+    <!-- ─── SPONSORS ───────────────────────────────────────────── -->
+    <section class="bg-slate-50 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <p class="text-[11px] text-slate-400 font-semibold tracking-widest uppercase text-center mb-8">
+          {{ sponsors.length ? $t('home.global_collab_sponsors') : $t('home.global_collab') }}
+        </p>
+        <div class="overflow-hidden">
+          <div class="ticker-track flex gap-16 items-center whitespace-nowrap">
+            <template v-if="sponsors.length">
+              <template v-for="n in 6" :key="n">
+                <template v-for="sponsor in sponsors" :key="sponsor._id + '-' + n">
+                  <a
+                    v-if="sponsor.websiteUrl"
+                    :href="sponsor.websiteUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-shrink-0 opacity-40 hover:opacity-80 grayscale hover:grayscale-0 transition-all duration-300"
+                  >
+                    <img v-if="sponsor.logoUrl" :src="sponsor.logoUrl" :alt="sponsor.name" class="h-8 object-contain" />
+                    <span v-else class="text-xl font-bold text-slate-400">{{ sponsor.name }}</span>
+                  </a>
+                  <div v-else class="flex-shrink-0 opacity-40">
+                    <img v-if="sponsor.logoUrl" :src="sponsor.logoUrl" :alt="sponsor.name" class="h-8 object-contain" />
+                    <span v-else class="text-xl font-bold text-slate-400">{{ sponsor.name }}</span>
+                  </div>
+                </template>
+              </template>
+            </template>
+            <template v-else>
+              <span v-for="(s, i) in fallbackSponsors.concat(fallbackSponsors).concat(fallbackSponsors)" :key="i" class="text-xl font-bold text-slate-300 flex-shrink-0">
+                {{ s }}
+              </span>
+            </template>
           </div>
-       </div>
-    </section>
-    
-    <!-- Static Marquee Fallback if no sponsors -->
-    <section v-else class="py-16 bg-slate-50 border-y border-slate-200 overflow-hidden">
-       <div class="container mx-auto px-6 mb-10 text-center">
-          <p class="text-sm font-black text-slate-400  -[0.4em]">{{ $t('home.global_collab') }}</p>
-       </div>
-       <div class="flex items-center gap-16 animate-marquee whitespace-nowrap opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-500 px-10">
-          <div v-for="n in 10" :key="n" class="flex items-center gap-16 grayscale">
-             <span class="text-3xl font-black text-slate-300 tracking-tighter">WHO</span>
-             <span class="text-3xl font-black text-slate-300 tracking-tighter">IFCC</span>
-             <span class="text-3xl font-black text-slate-300 tracking-tighter">ASCP</span>
-             <span class="text-3xl font-black text-slate-300 tracking-tighter">IPH</span>
-             <span class="text-3xl font-black text-slate-300 tracking-tighter">MLSCN</span>
-          </div>
-       </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Membership Tiers Section -->
-    <section class="py-32 bg-white relative">
-       <div class="container mx-auto px-6">
-          <div class="text-center max-w-3xl mx-auto mb-20 space-y-6">
-             <h2 class="text-5xl font-black text-brand-blue tracking-tighter">{{ $t('home.member_tiers') }}</h2>
-             <p class="text-slate-500 font-medium">{{ $t('home.join_community') }}</p>
+
+    <!-- ─── MEMBERSHIP TIERS ───────────────────────────────────── -->
+    <section class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="text-center mb-12">
+          <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-2">Membership tiers</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-3">{{ $t('home.member_tiers') }}</h2>
+          <p class="text-[15px] text-slate-500 max-w-md mx-auto">{{ $t('home.join_community') }}</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
+          <div
+            v-for="(tier, i) in activeTiers"
+            :key="i"
+            class="border rounded-2xl p-7 transition-all duration-300"
+            :class="i === 1 ? 'border-blue-600 bg-[#1d4e89] text-white' : 'border-slate-200 bg-white hover:border-blue-200 hover:shadow-sm'"
+          >
+            <div
+              v-if="i === 1"
+              class="inline-block text-[11px] font-semibold bg-white/20 text-white px-2.5 py-1 rounded-full mb-4"
+            >
+              Most popular
+            </div>
+            <h3
+              class="text-[17px] font-bold mb-1"
+              :class="i === 1 ? 'text-white' : 'text-slate-800'"
+            >
+              {{ tier.title }}
+            </h3>
+            <div
+              class="text-3xl font-bold mb-6"
+              :class="i === 1 ? 'text-white' : 'text-[#1d4e89]'"
+            >
+              ₦{{ tier.price }}
+              <span
+                v-if="tier.title.includes('Renewal')"
+                class="text-[14px] font-normal"
+                :class="i === 1 ? 'text-blue-200' : 'text-slate-400'"
+              >
+                /year
+              </span>
+            </div>
+            <ul class="space-y-3 mb-7">
+              <li
+                v-for="feat in tier.features"
+                :key="feat"
+                class="flex items-center gap-2.5 text-[13px]"
+                :class="i === 1 ? 'text-blue-100' : 'text-slate-500'"
+              >
+                <LucideCheck :size="14" :class="i === 1 ? 'text-blue-200 flex-shrink-0' : 'text-emerald-500 flex-shrink-0'" />
+                {{ feat }}
+              </li>
+            </ul>
+            <NuxtLink
+              to="/membership"
+              class="block w-full py-3 text-center rounded-xl text-[14px] font-semibold transition-colors duration-200"
+              :class="i === 1
+                ? 'bg-white text-[#1d4e89] hover:bg-blue-50'
+                : 'bg-[#1d4e89] text-white hover:bg-blue-800'"
+            >
+              {{ tier.title.includes('Renewal') ? $t('home.renew_now') : $t('home.join_now') }}
+            </NuxtLink>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-10">
-             <div v-for="(tier, i) in activeTiers" :key="i" class="p-12 rounded-[3rem] border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 group">
-                <h3 class="text-2xl font-black text-brand-blue mb-2">{{ tier.title }}</h3>
-                <div class="text-4xl font-black text-brand-cyan mb-8">₦{{ tier.price }}<span class="text-base text-slate-400 font-bold">/year</span></div>
-                <ul class="space-y-4 mb-10">
-                   <li v-for="feat in tier.features" :key="feat" class="flex items-center gap-3 text-base font-medium text-slate-500">
-                      <LucideShieldCheck class="text-emerald-500" :size="16" />
-                      {{ feat }}
-                   </li>
-                </ul>
-                <NuxtLink to="/membership" class="block w-full py-4 text-center bg-brand-blue text-white rounded-2xl text-base font-black  hover:bg-brand-red transition-colors">
-                  {{ tier.title.includes('Renewal') ? $t('home.renew_now') : $t('home.join_now') }}
-                </NuxtLink>
-             </div>
-          </div>
-       </div>
+        </div>
+      </div>
     </section>
 
-    <!-- AdBanner: ABOVE_FOOTER -->
-    <section v-if="groupedAdverts.ABOVE_FOOTER?.length" class="bg-slate-50 pt-16 pb-8">
-      <div class="container mx-auto px-6">
+
+    <!-- ─── AD BANNER: ABOVE_FOOTER ──────────────────────────── -->
+    <section v-if="groupedAdverts.ABOVE_FOOTER?.length" class="bg-slate-50 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <AdBanner :adverts="groupedAdverts.ABOVE_FOOTER" />
       </div>
     </section>
 
-    <!-- Leadership & Scientific Board Preview -->
-    <section class="py-32 bg-slate-50">
-       <div class="container mx-auto px-6">
-          <div class="text-center max-w-3xl mx-auto mb-20 space-y-6">
-             <h2 class="text-5xl font-black text-brand-blue tracking-tighter">{{ $t('home.our_board') }}</h2>
-             <p class="text-slate-500 font-medium">{{ $t('home.board_subtitle') }}</p>
-          </div>
 
-          <div v-if="loadingExcos" class="flex justify-center py-20">
-             <div class="animate-spin rounded-xl h-10 w-10 border-t-2 border-brand-blue"></div>
-          </div>
+    <!-- ─── LEADERSHIP BOARD ───────────────────────────────────── -->
+    <section class="bg-slate-50 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="text-center mb-12">
+          <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-2">Leadership</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-3">{{ $t('home.our_board') }}</h2>
+          <p class="text-[15px] text-slate-500 max-w-md mx-auto">{{ $t('home.board_subtitle') }}</p>
+        </div>
 
-          <div v-else-if="excos.length > 0" class="grid grid-cols-1 md:grid-cols-3 gap-10">
-             <div v-for="exco in excos" :key="exco._id" class="relative group overflow-hidden rounded-[2rem] aspect-[4/5] bg-white border border-slate-100 shadow-sm transition-all hover:shadow-xl">
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent opacity-80 z-10 transition-opacity group-hover:opacity-100"></div>
-                
-                <img v-if="exco.profilePicture" :src="exco.profilePicture" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" :alt="exco.name" />
-                <div v-else class="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
-                   <LucideUser :size="64" />
+        <div v-if="loading" class="flex justify-center py-16">
+          <div class="w-8 h-8 border-2 border-blue-700 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+
+        <div v-else-if="excosList.length > 0" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div
+            v-for="exco in excosList"
+            :key="exco._id"
+            class="bg-white border border-slate-200 rounded-2xl overflow-hidden group hover:shadow-md hover:border-blue-200 transition-all duration-300"
+          >
+            <div class="aspect-[4/3] relative overflow-hidden bg-blue-50">
+              <img
+                v-if="exco.profilePicture"
+                :src="exco.profilePicture"
+                :alt="exco.name"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                v-else
+                class="w-full h-full flex items-center justify-center"
+              >
+                <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+                  <LucideUser :size="28" class="text-blue-300" />
                 </div>
-
-                <div class="absolute bottom-8 left-8 right-8 z-20">
-                   <p class="text-brand-cyan font-black  tracking-[0.2em] text-[8px] mb-1.5">{{ exco.position || 'Executive Member' }}</p>
-                   <h3 class="text-xl font-black text-white leading-tight">{{ exco.name }}</h3>
-                </div>
-             </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-[11px] text-blue-600 font-semibold tracking-wider uppercase mb-1">
+                {{ exco.position || 'Executive member' }}
+              </p>
+              <h3 class="text-[14px] font-semibold text-slate-800 leading-snug">{{ exco.name }}</h3>
+            </div>
           </div>
+        </div>
 
-          <EmptyState 
-            v-else 
-            :title="$t('home.board_under_constitution')" 
-            :message="$t('home.board_finalizing')"
-          />
-       </div>
+        <EmptyState
+          v-else
+          :title="$t('home.board_under_constitution')"
+          :message="$t('home.board_finalizing')"
+        />
+      </div>
     </section>
+
+
+    <!-- ─── FINAL CTA ──────────────────────────────────────────── -->
+    <section class="bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
+        <div class="max-w-2xl mx-auto">
+          <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-4">Get started</p>
+          <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-bold text-slate-900 tracking-tight leading-[1.15] mb-5">
+            Ready to advance your career in pathology?
+          </h2>
+          <p class="text-[16px] text-slate-500 leading-relaxed mb-9">
+            Join over 1,200 scientists building the future of cellular pathology in Nigeria.
+          </p>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <NuxtLink
+              to="/membership"
+              class="inline-flex items-center gap-2 bg-[#1d4e89] hover:bg-blue-800 text-white text-[14px] font-semibold px-7 py-3.5 rounded-xl transition-colors duration-200"
+            >
+              Become a member
+              <LucideArrowRight :size="15" />
+            </NuxtLink>
+            <NuxtLink
+              to="/about"
+              class="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 text-[14px] font-semibold px-7 py-3.5 rounded-xl transition-colors duration-200"
+            >
+              Learn more about SCPSN
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import {
+  LucideMicroscope,
+  LucideFlaskConical,
+  LucideGraduationCap,
+  LucideGlobe,
+  LucideLibrary,
+  LucideDna,
+  LucideStethoscope,
+  LucideUsers,
+  LucideCalendar,
+  LucideAward,
+  LucideArrowRight,
+  LucideChevronLeft,
+  LucideChevronRight,
+  LucideCheck,
+  LucideUser,
+  LucideMapPin,
+  LucideMenu,
+  LucideX,
+} from 'lucide-vue-next'
+
 import { useGetExcos } from '@/composables/modules/excos/useGetExcos'
 import { useAdverts } from '@/composables/modules/adverts/useAdverts'
 import { useSponsors } from '@/composables/modules/sponsors/useSponsors'
 import { useGetConferences } from '@/composables/modules/conferences/useGetConferences'
+import { useGallery } from '@/composables/useGallery'
 import { useCMS } from '@/composables/useCMS'
-// import hero1 from "@/assets/images/hero1.jpg"
-// import hero2 from "@/assets/images/hero2.jpg"
-// import hero3 from "@/assets/images/hero3.jpg"
-import hero1 from "@/assets/images/gallery/photo4.jpeg"
-import hero2 from "@/assets/images/gallery/photo3.jpeg"
-import hero3 from "@/assets/images/gallery/photo2.jpeg"
 
+// ─── Composables ────────────────────────────────────────────
 const { cmsConfig } = useCMS()
-
-const { loading: loadingExcos, excos, getExcos } = useGetExcos()
+const { loading: loadingExcos, items: excos, fetchPublicGallery: getExcos  } = useGallery()
+const { loading: loading, excos: excosList, getExcos: fetchExcos } = useGetExcos()
 const { groupedAdverts, fetchAdverts } = useAdverts()
 const { sponsors, fetchSponsors } = useSponsors()
-const { loading: loadingConferences, conferences, getConferences } = useGetConferences()
+const { conferences, getConferences } = useGetConferences()
 
-const upcomingEvent = computed(() => {
-  return conferences.value.find(c => c.status === 'upcoming') || null
-})
+// ─── Nav ─────────────────────────────────────────────────────
+const mobileMenuOpen = ref<boolean>(false)
 
-const upcomingConferences = computed(() => {
-  return [...conferences.value]
+const navLinks = [
+  { label: 'About', to: '/about' },
+  { label: 'Conferences', to: '/conferences' },
+  { label: 'Resources', to: '/resources' },
+  { label: 'Members', to: '/membership' },
+  { label: 'Contact', to: '/contact' },
+]
+
+// ─── Hero ─────────────────────────────────────────────────────
+const heroStats = [
+  { value: '1,200+', label: 'Qualified scientists' },
+  { value: '82+', label: 'Scientific events' },
+  { value: '450+', label: 'Lab networks' },
+]
+
+// ─── Team carousel ────────────────────────────────────────────
+const carouselRef     = ref<HTMLElement | null>(null)
+const carouselIndex   = ref<number>(0)
+let carouselTimer: ReturnType<typeof setInterval> | null = null
+
+const carouselExcos = computed(() => excos.value ?? [])
+
+const carouselLastIndex = computed<number>(() =>
+  Math.max(0, carouselExcos.value.length - 1)
+)
+
+const nextSlide = (): void => {
+  carouselIndex.value = carouselIndex.value >= carouselLastIndex.value
+    ? 0
+    : carouselIndex.value + 1
+}
+
+const prevSlide = (): void => {
+  carouselIndex.value = carouselIndex.value <= 0
+    ? carouselLastIndex.value
+    : carouselIndex.value - 1
+}
+
+const goToSlide = (i: number): void => {
+  carouselIndex.value = i
+}
+
+const startCarouselTimer = (): void => {
+  carouselTimer = setInterval(() => {
+    if (carouselExcos.value.length > 1) nextSlide()
+  }, 4000)
+}
+
+const stopCarouselTimer = (): void => {
+  if (carouselTimer) {
+    clearInterval(carouselTimer)
+    carouselTimer = null
+  }
+}
+
+// ─── Ticker ───────────────────────────────────────────────────
+const tickerItems = [
+  { label: 'Precision diagnostics', icon: LucideMicroscope },
+  { label: 'Molecular research', icon: LucideDna },
+  { label: 'Cellular analysis', icon: LucideFlaskConical },
+  { label: 'Global collaboration', icon: LucideGlobe },
+  { label: 'Professional excellence', icon: LucideAward },
+  { label: 'Continuous training', icon: LucideGraduationCap },
+  { label: 'Diagnostic mastery', icon: LucideStethoscope },
+]
+
+// ─── Conferences ──────────────────────────────────────────────
+const upcomingConferences = computed(() =>
+  [...conferences.value]
     .filter(c => c.status === 'upcoming')
     .sort((a, b) => {
-      const orderA = a.order ?? 999;
-      const orderB = b.order ?? 999;
-      if (orderA !== orderB) return orderA - orderB;
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      const oA = a.order ?? 999
+      const oB = b.order ?? 999
+      if (oA !== oB) return oA - oB
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     })
     .slice(0, 3)
-})
-import { 
-    LucideMicroscope, 
-    LucideFlaskConical, 
-    LucideGraduationCap, 
-    LucideGlobe,
-    LucideLibrary,
-    LucideDna,
-    LucideStethoscope,
-    LucideUsers,
-    LucideCalendar,
-    LucideAward,
-    LucidePlayCircle,
-    LucideArrowLeft,
-    LucideArrowRight,
-    LucideShieldCheck,
-    LucideUser,
-    LucideMapPin
-} from 'lucide-vue-next'
+)
 
-const marqueeItems = ref([
-  { tag: 'Focus', label: 'Precision Diagnostics', icon: LucideMicroscope },
-  { tag: 'Focus', label: 'Cellular Analysis', icon: LucideFlaskConical },
-  { tag: 'Focus', label: 'Molecular Research', icon: LucideDna },
-  { tag: 'Focus', label: 'Global Collaboration', icon: LucideGlobe },
-  { tag: 'Focus', label: 'Professional Training', icon: LucideGraduationCap }
-])
-
-const activeSlide = ref(0)
-let timer = null
-
-const activeSlides = computed(() => {
-  if (cmsConfig.value?.public?.home?.slides?.length) {
-    return cmsConfig.value.public.home.slides.map(s => ({
-       tag: s.tag,
-       title: s.title,
-       desc: s.desc,
-       image: s.image || hero2
-    }))
-  }
-  return [
-    {
-      tag: 'Welcome to SCPSN',
-      title: 'Precision in Cellular Pathology',
-      desc: 'Empowering medical laboratory scientists specializing in Histopathology and Cytopathology through innovation and global excellence.',
-      image: hero1
-    },
-    {
-      tag: 'Academic Mastery',
-      title: 'The Future of Histology',
-      desc: 'Setting the benchmark for laboratory practices in Nigeria and the West African sub-region through rigorous standardization.',
-      image: hero2
-      // image: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=2070&auto=format&fit=crop'
-    },
-    {
-      tag: 'Scientific Innovation',
-      title: 'Mastery in Diagnostics',
-      desc: 'Access advanced research resources, international conference materials, and world-class scientific journals.',
-      image: hero3
-    }
-  ]
-})
+// ─── Pillars ──────────────────────────────────────────────────
+const pillarColors = [
+  { bg: 'bg-blue-50',   icon: 'text-[#1d4e89]' },
+  { bg: 'bg-green-50',  icon: 'text-green-700' },
+  { bg: 'bg-amber-50',  icon: 'text-amber-700' },
+  { bg: 'bg-teal-50',   icon: 'text-teal-700'  },
+]
 
 const activePillars = computed(() => {
   if (cmsConfig.value?.public?.home?.pillars?.length) {
-    return cmsConfig.value.public.home.pillars.map((p, i) => ({
+    return cmsConfig.value.public.home.pillars.map((p: any, i: number) => ({
       title: p.title,
       desc: p.desc,
-      icon: [LucideDna, LucideFlaskConical, LucideLibrary, LucideStethoscope][i % 4]
+      icon: [LucideDna, LucideFlaskConical, LucideLibrary, LucideStethoscope][i % 4],
     }))
   }
   return [
-    { title: 'Advanced Research', desc: 'Facilitating cutting-edge investigative studies in molecular diagnostics and genomic pathology.', icon: LucideDna },
-    { title: 'Standardization', desc: 'Implementing national and regional protocols for high-precision histopathology processing.', icon: LucideFlaskConical },
-    { title: 'Digital Library', desc: 'Exclusive access to our secure vault of peer-reviewed scientific journals and newsletters.', icon: LucideLibrary },
-    { title: 'Mastery Portal', desc: 'Improving diagnostic accuracy through continuous training and international collaboration.', icon: LucideStethoscope },
+    { title: 'Advanced research',  desc: 'Cutting-edge investigative studies in molecular diagnostics and genomic pathology.',        icon: LucideDna },
+    { title: 'Standardization',    desc: 'National protocols for high-precision histopathology processing and quality assurance.',    icon: LucideFlaskConical },
+    { title: 'Digital library',    desc: 'Exclusive access to peer-reviewed scientific journals, newsletters, and secure resources.', icon: LucideLibrary },
+    { title: 'Mastery portal',     desc: 'Improving diagnostic accuracy through continuous training and international collaboration.', icon: LucideStethoscope },
   ]
 })
 
+// ─── Stats ────────────────────────────────────────────────────
 const activeStats = computed(() => {
   if (cmsConfig.value?.public?.home?.stats?.length) {
-    return cmsConfig.value.public.home.stats.map((s, i) => ({
+    return cmsConfig.value.public.home.stats.map((s: any) => ({
       label: s.label,
       value: s.value,
-      icon: [LucideUsers, LucideCalendar, LucideFlaskConical, LucideAward][i % 4]
     }))
   }
   return [
-    { label: 'Qualified Scientists', value: '1,200', icon: LucideUsers },
-    { label: 'Scientific Events', value: '82', icon: LucideCalendar },
-    { label: 'Lab Networks', value: '450', icon: LucideFlaskConical },
-    { label: 'Awards Issued', value: '45', icon: LucideAward },
+    { label: 'Qualified scientists', value: '1,200' },
+    { label: 'Scientific events',    value: '82'    },
+    { label: 'Lab networks',         value: '450'   },
+    { label: 'Awards issued',        value: '45'    },
   ]
 })
+
+// ─── Initiatives ──────────────────────────────────────────────
+const initiativeColors = [
+  { bg: 'bg-blue-50',  icon: 'text-[#1d4e89]',  link: 'text-[#1d4e89] hover:text-blue-800'  },
+  { bg: 'bg-red-50',   icon: 'text-red-600',   link: 'text-red-600 hover:text-red-700'    },
+  { bg: 'bg-teal-50',  icon: 'text-teal-700',  link: 'text-teal-700 hover:text-teal-800'  },
+]
 
 const activeInitiatives = computed(() => {
   if (cmsConfig.value?.public?.home?.initiatives?.length) {
-    return cmsConfig.value.public.home.initiatives.map((ini, i) => ({
+    return cmsConfig.value.public.home.initiatives.map((ini: any, i: number) => ({
       title: ini.title,
-      desc: ini.desc,
-      icon: [LucideGlobe, LucideMicroscope, LucideDna][i % 3],
-      to: '/about'
+      desc:  ini.desc,
+      icon:  [LucideGlobe, LucideMicroscope, LucideDna][i % 3],
+      to:    '/about',
     }))
   }
   return [
-    { title: 'Digital Pathology Expansion', desc: 'Implementing Al-driven diagnostic tools in laboratories across Nigeria.', icon: LucideGlobe, to: '/about' },
-    { title: 'Cancer Screening Project', desc: 'Collaborating with oncology centers for early histopathology detection.', icon: LucideMicroscope, to: '/conferences' },
-    { title: 'Molecular Genetics Hub', desc: 'A dedicated research initiative for genomic cellular analysis.', icon: LucideDna, to: '/abstracts' },
+    { title: 'Digital pathology expansion', desc: 'Implementing AI-driven diagnostic tools in laboratories across Nigeria and the sub-region.', icon: LucideGlobe,       to: '/about'       },
+    { title: 'Cancer screening project',    desc: 'Collaborating with oncology centres for early histopathology detection and prevention.',     icon: LucideMicroscope, to: '/conferences' },
+    { title: 'Molecular genetics hub',      desc: 'A dedicated research initiative for genomic cellular analysis and data-driven pathology.',   icon: LucideDna,        to: '/abstracts'   },
   ]
 })
 
+// ─── Sponsors fallback ───────────────────────────────────────
+const fallbackSponsors = ['WHO', 'IFCC', 'ASCP', 'IPH', 'MLSCN', 'FMOH']
+
+// ─── Tiers ───────────────────────────────────────────────────
 const activeTiers = computed(() => {
   if (cmsConfig.value?.public?.home?.tiers?.length) {
     return cmsConfig.value.public.home.tiers
   }
   return [
-    { title: 'New Registration', price: '20,000', features: ['Full association membership', 'Voting rights', 'Journal access', 'Conference discounts'] },
-    { title: 'Membership Renewal', price: '10,000', features: ['Maintain active status', 'Continuous journal access', 'Resource vault', 'Mentorship'] }
+    {
+      title:    'New registration',
+      price:    '20,000',
+      features: ['Full association membership', 'Voting rights & governance', 'Journal access', 'Conference discounts'],
+    },
+    {
+      title:    'Membership Renewal',
+      price:    '10,000',
+      features: ['Maintain active status', 'Continuous journal access', 'Resource vault access', 'Mentorship & networking'],
+    },
   ]
 })
 
-onMounted(() => {
+// ─── Lifecycle ───────────────────────────────────────────────
+onMounted(async () => {
   fetchAdverts()
   fetchSponsors()
   getConferences()
-  getExcos()
-  // Intersection Observer for scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-      }
-    })
-  }, { threshold: 0.1 })
-
-  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el))
-
-  timer = setInterval(() => {
-    activeSlide.value = (activeSlide.value + 1) % activeSlides.value.length
-  }, 6000)
+  await getExcos()
+  await fetchExcos()
+  startCarouselTimer()
 })
 
 onUnmounted(() => {
-  if (timer) clearInterval(timer)
+  stopCarouselTimer()
 })
 </script>
 
+
 <style scoped>
-.animate-on-scroll {
+/* ── Custom font stack ────────────────────────────────────── */
+.font-body {
+  font-family: 'DM Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Nav slide-down transition ─────────────────────────────── */
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.22s ease;
+}
+.slide-down-enter-from,
+.slide-down-leave-to {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-8px);
 }
 
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ── Infinite ticker ─────────────────────────────────────── */
+.ticker-track {
+  animation: ticker 35s linear infinite;
+  width: max-content;
 }
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
-.text-gradient {
-  background: linear-gradient(to right, #1d4e89, #28AAE1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+/* ── Hide scrollbar (mobile carousel strip) ──────────────── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

@@ -1,170 +1,270 @@
 <template>
-  <div class="min-h-screen pt-32 pb-20 bg-slate-50 relative overflow-hidden">
-    <!-- Background Decor -->
-    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-cyan/5 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-red/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+  <div class="min-h-screen bg-white font-body">
 
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-4xl mx-auto text-center space-y-6 mb-20 animate-on-scroll">
-        <span class="inline-block px-4 py-1.5 glass text-brand-cyan font-black text-[10px]  tracking-[0.3em] rounded-full border border-brand-cyan/20">
-          Precision Consultations
-        </span>
-        <h1 class="text-5xl md:text-7xl font-black text-brand-dark tracking-tighter leading-none">
-          Schedule A <span class="text-gradient">Professional Session</span>.
-        </h1>
-        <p class="text-lg text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
-          Book clinical diagnoses, scientific consultations, or lab walkthroughs with Nigeria's premier cellular pathology experts.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
-        <!-- Booking Form -->
-        <div class="lg:col-span-7 animate-on-scroll">
-          <div class="glass p-8 md:p-12 rounded-[3rem] border border-white/40 shadow-2xl relative overflow-hidden group">
-            <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-cyan/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
-            
-            <form @submit.prevent="handleSubmit" class="relative z-10 space-y-8">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark  ml-4">Full Legal Name</label>
-                  <input v-model="appointment.fullName" type="text" placeholder="Dr. John Doe" class="form-input" required />
-                </div>
-                <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark  ml-4">Email Address</label>
-                  <input v-model="appointment.email" type="email" placeholder="john@scientific.ng" class="form-input" required />
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <label class="text-[10px] font-black text-brand-dark  ml-4">Service Category</label>
-                <select v-model="appointment.purpose" class="form-input appearance-none cursor-pointer" required>
-                  <option value="" disabled selected>Select a professional service</option>
-                  <option>Histopathology Case Review</option>
-                  <option>Cytopathology Consultation</option>
-                  <option>Molecular Diagnostic Advisory</option>
-                  <option>Laboratory Quality Audit</option>
-                  <option>Scientific Equipment Training</option>
-                </select>
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark  ml-4">Preferred Date</label>
-                  <input v-model="appointment.date" type="date" class="form-input" required />
-                </div>
-                <div class="space-y-2">
-                  <label class="text-[10px] font-black text-brand-dark  ml-4">Preferred Time Slice</label>
-                  <input v-model="appointment.time" type="time" class="form-input" required />
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <label class="text-[10px] font-black text-brand-dark  ml-4">Case Summary / Inquiry</label>
-                <textarea v-model="appointment.message" rows="4" placeholder="Briefly describe the clinical context or scientific inquiry..." class="form-input !py-3 !px-8 !rounded-[24px] resize-none pb-12"></textarea>
-              </div>
-
-              <button type="submit" :disabled="loading" class="w-full btn-premium !py-4 group">
-                <span v-if="loading" class="flex items-center justify-center gap-3">
-                   <div class="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-                   TRANSMITTING...
-                </span>
-                <span v-else class="flex items-center justify-center gap-3">
-                  CONFIRM RESERVATION
-                  <LucideArrowRight :size="18" class="group-hover:translate-x-2 transition-transform" />
-                </span>
-              </button>
-            </form>
+    <!-- ─── HERO ─────────────────────────────────────────────── -->
+    <section class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pb-20">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 bg-blue-50 text-[#1d4e89] text-xs font-semibold px-4 py-2 rounded-full mb-7 border border-blue-100">
+            <LucideCalendar :size="13" />
+            Precision Consultations
           </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
+            Schedule a
+            <span class="text-[#1d4e89]"> Professional Session.</span>
+          </h1>
+          <p class="text-[16px] text-slate-500 leading-relaxed max-w-[540px]">
+            Book clinical diagnoses, scientific consultations, or lab walkthroughs with Nigeria's premier cellular pathology experts.
+          </p>
         </div>
+      </div>
+    </section>
 
-        <!-- Info Sidebar -->
-        <div class="lg:col-span-5 space-y-10 animate-on-scroll">
-          <div class="interactive-card p-10 bg-brand-dark text-white border-none group">
-            <LucideShieldCheck :size="48" class="text-brand-cyan mb-8" />
-            <h3 class="text-2xl font-black mb-4 tracking-tight">Scientific Integrity Guaranteed.</h3>
-            <p class="text-slate-300 text-base leading-relaxed font-medium">
-              Every appointment is handled by board-certified Cellular Pathology Scientists under the strict guidelines of MDCN and scientific international standards.
-            </p>
-          </div>
 
-          <div class="space-y-6">
-            <h4 class="text-[10px] font-black text-slate-400  tracking-[0.3em] ml-2">Why Book With Us?</h4>
-            <div v-for="(feat, i) in features" :key="i" class="flex gap-6 group">
-              <div class="h-12 w-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center text-brand-dark group-hover:bg-brand-cyan group-hover:text-white transition-all duration-300">
-                <component :is="feat.icon" :size="20" />
-              </div>
-              <div class="space-y-1">
-                <p class="font-black text-brand-dark text-base  tracking-tight">{{ feat.title }}</p>
-                <p class="text-sm text-slate-400 leading-relaxed">{{ feat.desc }}</p>
-              </div>
+    <!-- ─── MAIN CONTENT ─────────────────────────────────────── -->
+    <section class="bg-slate-50 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+          <!-- ── Left: Booking Form ── -->
+          <div class="lg:col-span-7">
+            <div class="bg-white border border-slate-200 rounded-2xl p-7 lg:p-10">
+
+              <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-2">Book your session</p>
+              <h2 class="text-[22px] font-bold text-slate-800 mb-7 leading-snug">Appointment details</h2>
+
+              <form @submit.prevent="handleSubmit" class="space-y-5">
+
+                <!-- Name + Email -->
+                <div class="grid sm:grid-cols-2 gap-5">
+                  <div class="space-y-1.5">
+                    <label class="text-[12px] font-semibold text-slate-500">Full Legal Name</label>
+                    <input
+                      v-model="appointment.fullName"
+                      type="text"
+                      placeholder="Dr. John Doe"
+                      class="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder:text-slate-400 text-[14px] px-4 py-3 rounded-xl focus:outline-none focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-blue-50 transition-all duration-200"
+                      required
+                    />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label class="text-[12px] font-semibold text-slate-500">Email Address</label>
+                    <input
+                      v-model="appointment.email"
+                      type="email"
+                      placeholder="john@scientific.ng"
+                      class="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder:text-slate-400 text-[14px] px-4 py-3 rounded-xl focus:outline-none focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-blue-50 transition-all duration-200"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Service category -->
+                <div class="space-y-1.5">
+                  <label class="text-[12px] font-semibold text-slate-500">Service Category</label>
+                  <div class="relative">
+                    <select
+                      v-model="appointment.purpose"
+                      class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-[14px] px-4 py-3 rounded-xl focus:outline-none focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-blue-50 transition-all duration-200 appearance-none cursor-pointer"
+                      required
+                    >
+                      <option value="" disabled selected>Select a professional service</option>
+                      <option>Histopathology Case Review</option>
+                      <option>Cytopathology Consultation</option>
+                      <option>Molecular Diagnostic Advisory</option>
+                      <option>Laboratory Quality Audit</option>
+                      <option>Scientific Equipment Training</option>
+                    </select>
+                    <LucideChevronDown
+                      class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                      :size="16"
+                    />
+                  </div>
+                </div>
+
+                <!-- Date + Time -->
+                <div class="grid sm:grid-cols-2 gap-5">
+                  <div class="space-y-1.5">
+                    <label class="text-[12px] font-semibold text-slate-500">Preferred Date</label>
+                    <input
+                      v-model="appointment.date"
+                      type="date"
+                      class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-[14px] px-4 py-3 rounded-xl focus:outline-none focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-blue-50 transition-all duration-200"
+                      required
+                    />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label class="text-[12px] font-semibold text-slate-500">Preferred Time</label>
+                    <input
+                      v-model="appointment.time"
+                      type="time"
+                      class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-[14px] px-4 py-3 rounded-xl focus:outline-none focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-blue-50 transition-all duration-200"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Message -->
+                <div class="space-y-1.5">
+                  <label class="text-[12px] font-semibold text-slate-500">Case Summary / Inquiry</label>
+                  <textarea
+                    v-model="appointment.message"
+                    rows="5"
+                    placeholder="Briefly describe the clinical context or scientific inquiry..."
+                    class="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder:text-slate-400 text-[14px] px-4 py-4 rounded-xl focus:outline-none focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-blue-50 transition-all duration-200 resize-none leading-relaxed"
+                  />
+                </div>
+
+                <!-- Submit -->
+                <div class="pt-2">
+                  <button
+                    type="submit"
+                    :disabled="loading"
+                    class="w-full inline-flex items-center justify-center gap-2 bg-[#1d4e89] hover:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white text-[14px] font-semibold px-6 py-3.5 rounded-xl transition-colors duration-200"
+                  >
+                    <div v-if="loading" class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span v-if="loading">Confirming reservation...</span>
+                    <span v-else class="flex items-center gap-2">
+                      Confirm reservation
+                      <LucideArrowRight :size="15" />
+                    </span>
+                  </button>
+                </div>
+
+              </form>
             </div>
           </div>
 
-          <div class="glass p-8 rounded-[2.5rem] border-brand-cyan/10">
-            <p class="text-center text-[10px] font-black text-slate-400  mb-6">Regional Support Hubs</p>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="p-4 bg-slate-50/50 rounded-2xl text-center space-y-1">
-                <p class="text-[10px] font-black text-brand-dark">ABUJA</p>
-                <p class="text-[9px] text-slate-400 font-bold ">Headquarters</p>
+
+          <!-- ── Right: Info sidebar ── -->
+          <div class="lg:col-span-5 space-y-5">
+
+            <!-- Integrity card -->
+            <div class="bg-[#1d4e89] border border-blue-800 rounded-2xl p-7 relative overflow-hidden">
+              <LucideShieldCheck
+                :size="110"
+                class="absolute -right-5 -bottom-5 opacity-[0.06] text-white pointer-events-none"
+              />
+              <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-5">
+                <LucideShieldCheck :size="20" class="text-white" />
               </div>
-              <div class="p-4 bg-slate-50/50 rounded-2xl text-center space-y-1">
-                <p class="text-[10px] font-black text-brand-dark">LAGOS</p>
-                <p class="text-[9px] text-slate-400 font-bold ">Coastal Hub</p>
+              <p class="text-[11px] font-semibold text-blue-300 tracking-widest uppercase mb-2">Scientific integrity</p>
+              <h3 class="text-[18px] font-bold text-white mb-3 leading-snug">Guaranteed quality at every step</h3>
+              <p class="text-[13px] text-blue-200 leading-relaxed">
+                Every appointment is handled by board-certified Cellular Pathology Scientists under the strict guidelines of MDCN and international scientific standards.
+              </p>
+            </div>
+
+            <!-- Why book card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-7 hover:border-blue-200 hover:shadow-sm transition-all duration-300">
+              <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-6">Why book with us?</p>
+              <div class="space-y-5">
+                <div
+                  v-for="(feat, i) in features"
+                  :key="i"
+                  class="flex items-start gap-4 group"
+                >
+                  <div
+                    class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-200"
+                    :class="featureColors[i % featureColors.length].bg"
+                  >
+                    <component
+                      :is="feat.icon"
+                      :size="18"
+                      :class="featureColors[i % featureColors.length].icon"
+                    />
+                  </div>
+                  <div>
+                    <p class="text-[14px] font-semibold text-slate-800 mb-0.5">{{ feat.title }}</p>
+                    <p class="text-[13px] text-slate-400 leading-relaxed">{{ feat.desc }}</p>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- Regional hubs card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-7 hover:border-blue-200 hover:shadow-sm transition-all duration-300">
+              <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-5">Regional support hubs</p>
+              <div class="grid grid-cols-2 gap-3">
+                <div
+                  v-for="hub in hubs"
+                  :key="hub.city"
+                  class="bg-slate-50 border border-slate-100 rounded-xl p-4 hover:border-blue-200 hover:bg-blue-50/40 transition-all duration-200"
+                >
+                  <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center mb-3">
+                    <LucideMapPin :size="15" class="text-[#1d4e89]" />
+                  </div>
+                  <p class="text-[13px] font-bold text-slate-800">{{ hub.city }}</p>
+                  <p class="text-[11px] text-slate-400 font-medium mt-0.5">{{ hub.role }}</p>
+                </div>
+              </div>
+            </div>
+
           </div>
+
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </template>
 
+
 <script setup>
-import { ref, onMounted } from 'vue'
-import { 
-  LucideArrowRight, 
-  LucideShieldCheck, 
-  LucideMicroscope, 
-  LucideFlaskConical, 
-  LucideClock, 
-  LucideGlobe 
+import {
+  LucideArrowRight,
+  LucideShieldCheck,
+  LucideMicroscope,
+  LucideFlaskConical,
+  LucideClock,
+  LucideGlobe,
+  LucideCalendar,
+  LucideChevronDown,
+  LucideMapPin,
 } from 'lucide-vue-next'
 import { useCreateAppointment } from '@/composables/modules/appointments/useCreateAppointment'
 
 const { loading, appointment, submitAppointment } = useCreateAppointment()
 
 const features = [
-  { title: 'Global Benchmarks', desc: 'Consultations aligned with international diagnostic standards.', icon: LucideGlobe },
-  { title: 'Advanced Analytics', desc: 'Utilizing modern histopathology processing technologies.', icon: LucideMicroscope },
-  { title: 'Quick Turnaround', desc: 'Efficient case review within 48-72 business hours.', icon: LucideClock }
+  {
+    title: 'Global benchmarks',
+    desc: 'Consultations aligned with international diagnostic standards.',
+    icon: LucideGlobe,
+  },
+  {
+    title: 'Advanced analytics',
+    desc: 'Utilizing modern histopathology processing technologies.',
+    icon: LucideMicroscope,
+  },
+  {
+    title: 'Quick turnaround',
+    desc: 'Efficient case review within 48–72 business hours.',
+    icon: LucideClock,
+  },
+]
+
+const featureColors = [
+  { bg: 'bg-blue-50',  icon: 'text-[#1d4e89]' },
+  { bg: 'bg-green-50', icon: 'text-green-700'  },
+  { bg: 'bg-amber-50', icon: 'text-amber-700'  },
+]
+
+const hubs = [
+  { city: 'Abuja',  role: 'Headquarters'  },
+  { city: 'Lagos',  role: 'Coastal Hub'   },
+  { city: 'Kano',   role: 'Northern Hub'  },
+  { city: 'Enugu',  role: 'Eastern Hub'   },
 ]
 
 const handleSubmit = async () => {
   await submitAppointment()
 }
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-      }
-    })
-  }, { threshold: 0.1 })
-
-  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el))
-})
 </script>
 
-<style scoped>
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
 
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
+<style scoped>
+.font-body {
+  font-family: 'DM Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
 }
 </style>

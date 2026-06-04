@@ -1,157 +1,340 @@
 <template>
-  <main class="min-h-screen bg-slate-50 pt-24 pb-32">
-    <!-- Hero Section -->
-    <section class="bg-brand-blue py-20 relative overflow-hidden">
-      <div class="absolute inset-0 z-0 opacity-10">
-        <div class="absolute top-10 left-10 w-64 h-64 bg-brand-cyan rounded-full blur-[100px]"></div>
-        <div class="absolute bottom-10 right-10 w-64 h-64 bg-brand-red rounded-full blur-[100px]"></div>
-      </div>
-      <div class="container mx-auto px-6 relative z-10 text-center max-w-4xl">
-        <h1 class="text-4xl md:text-6xl font-black text-white tracking-tighter mb-6">Premium Scientific <span class="text-brand-cyan">Newsletters</span></h1>
-        <p class="text-lg md:text-xl text-slate-300 font-medium leading-relaxed">
-          Subscribe to our specialized publications to receive cutting-edge research, clinical updates, and pathology news directly in your inbox.
-        </p>
+  <div class="min-h-screen bg-white font-body">
+
+    <!-- ─── HERO ─────────────────────────────────────────────── -->
+    <section class="bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pb-20">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 bg-blue-50 text-[#1d4e89] text-xs font-semibold px-4 py-2 rounded-full mb-7 border border-blue-100">
+            <LucideMail :size="13" />
+            Newsletter Subscriptions
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
+            Stay informed with <span class="text-[#1d4e89]">SCPSN</span> publications.
+          </h1>
+          <p class="text-[16px] text-slate-500 leading-relaxed max-w-[540px]">
+            Subscribe to our specialized publications and receive cutting-edge research, clinical updates, and pathology news directly in your inbox.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- Subscription Section -->
-    <section class="container mx-auto px-6 mt-16 max-w-6xl">
-      <div class="flex flex-col lg:flex-row gap-12">
-        
-        <!-- Categories Selection -->
-        <div class="flex-grow space-y-8">
-          <div class="flex items-center justify-between">
-            <h2 class="text-2xl font-black text-brand-blue">Available Categories</h2>
-            <span class="text-base font-bold text-slate-400">{{ activeCategories.length }} available</span>
-          </div>
+    <!-- ─── MAIN CONTENT ─────────────────────────────────────── -->
+    <section class="bg-slate-50 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-          <div v-if="loading && categories.length === 0" class="py-12 flex justify-center">
-            <div class="w-10 h-10 border-4 border-brand-cyan/30 border-t-brand-cyan rounded-full animate-spin"></div>
-          </div>
+          <!-- ── Left: Categories ── -->
+          <div class="lg:col-span-7 space-y-5">
 
-          <div v-else-if="activeCategories.length === 0" class="py-12 text-center text-slate-500 bg-white rounded-2xl border border-slate-200">
-            No newsletter categories available at the moment. Please check back later.
-          </div>
+            <!-- Section header -->
+            <div class="flex items-center justify-between mb-2">
+              <div>
+                <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-1">Step 1</p>
+                <h2 class="text-[20px] font-bold text-slate-800">Choose your categories</h2>
+              </div>
+              <span class="text-[12px] font-semibold text-slate-400 bg-white border border-slate-200 px-3 py-1.5 rounded-full">
+                {{ activeCategories.length }} available
+              </span>
+            </div>
 
-          <div v-else class="space-y-4">
-            <label 
-              v-for="cat in activeCategories" 
-              :key="cat._id"
-              :class="['relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center bg-white hover:shadow-md', 
-                selectedCategories.includes(cat._id) ? 'border-brand-blue ring-2 ring-brand-blue/10 shadow-sm' : 'border-slate-100 hover:border-slate-300'
-              ]"
+            <!-- Loading -->
+            <div v-if="loading && categories.length === 0" class="py-16 flex justify-center">
+              <div class="w-10 h-10 border-2 border-blue-100 border-t-[#1d4e89] rounded-full animate-spin"></div>
+            </div>
+
+            <!-- Empty state -->
+            <div
+              v-else-if="activeCategories.length === 0"
+              class="py-16 text-center text-slate-400 bg-white border border-slate-200 rounded-2xl"
             >
-              <div class="flex-grow pr-6">
-                <h3 class="text-base font-black text-slate-800 mb-1">{{ cat.title }}</h3>
-                <p class="text-sm text-slate-500">{{ cat.description }}</p>
-              </div>
-              <div class="shrink-0 text-right mr-6">
-                <span class="text-xl font-black text-brand-cyan block leading-none">{{ cat.price === 0 ? 'Free' : '₦' + cat.price.toLocaleString() }}</span>
-                <span class="text-xs font-bold text-slate-400">/ subscription</span>
-              </div>
-              <div class="shrink-0 flex items-center justify-center">
-                <input 
-                  type="checkbox" 
-                  :value="cat._id" 
-                  v-model="selectedCategories"
-                  class="w-6 h-6 text-brand-blue border-slate-300 rounded focus:ring-brand-blue cursor-pointer"
-                />
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- Checkout Panel -->
-        <div class="w-full lg:w-[400px] shrink-0">
-          <div class="bg-white rounded-3xl border border-slate-200 shadow-xl p-8 sticky top-32">
-            <h3 class="text-xl font-black text-brand-blue mb-6">Your Subscription</h3>
-            
-            <div class="space-y-4 mb-8 min-h-[100px]">
-              <div v-if="selectedCategoriesData.length === 0" class="text-base text-slate-400 text-center py-6 border-2 border-dashed border-slate-100 rounded-xl">
-                Please select at least one newsletter category from the list.
-              </div>
-              
-              <div v-for="cat in selectedCategoriesData" :key="cat._id" class="flex justify-between items-center text-base">
-                <span class="font-semibold text-slate-700 truncate pr-4">{{ cat.title }}</span>
-                <span class="font-black text-brand-blue shrink-0">{{ cat.price === 0 ? 'Free' : '₦' + cat.price.toLocaleString() }}</span>
-              </div>
+              <LucideInbox :size="32" class="mx-auto mb-3 text-slate-300" />
+              <p class="text-[14px] font-semibold text-slate-500">No newsletter categories available at the moment.</p>
+              <p class="text-[13px] text-slate-400 mt-1">Please check back later.</p>
             </div>
 
-            <div class="border-t border-slate-100 pt-6 mb-8">
-              <div class="flex justify-between items-end">
-                <span class="text-base font-bold text-slate-400 ">Total Total</span>
-                <span class="text-3xl font-black text-brand-red">₦{{ totalPrice.toLocaleString() }}</span>
-              </div>
-            </div>
-
-            <form @submit.prevent="subscribe" class="space-y-4">
-              <div>
-                <label class="block text-sm font-bold text-slate-600 tracking-wider mb-2">Full Name</label>
-                <input v-model="fullName" type="text" placeholder="Dr. Jane Doe" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all" />
-              </div>
-              <div>
-                <label class="block text-sm font-bold text-slate-600 tracking-wider mb-2">Email Address</label>
-                <input v-model="email" type="email" placeholder="jane@hospital.org" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all" />
-              </div>
-              
-              <div v-if="totalPrice > 0" class="mt-6 pt-6 border-t border-slate-100">
-                <div class="bg-brand-blue/5 border border-brand-blue/20 rounded-xl p-4 mb-4">
-                   <h4 class="text-sm font-black text-brand-blue mb-2">Bank Transfer Details</h4>
-                   <p class="text-xs text-slate-600 mb-1">Please transfer <strong>₦{{ totalPrice.toLocaleString() }}</strong> to the SCPSN dues account below:</p>
-                   <div class="mt-2 space-y-1">
-                      <p class="text-sm"><span class="font-bold text-slate-500">Bank:</span> <span class="font-black text-slate-800">First Bank of Nigeria</span></p>
-                      <p class="text-sm"><span class="font-bold text-slate-500">Account No:</span> <span class="font-black text-slate-800">2012345678</span></p>
-                      <p class="text-sm"><span class="font-bold text-slate-500">Account Name:</span> <span class="font-black text-slate-800">SCPSN Dues</span></p>
-                   </div>
-                   <p class="text-xs text-slate-500 mt-3 border-t border-brand-blue/10 pt-2 italic">Transfer description must be: <strong>payment for new letter subscription</strong></p>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-bold text-slate-600 tracking-wider mb-2">Upload Proof of Payment</label>
-                  <input type="file" @change="e => proofFile = e.target.files[0]" accept="image/*,.pdf" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-none transition-all text-sm" />
-                </div>
-              </div>
-
-              <button 
-                type="submit" 
-                :disabled="loading || selectedCategories.length === 0"
-                class="w-full text-sm rounded-lg bg-black text-white py-4 mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3 transition-colors hover:bg-slate-800"
+            <!-- Category cards -->
+            <div v-else class="space-y-3">
+              <label
+                v-for="cat in activeCategories"
+                :key="cat._id"
+                :class="[
+                  'flex items-center gap-4 bg-white border-2 rounded-2xl p-5 cursor-pointer transition-all duration-200',
+                  selectedCategories.includes(cat._id)
+                    ? 'border-[#1d4e89] bg-blue-50/40 shadow-sm'
+                    : 'border-slate-200 hover:border-blue-200 hover:shadow-sm'
+                ]"
               >
-                <span v-if="loading" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                {{ totalPrice === 0 ? 'Subscribe Now' : 'Submit Subscription' }}
-              </button>
-            </form>
-            
-            <p class="text-sm text-center text-slate-400 mt-6 font-medium">
-              By subscribing, you agree to our Terms of Service and Privacy Policy.
-            </p>
-          </div>
-        </div>
+                <!-- Icon badge -->
+                <div
+                  :class="[
+                    'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all',
+                    selectedCategories.includes(cat._id) ? 'bg-[#1d4e89]' : 'bg-slate-100'
+                  ]"
+                >
+                  <LucideNewspaper
+                    :size="16"
+                    :class="selectedCategories.includes(cat._id) ? 'text-white' : 'text-slate-500'"
+                  />
+                </div>
 
+                <!-- Text -->
+                <div class="flex-grow">
+                  <p class="text-[13px] font-semibold text-slate-800 mb-0.5">{{ cat.title }}</p>
+                  <p class="text-[12px] text-slate-400 leading-relaxed">{{ cat.description }}</p>
+                </div>
+
+                <!-- Price -->
+                <div class="text-right flex-shrink-0 mr-3">
+                  <p class="text-[18px] font-bold leading-none" :class="cat.price === 0 ? 'text-emerald-600' : 'text-[#1d4e89]'">
+                    {{ cat.price === 0 ? 'Free' : '₦' + cat.price.toLocaleString() }}
+                  </p>
+                  <p class="text-[11px] text-slate-400 mt-0.5">/ subscription</p>
+                </div>
+
+                <!-- Checkbox -->
+                <input
+                  type="checkbox"
+                  :value="cat._id"
+                  v-model="selectedCategories"
+                  class="w-5 h-5 accent-[#1d4e89] flex-shrink-0 cursor-pointer"
+                />
+              </label>
+            </div>
+
+          </div>
+
+          <!-- ── Right: Checkout panel ── -->
+          <div class="lg:col-span-5">
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden sticky top-24">
+
+              <!-- Panel header -->
+              <div class="bg-[#1d4e89] px-7 py-6 relative overflow-hidden">
+                <LucideReceipt
+                  :size="100"
+                  class="absolute -right-4 -bottom-4 text-white opacity-[0.06] pointer-events-none"
+                />
+                <p class="text-[11px] font-semibold text-blue-300 tracking-widest uppercase mb-1">Your subscription</p>
+                <h3 class="text-[17px] font-bold text-white">Summary &amp; checkout</h3>
+              </div>
+
+              <div class="p-7 space-y-5">
+
+                <!-- Cart items -->
+                <div class="min-h-[80px]">
+                  <div
+                    v-if="selectedCategoriesData.length === 0"
+                    class="border-2 border-dashed border-slate-200 rounded-xl py-6 text-center"
+                  >
+                    <LucideShoppingCart :size="22" class="mx-auto text-slate-300 mb-2" />
+                    <p class="text-[12px] text-slate-400">Select categories to get started</p>
+                  </div>
+                  <div v-else class="space-y-0.5">
+                    <div
+                      v-for="cat in selectedCategoriesData"
+                      :key="cat._id"
+                      class="flex items-center justify-between py-2.5 border-b border-slate-100 last:border-0"
+                    >
+                      <span class="text-[12px] font-semibold text-slate-700 truncate pr-4">{{ cat.title }}</span>
+                      <span
+                        class="text-[13px] font-bold flex-shrink-0"
+                        :class="cat.price === 0 ? 'text-emerald-600' : 'text-[#1d4e89]'"
+                      >
+                        {{ cat.price === 0 ? 'Free' : '₦' + cat.price.toLocaleString() }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Total -->
+                <div class="flex items-end justify-between border-t border-slate-100 pt-4">
+                  <p class="text-[12px] font-semibold text-slate-400">Total amount</p>
+                  <p class="text-[24px] font-bold text-[#1d4e89]">₦{{ totalPrice.toLocaleString() }}</p>
+                </div>
+
+                <div class="border-t border-slate-100" />
+
+                <!-- Step 2: Details -->
+                <div class="space-y-3">
+                  <div>
+                    <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">Step 2</p>
+                    <p class="text-[13px] font-bold text-slate-700 mb-3">Your details</p>
+                  </div>
+                  <div class="space-y-1.5">
+                    <label class="text-[11px] font-semibold text-slate-400">Full Name <span class="text-red-400">*</span></label>
+                    <input v-model="fullName" type="text" class="field" placeholder="e.g. MLS Jane Okonkwo" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label class="text-[11px] font-semibold text-slate-400">Email Address <span class="text-red-400">*</span></label>
+                    <input v-model="email" type="email" class="field" placeholder="e.g. jane@hospital.org" />
+                  </div>
+                </div>
+
+                <!-- Step 3: Payment (only when total > 0) -->
+                <template v-if="totalPrice > 0">
+                  <div class="border-t border-slate-100" />
+                  <div class="space-y-3">
+                    <div>
+                      <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">Step 3</p>
+                      <p class="text-[13px] font-bold text-slate-700 mb-3">Payment</p>
+                    </div>
+
+                    <!-- Bank details -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
+                      <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Bank transfer details</p>
+                      <div class="space-y-1.5">
+                        <div class="flex justify-between text-[12px]">
+                          <span class="text-slate-400 font-semibold">Bank</span>
+                          <span class="font-bold text-slate-800">First Bank of Nigeria</span>
+                        </div>
+                        <div class="flex justify-between text-[12px]">
+                          <span class="text-slate-400 font-semibold">Account No.</span>
+                          <span class="font-mono font-bold text-slate-800 tracking-wider">2012345678</span>
+                        </div>
+                        <div class="flex justify-between text-[12px]">
+                          <span class="text-slate-400 font-semibold">Account Name</span>
+                          <span class="font-bold text-slate-800">SCPSN Dues</span>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+                        <p class="text-[11px] text-slate-500 italic">
+                          Description: <strong class="text-[#1d4e89] not-italic">newsletter subscription</strong>
+                        </p>
+                        <button
+                          @click="copyToClipboard('2012345678')"
+                          class="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-400 hover:text-[#1d4e89] bg-white border border-slate-200 hover:border-blue-200 px-2.5 py-1 rounded-lg transition-all"
+                        >
+                          <LucideCopy :size="11" /> Copy
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Upload receipt -->
+                    <div class="space-y-1.5">
+                      <label class="text-[11px] font-semibold text-slate-400">
+                        Proof of Payment <span class="text-red-400">*</span>
+                      </label>
+
+                      <div
+                        v-if="!proofFile"
+                        @click="$refs.proofFileInput.click()"
+                        class="border border-dashed border-slate-300 hover:border-blue-300 bg-slate-50 hover:bg-blue-50/30 rounded-xl py-7 px-4 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200 group"
+                      >
+                        <div class="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-[#1d4e89] mb-3 group-hover:-translate-y-1 transition-transform duration-200">
+                          <LucideUpload :size="18" />
+                        </div>
+                        <p class="text-[13px] font-semibold text-slate-700 mb-0.5">Click to upload receipt</p>
+                        <p class="text-[11px] text-slate-400">PNG, JPG, or PDF — max 5MB</p>
+                      </div>
+
+                      <div
+                        v-else
+                        class="flex items-center justify-between p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl"
+                      >
+                        <div class="flex items-center gap-2.5">
+                          <div class="w-8 h-8 bg-white border border-emerald-200 rounded-lg flex items-center justify-center">
+                            <LucideFileCheck :size="14" class="text-emerald-600" />
+                          </div>
+                          <div>
+                            <p class="text-[12px] font-semibold text-slate-800 truncate max-w-[160px]">{{ proofFile.name }}</p>
+                            <p class="text-[11px] text-slate-400">{{ (proofFile.size / 1024 / 1024).toFixed(2) }} MB</p>
+                          </div>
+                        </div>
+                        <button
+                          @click="proofFile = null"
+                          class="w-7 h-7 rounded-lg bg-white hover:bg-red-50 border border-slate-200 text-slate-400 hover:text-red-500 flex items-center justify-center transition-all"
+                        >
+                          <LucideX :size="13" />
+                        </button>
+                      </div>
+                      <input
+                        type="file"
+                        ref="proofFileInput"
+                        class="hidden"
+                        accept="image/*,.pdf"
+                        @change="e => proofFile = e.target.files[0]"
+                      />
+                    </div>
+                  </div>
+                </template>
+
+                <!-- Submit -->
+                <button
+                  @click="subscribe"
+                  :disabled="loading || selectedCategories.length === 0"
+                  class="w-full inline-flex items-center justify-center gap-2 bg-[#1d4e89] hover:bg-blue-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-[14px] font-semibold px-6 py-3.5 rounded-xl transition-colors duration-200"
+                >
+                  <div v-if="loading" class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <LucideSend v-else :size="15" />
+                  <span>{{ loading ? 'Submitting...' : totalPrice === 0 ? 'Subscribe now' : 'Submit subscription' }}</span>
+                </button>
+
+                <p class="text-[11px] text-center text-slate-400">
+                  By subscribing, you agree to our Terms of Service and Privacy Policy.
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
-  </main>
+
+  </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, ref } from 'vue'
+import {
+  LucideMail,
+  LucideNewspaper,
+  LucideReceipt,
+  LucideInbox,
+  LucideShoppingCart,
+  LucideUpload,
+  LucideFileCheck,
+  LucideCopy,
+  LucideSend,
+  LucideX,
+} from 'lucide-vue-next'
 import { useNewsletter } from '@/composables/modules/newsletters/useNewsletter'
+import { useCustomToast } from '@/composables/core/useCustomToast'
 
+definePageMeta({ layout: 'default' })
+
+const { showToast } = useCustomToast()
 const { loading, email, fullName, categories, selectedCategories, proofFile, fetchCategories, subscribe } = useNewsletter()
 
 onMounted(() => {
   fetchCategories()
 })
 
-const activeCategories = computed(() => {
-  return categories.value.filter(c => c.isActive)
-})
+const activeCategories = computed(() => categories.value.filter(c => c.isActive))
 
-const selectedCategoriesData = computed(() => {
-  return activeCategories.value.filter(c => selectedCategories.value.includes(c._id))
-})
+const selectedCategoriesData = computed(() =>
+  activeCategories.value.filter(c => selectedCategories.value.includes(c._id))
+)
 
-const totalPrice = computed(() => {
-  return selectedCategoriesData.value.reduce((sum, c) => sum + c.price, 0)
-})
+const totalPrice = computed(() =>
+  selectedCategoriesData.value.reduce((sum, c) => sum + c.price, 0)
+)
+
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    showToast({ title: 'Copied!', message: `Account number ${text} copied to clipboard.`, toastType: 'success' })
+  } catch {
+    showToast({ title: 'Copy Failed', message: 'Please copy the account number manually.', toastType: 'error' })
+  }
+}
 </script>
+
+<style scoped>
+.font-body {
+  font-family: 'DM Sans', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+}
+.field {
+  @apply w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder:text-slate-400 text-[13px] px-4 py-3 rounded-xl focus:outline-none focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-blue-50 transition-all duration-200;
+}
+</style>
