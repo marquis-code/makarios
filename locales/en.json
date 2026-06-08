@@ -1,5 +1,6 @@
 {
   "nav": {
+    "about_us": "About Us",
     "science": "Science",
     "scientific_board": "Scientific Board",
     "scientific_excellence": "Our Scientific Excellence",
@@ -11,7 +12,10 @@
     "contact": "Contact",
     "bookings": "Bookings",
     "become_member": "Become a Member",
-    "official_inquiries": "Official Inquiries"
+    "official_inquiries": "Official Inquiries",
+    "links": "Links",
+    "iac_website": "IAC Website",
+    "iac_website_desc": "International Academy of Cytology"
   },
   "home": {
     "global_events": "Global Events",
@@ -63,12 +67,12 @@
     "terms": "Terms of Use",
     "quick_nav": "Quick Navigation",
     "resources": "Resources",
-    "scientific_board": "Scientific Board",
+    "scientific_board": "National Executive Council",
     "upcoming_conf": "Upcoming Conferences",
     "member_portal": "Membership Portal",
-    "journal_archives": "Journal Archives",
+    "journal_archives": "Journal",
     "protocol_guidelines": "Protocol Guidelines",
-    "gallery": "Association Gallery",
+    "gallery": "Society Gallery",
     "news_media": "News & Media",
     "contact_support": "Contact Support"
   }

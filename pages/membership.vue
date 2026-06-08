@@ -10,7 +10,7 @@
             Membership Registration
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
-            Join <span class="text-[#1d4e89]">SCPSN</span> Today.
+            Join <span class="text-[#1d4e89]">SCPSC</span> Today.
           </h1>
           <p class="text-[16px] text-slate-500 leading-relaxed max-w-[540px]">
             Become a member of the Society for Cellular Pathology Scientists of Nigeria. Register online in just a few simple steps.
@@ -37,12 +37,12 @@
               <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-5">
                 <LucideFlaskConical :size="18" class="text-white" />
               </div>
-              <p class="text-[11px] font-semibold text-blue-300 tracking-widest uppercase mb-2">About SCPSN</p>
+              <p class="text-[11px] font-semibold text-blue-300 tracking-widest uppercase mb-2">About SCPSC</p>
               <h3 class="text-[17px] font-bold text-white mb-3 leading-snug">
                 Nigeria's premier cellular pathology body
               </h3>
               <p class="text-[13px] text-blue-200 leading-relaxed">
-                Founded in 2007 in Ilorin, Kwara State, SCPSN is the official professional body for Histoscientists and Cytologists in Nigeria, championing excellence in cellular pathology across the nation.
+                Founded in 2007 in Ilorin, Kwara State, SCPSC is the official professional body for Histoscientists and Cytologists in Nigeria, championing excellence in cellular pathology across the nation.
               </p>
             </div>
 
@@ -100,7 +100,7 @@
             <div class="bg-white border border-slate-200 rounded-2xl p-6 flex items-center justify-between hover:border-blue-200 transition-all duration-200">
               <div>
                 <p class="text-[12px] font-semibold text-slate-400 mb-0.5">Need help?</p>
-                <p class="text-[13px] font-semibold text-slate-700">info@scpsn.org.ng</p>
+                <p class="text-[13px] font-semibold text-slate-700">info@SCPSC.org.ng</p>
               </div>
               <NuxtLink
                 to="/contact"
@@ -274,7 +274,7 @@
                       </div>
                       <div>
                         <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Account Name</p>
-                        <p class="text-[16px] font-bold text-slate-800">SCPSN</p>
+                        <p class="text-[16px] font-bold text-slate-800">SCPSC</p>
                       </div>
                     </div>
                     <div class="flex items-center justify-between pt-3 border-t border-slate-200">
@@ -383,7 +383,7 @@
                 </div>
                 <div>
                   <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Account Name</p>
-                  <p class="text-[13px] font-bold text-slate-800">SCPSN</p>
+                  <p class="text-[13px] font-bold text-slate-800">SCPSC</p>
                 </div>
               </div>
               <button
@@ -447,7 +447,7 @@ const benefits = [
   'Access to exclusive scientific publications and journals',
   'Discounted registration for the Annual Scientific Conference',
   'Eligibility to vote and hold office in the Society',
-  'Access to the SCPSN mentorship network',
+  'Access to the SCPSC mentorship network',
   'Professional development and training opportunities',
   'Networking with cellular pathology experts across Nigeria',
 ]

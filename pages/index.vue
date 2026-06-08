@@ -55,7 +55,7 @@
               <!-- Header row -->
               <div class="flex items-center justify-between mb-5">
                 <div>
-                  <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">SCPSN Gallery</p>
+                  <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">SCPSC Gallery</p>
                   <h3 class="text-[15px] font-bold text-slate-800">From our archive</h3>
                 </div>
                 <div class="flex items-center gap-2">
@@ -143,7 +143,7 @@
           <div class="lg:hidden mt-8">
             <div class="flex items-center justify-between mb-4">
               <div>
-                <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">SCPSN Gallery</p>
+                <p class="text-[11px] font-semibold text-blue-600 tracking-widest uppercase mb-0.5">SCPSC Gallery</p>
                 <h3 class="text-[14px] font-bold text-slate-800">From our archive</h3>
               </div>
               <NuxtLink to="/about" class="text-[12px] text-[#1d4e89] font-semibold inline-flex items-center gap-1">
@@ -546,7 +546,7 @@
               to="/about"
               class="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 text-[14px] font-semibold px-7 py-3.5 rounded-xl transition-colors duration-200"
             >
-              Learn more about SCPSN
+              Learn more about SCPSC
             </NuxtLink>
           </div>
         </div>

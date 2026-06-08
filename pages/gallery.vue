@@ -87,7 +87,7 @@
             <!-- Image -->
             <img
               :src="item.imageUrl"
-              :alt="item.title || 'SCPSN Gallery Image'"
+              :alt="item.title || 'SCPSC Gallery Image'"
               class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               loading="lazy"
             />

@@ -10,7 +10,7 @@
             Newsletter Subscriptions
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-[56px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
-            Stay informed with <span class="text-[#1d4e89]">SCPSN</span> publications.
+            Stay informed with <span class="text-[#1d4e89]">SCPSC</span> publications.
           </h1>
           <p class="text-[16px] text-slate-500 leading-relaxed max-w-[540px]">
             Subscribe to our specialized publications and receive cutting-edge research, clinical updates, and pathology news directly in your inbox.
@@ -193,7 +193,7 @@
                         </div>
                         <div class="flex justify-between text-[12px]">
                           <span class="text-slate-400 font-semibold">Account Name</span>
-                          <span class="font-bold text-slate-800">SCPSN Dues</span>
+                          <span class="font-bold text-slate-800">SCPSC Dues</span>
                         </div>
                       </div>
                       <div class="flex items-center justify-between pt-2 border-t border-slate-200">

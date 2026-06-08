@@ -29,13 +29,13 @@
           <div class="w-9 h-9 rounded-xl overflow-hidden border border-slate-200 flex-shrink-0 group-hover:border-blue-200 transition-colors duration-300">
             <img
               src="@/assets/images/logo.jpeg"
-              alt="SCPSN Logo"
+              alt="SCPSC Logo"
               class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
             />
           </div>
           <div class="flex flex-col leading-none gap-0.5">
             <span class="text-[14px] font-bold tracking-tight text-slate-900">
-              {{ cmsConfig?.global?.siteName || 'SCPSN' }}
+              {{ cmsConfig?.global?.siteName || 'SCPSC' }}
             </span>
             <span class="text-[9px] font-semibold tracking-[0.25em] text-blue-600 uppercase">Nigeria</span>
           </div>
@@ -330,7 +330,7 @@ const isHomePage = computed<boolean>(() => route.path === '/')
 
 const navigation = computed<NavLink[]>(() => [
   {
-    label: t('nav.science'),
+    label: t('nav.about_us'),
     children: [
       { label: t('nav.scientific_board'), to: '/about',     icon: LucideUsers,    description: t('nav.scientific_excellence') },
       { label: t('nav.abstracts'),        to: '/abstracts', icon: LucideBookOpen, description: t('nav.research_pubs') },
@@ -340,6 +340,12 @@ const navigation = computed<NavLink[]>(() => [
   { label: t('nav.newsletters'), to: '/newsletters'  },
   { label: t('nav.gallery'),     to: '/gallery'      },
   { label: t('nav.contact'),     to: '/contact'      },
+  {
+    label: t('nav.links'),
+    children: [
+      { label: t('nav.iac_website'), to: 'https://www.cytology-iac.org/', icon: LucideGlobe, description: t('nav.iac_website_desc') }
+    ]
+  }
 ])
 
 // ─── Scroll handler ──────────────────────────────────────────

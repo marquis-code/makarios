@@ -14,10 +14,10 @@
             </div>
             <h1 class="text-4xl sm:text-5xl lg:text-[54px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
               Instituting Excellence in
-              <span class="text-[#1d4e89]"> Laboratory Science.</span>
+              <span class="text-[#1d4e89]"> Cellular Pathology Science.</span>
             </h1>
             <p class="text-[16px] text-slate-500 leading-relaxed max-w-[520px] mb-10">
-              The Society for Cellular Pathology Scientists of Nigeria (SCPSN) is the professional body for medical laboratory scientists specialized in the field of histopathology and cytopathology.
+              The Society for Cellular Pathology Scientists of Nigeria (SCPSC) is the professional body for medical laboratory scientists specialized in the field of histopathology and cytopathology.
             </p>
             <div class="flex flex-wrap gap-3">
               <NuxtLink
@@ -175,7 +175,7 @@
             Meet Our Executives
           </h2>
           <p class="text-[15px] text-slate-500 max-w-md mx-auto">
-            The dedicated professionals steering SCPSN toward scientific excellence and global impact.
+            The dedicated professionals steering SCPSC toward scientific excellence and global impact.
           </p>
         </div>
 

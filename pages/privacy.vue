@@ -3,7 +3,7 @@
     <div class="container mx-auto px-6 max-w-3xl">
        <h1 class="text-4xl font-black text-brand-blue mb-10">Privacy Policy</h1>
        <div class="prose prose-slate max-w-none text-slate-500 font-medium leading-[2]">
-          <p class="mb-6">The Society for Cellular Pathology Scientists of Nigeria (SCPSN) respects your privacy and is committed to protecting your personal data.</p>
+          <p class="mb-6">The Society for Cellular Pathology Scientists of Nigeria (SCPSC) respects your privacy and is committed to protecting your personal data.</p>
           <h2 class="text-2xl font-bold text-brand-blue mt-12 mb-6">1. Information We Collect</h2>
           <p class="mb-6">We collect personal information such as name, email address, and professional credentials when you register for membership or conferences.</p>
           <h2 class="text-2xl font-bold text-brand-blue mt-12 mb-6">2. How We Use Data</h2>

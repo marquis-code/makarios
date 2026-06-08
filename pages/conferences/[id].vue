@@ -167,11 +167,11 @@
                 <p class="text-[10px] font-bold tracking-[.28em] uppercase text-[#1d4e89] mb-4">Organizer</p>
                 <div class="flex items-center gap-3 pb-5 mb-5 border-b border-slate-100">
                   <div class="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0">
-                    <span class="text-[8px] font-black tracking-wide text-[#1d4e89]">SCPSN</span>
+                    <span class="text-[8px] font-black tracking-wide text-[#1d4e89]">SCPSC</span>
                   </div>
                   <div>
-                    <p class="text-[14px] font-bold text-slate-900 mb-0.5">SCPSN Nigeria</p>
-                    <p class="text-[12px] text-slate-400">Society of Cellular Pathology</p>
+                    <p class="text-[14px] font-bold text-slate-900 mb-0.5">SCPSC Nigeria</p>
+                    <p class="text-[12px] text-slate-400">Society for Cellular Pathology Scientists of Nigeria</p>
                   </div>
                 </div>
                 <div class="flex items-center justify-between">
@@ -275,8 +275,8 @@ const { showToast } = useCustomToast()
 const { loading, conference, getConference } = useGetConference()
 
 useSeoMeta({
-  title: () => conference.value?.title || 'SCPSN Event',
-  description: () => conference.value?.description || 'Learn more about this upcoming SCPSN event.',
+  title: () => conference.value?.title || 'SCPSC Event',
+  description: () => conference.value?.description || 'Learn more about this upcoming SCPSC event.',
   ogTitle: () => conference.value?.title,
   ogDescription: () => conference.value?.description,
   ogImage: () => conference.value?.bannerImage || 'https://scpsn.org.ng/wp-content/uploads/2021/10/banner.jpg',

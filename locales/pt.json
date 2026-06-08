@@ -1,5 +1,6 @@
 {
   "nav": {
+    "about_us": "Sobre nós",
     "science": "Ciência",
     "scientific_board": "Conselho Científico",
     "scientific_excellence": "Nossa Excelência Científica",
@@ -11,7 +12,10 @@
     "contact": "Contato",
     "bookings": "Reservas",
     "become_member": "Torne-se um Membro",
-    "official_inquiries": "Consultas Oficiais"
+    "official_inquiries": "Consultas Oficiais",
+    "links": "Links",
+    "iac_website": "Site da IAC",
+    "iac_website_desc": "Academia Internacional de Citologia"
   },
   "home": {
     "global_events": "Eventos Globais",
@@ -63,12 +67,12 @@
     "terms": "Termos de Uso",
     "quick_nav": "Navegação Rápida",
     "resources": "Recursos",
-    "scientific_board": "Conselho Científico",
-    "upcoming_conf": "Próximas Conferências",
+    "scientific_board": "Conselho Executivo Nacional",
+    "upcoming_conf": "Próximas Conferencias",
     "member_portal": "Portal de Membros",
-    "journal_archives": "Arquivos de Revistas",
+    "journal_archives": "Revista",
     "protocol_guidelines": "Diretrizes de Protocolo",
-    "gallery": "Galeria da Associação",
+    "gallery": "Galeria da Sociedade",
     "news_media": "Notícias e Mídia",
     "contact_support": "Contatar Suporte"
   }

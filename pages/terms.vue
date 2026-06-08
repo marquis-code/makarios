@@ -10,7 +10,7 @@
         <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8 tracking-tight">Terms of Use</h1>
         
         <div class="prose prose-slate max-w-none text-slate-600 font-medium leading-relaxed">
-          <p class="mb-8 text-[15px]">By accessing this portal, you agree to comply with the professional standards set by the SCPSN scientific board.</p>
+          <p class="mb-8 text-[15px]">By accessing this portal, you agree to comply with the professional standards set by the SCPSC scientific board.</p>
           
           <h2 class="text-[20px] font-bold text-slate-800 mt-10 mb-4 border-b border-slate-100 pb-2">1. Membership Conduct</h2>
           <p class="mb-8 text-[14px]">All members must adhere to the Ethical Code of Conduct for Medical Laboratory Scientists in Nigeria.</p>

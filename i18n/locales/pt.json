@@ -1,5 +1,6 @@
 {
   "nav": {
+    "about_us": "Sobre nós",
     "science": "Ciência",
     "scientific_board": "Conselho Científico",
     "scientific_excellence": "Nossa Excelência Científica",
@@ -11,7 +12,10 @@
     "contact": "Contato",
     "bookings": "Reservas",
     "become_member": "Torne-se um Membro",
-    "official_inquiries": "Consultas Oficiais"
+    "official_inquiries": "Consultas Oficiais",
+    "links": "Links",
+    "iac_website": "Site da IAC",
+    "iac_website_desc": "Academia Internacional de Citologia"
   },
   "home": {
     "global_events": "Eventos Globais",

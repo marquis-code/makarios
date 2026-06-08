@@ -1,5 +1,6 @@
 {
   "nav": {
+    "about_us": "About Us",
     "science": "Science",
     "scientific_board": "Scientific Board",
     "scientific_excellence": "Our Scientific Excellence",
@@ -11,7 +12,10 @@
     "contact": "Contact",
     "bookings": "Bookings",
     "become_member": "Become a Member",
-    "official_inquiries": "Official Inquiries"
+    "official_inquiries": "Official Inquiries",
+    "links": "Links",
+    "iac_website": "IAC Website",
+    "iac_website_desc": "International Academy of Cytology"
   },
   "home": {
     "global_events": "Global Events",

@@ -1,5 +1,6 @@
 {
   "nav": {
+    "about_us": "À propos",
     "science": "Science",
     "scientific_board": "Conseil Scientifique",
     "scientific_excellence": "Notre Excellence Scientifique",
@@ -11,7 +12,10 @@
     "contact": "Contact",
     "bookings": "Réservations",
     "become_member": "Devenir Membre",
-    "official_inquiries": "Demandes Officielles"
+    "official_inquiries": "Demandes Officielles",
+    "links": "Liens",
+    "iac_website": "Site de l'IAC",
+    "iac_website_desc": "Académie Internationale de Cytologie"
   },
   "home": {
     "global_events": "Événements Mondiaux",
@@ -63,12 +67,12 @@
     "terms": "Conditions d'Utilisation",
     "quick_nav": "Navigation Rapide",
     "resources": "Ressources",
-    "scientific_board": "Conseil Scientifique",
+    "scientific_board": "Conseil Exécutif National",
     "upcoming_conf": "Conférences à Venir",
     "member_portal": "Portail des Membres",
-    "journal_archives": "Archives des Revues",
+    "journal_archives": "Revue",
     "protocol_guidelines": "Directives de Protocole",
-    "gallery": "Galerie de l'Association",
+    "gallery": "Galerie de la Société",
     "news_media": "Actualités et Médias",
     "contact_support": "Contacter l'Assistance"
   }
