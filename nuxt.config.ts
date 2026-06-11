@@ -93,5 +93,12 @@ export default defineNuxtConfig({
         'socket.io-client'
       ]
     }
-  }
+  },
+  nitro: {
+    prerender: {
+      routes: ['/', '/404.html'],
+      ignore: ['/dynamic-routes', '/api'],
+      failOnError: false
+    }
+  },
 })
