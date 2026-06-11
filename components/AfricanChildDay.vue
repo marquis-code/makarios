@@ -13,7 +13,7 @@
       <div class="w-full lg:w-5/12 flex flex-col justify-center animate-fade-in-up">
         <div class="inline-flex items-center gap-3 mb-6">
           <span class="px-4 py-1.5 rounded-full bg-emerald-900/40 border border-emerald-500/20 text-emerald-300 text-xs font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-            June 16, 2026
+            June 25, 2026
           </span>
           <span class="text-sm font-bold text-slate-400 tracking-wider uppercase">Special Initiative</span>
         </div>
