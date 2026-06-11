@@ -1,1 +1,0 @@
-import{G as n}from"./Bec1qZF0.js";const r={getConferences:()=>n.get("/conferences"),getConference:e=>n.get(`/conferences/${e}`),createConference:e=>n.post("/conferences",e),updateConference:(e,c)=>n.patch(`/conferences/${e}`,c),deleteConference:e=>n.delete(`/conferences/${e}`)};export{r as c};

@@ -34,16 +34,55 @@ export default defineNuxtConfig({
   tailwindcss: {
     viewer: true,
   },
-  app: {
+    app: {
     head: {
-      title: 'Society for Cellular Pathology Scientists of Nigeria (SCPSN)',
+      title: "Makarios Initiative - Improving Lives Through Health and Humanitarian Projects",
+      htmlAttrs: { lang: "en" },
       meta: [
-        { name: 'description', content: 'Official website of the Society for Cellular Pathology Scientists of Nigeria. Professional development, conferences, and research in pathology.' }
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "format-detection", content: "telephone=no" },
+        {
+          name: "description",
+          content: "MAKARIOS Initiative is dedicated to improving health outcomes and empowering communities through sustainable development programs.",
+        },
+        { name: "author", content: "Makarios Initiative" },
+
+        // Open Graph
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://makariosinitiative.org" },
+        { property: "og:title", content: "Makarios Initiative - Improving Lives Through Health and Humanitarian Projects" },
+        {
+          property: "og:description",
+          content: "Breaking barriers and creating opportunities through innovative educational programs and resources that transform communities.",
+        },
+        { property: "og:image", content: "https://makariosinitiative.org/icon.png" },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+
+        // Twitter
+        { property: "twitter:card", content: "summary_large_image" },
+        { property: "twitter:url", content: "https://makariosinitiative.org/" },
+        { property: "twitter:title", content: "Makarios Initiative - Improving Lives Through Health and Humanitarian Projects" },
+        {
+          property: "twitter:description",
+          content: "Product development agency specializing in UI/UX design and software development for startups.",
+        },
+        { property: "twitter:image", content: "https://makariosinitiative.org/icon.png" },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
-    }
+        { rel: "canonical", href: "https://makariosinitiative.org/" },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap",
+        },
+      ],
+    },
+    pageTransition: {
+      name: "page",
+      mode: "out-in",
+    },
   },
   vite: {
     optimizeDeps: {
