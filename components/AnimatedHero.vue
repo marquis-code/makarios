@@ -73,22 +73,30 @@
 
       <!-- Right Glassmorphic Frame Image -->
       <div class="w-full lg:w-1/2 relative z-10 h-[500px] lg:h-[700px] animate-fade-in-scale">
-        <div class="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-slate-200 shadow-2xl shadow-slate-900/10 border-4 border-white/60 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out">
+        <div class="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-slate-200 shadow-2xl shadow-slate-900/10 border-4 border-white/60 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out group">
           <Transition name="editorial-fade" mode="out-in">
             <video 
               :key="currentIndex"
               ref="heroVideo"
-              :src="currentSlide.video"
+              class="w-full h-full object-cover cursor-pointer"
               autoplay 
               loop 
               muted 
               playsinline
-              @loadedmetadata="handleVideoLoad"
-              @canplay="handleVideoLoad"
-              class="w-full h-full object-cover"
-            ></video>
+              preload="auto"
+              @click="openFullscreen"
+            >
+              <source :src="currentSlide.video" type="video/mp4" />
+            </video>
           </Transition>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent pointer-events-none"></div>
+
+          <!-- Play icon overlay hint -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10">
+            <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+              <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
 
         <!-- Floating Glass Widget 1 -->
@@ -156,11 +164,45 @@
       </Transition>
       </Teleport>
     </ClientOnly>
+
+    <!-- Fullscreen Video Modal -->
+    <ClientOnly>
+      <Teleport to="body">
+        <Transition name="modal-fade">
+          <div 
+            v-if="isVideoModalOpen" 
+            class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 md:p-8"
+            @click.self="closeFullscreen"
+          >
+            <button 
+              @click="closeFullscreen"
+              class="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 transition-colors duration-200 text-white"
+              aria-label="Close video"
+            >
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <video
+              ref="modalVideo"
+              class="max-w-full max-h-full w-full md:w-auto rounded-xl shadow-2xl"
+              controls
+              autoplay
+              loop
+              playsinline
+            >
+              <source :src="currentSlide.video" type="video/mp4" />
+            </video>
+          </div>
+        </Transition>
+      </Teleport>
+    </ClientOnly>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, onBeforeUnmount, watch, nextTick } from 'vue'
 
 interface Button {
   text: string
@@ -187,7 +229,7 @@ const rawSlides = [
       { text: "Kika's Examination", action: 'openModal', primary: true },
       { text: 'Explore Impact', action: '#impact', secondary: true }
     ],
-    video: '/ensuring-access1.mp4'
+    video: '/videos/ensuring-access1.mp4'
   },
   {
     id: 2,
@@ -198,7 +240,7 @@ const rawSlides = [
       { text: 'Join Our Mission', action: 'openModal', primary: true },
       { text: 'View Programs', action: '#about', secondary: true }
     ],
-    video: '/ensuring-access2.mp4'
+    video: '/videos/ensuring-access2.mp4'
   }
 ]
 
@@ -213,20 +255,22 @@ const slides = ref<any[]>(
 
 const currentIndex = ref(0)
 const showModal = ref(false)
+const isVideoModalOpen = ref(false)
 
 const currentSlide = computed(() => slides.value[currentIndex.value])
 
 const heroVideo = ref<HTMLVideoElement | null>(null)
+const modalVideo = ref<HTMLVideoElement | null>(null)
 
-const handleVideoLoad = (e: Event) => {
-  const target = e.target as HTMLVideoElement;
-  if (target) {
-    target.muted = true;
-    target.play().catch(err => console.log('Video autoplay prevented:', err));
+const playVideo = async (el: HTMLVideoElement | null, muted = true) => {
+  if (!el) return
+  el.muted = muted
+  try {
+    await el.play()
+  } catch (err) {
+    console.warn('Autoplay prevented:', err)
   }
 }
-
-// Video replaces static background
 
 const setCurrentSlide = (index: number) => { currentIndex.value = index }
 
@@ -238,13 +282,71 @@ const handleButtonClick = (btn: Button) => {
   }
 }
 
+const closeModal = () => {
+  showModal.value = false
+}
+
+const openFullscreen = async () => {
+  isVideoModalOpen.value = true
+
+  // pause background video to avoid double playback
+  heroVideo.value?.pause()
+
+  await nextTick()
+
+  const el = modalVideo.value
+  if (el) {
+    el.load()
+    await playVideo(el, false)
+  }
+
+  document.body.style.overflow = 'hidden'
+}
+
+const closeFullscreen = () => {
+  if (modalVideo.value) {
+    modalVideo.value.pause()
+  }
+  isVideoModalOpen.value = false
+  document.body.style.overflow = ''
+
+  // resume background preview
+  playVideo(heroVideo.value, true)
+}
+
+const handleEscKey = (e: KeyboardEvent) => {
+  if (e.key === 'Escape' && isVideoModalOpen.value) {
+    closeFullscreen()
+  }
+}
+
+// Reload + play the hero video whenever the slide (and thus source) changes
+watch(currentIndex, async () => {
+  await nextTick()
+  const el = heroVideo.value
+  if (el) {
+    el.load()
+    await playVideo(el, true)
+  }
+
+  // keep modal video in sync if open
+  if (isVideoModalOpen.value && modalVideo.value) {
+    modalVideo.value.load()
+    await playVideo(modalVideo.value, false)
+  }
+})
+
 let slideTimer: ReturnType<typeof setInterval>
 
-onMounted(() => {
-  if (heroVideo.value) {
-    heroVideo.value.muted = true;
-    heroVideo.value.play().catch(e => console.error("Autoplay prevented on mount", e))
+onMounted(async () => {
+  await nextTick()
+  const el = heroVideo.value
+  if (el) {
+    el.load()
+    await playVideo(el, true)
   }
+
+  window.addEventListener('keydown', handleEscKey)
 
   slideTimer = setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % slides.value.length
@@ -253,6 +355,11 @@ onMounted(() => {
   onUnmounted(() => {
     clearInterval(slideTimer)
   })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleEscKey)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -307,4 +414,14 @@ onMounted(() => {
 .modal-enter-active > div, .modal-leave-active > div { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; }
 .modal-enter-from > div { transform: scale(0.95) translateY(20px); opacity: 0; }
 .modal-leave-to > div { transform: scale(1.02) translateY(-10px); opacity: 0; }
+
+/* Fullscreen video modal */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
 </style>
