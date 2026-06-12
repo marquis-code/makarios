@@ -77,11 +77,14 @@
           <Transition name="editorial-fade" mode="out-in">
             <video 
               :key="currentIndex"
+              ref="heroVideo"
               :src="currentSlide.video"
               autoplay 
               loop 
               muted 
               playsinline
+              @loadedmetadata="handleVideoLoad"
+              @canplay="handleVideoLoad"
               class="w-full h-full object-cover"
             ></video>
           </Transition>
@@ -213,6 +216,16 @@ const showModal = ref(false)
 
 const currentSlide = computed(() => slides.value[currentIndex.value])
 
+const heroVideo = ref<HTMLVideoElement | null>(null)
+
+const handleVideoLoad = (e: Event) => {
+  const target = e.target as HTMLVideoElement;
+  if (target) {
+    target.muted = true;
+    target.play().catch(err => console.log('Video autoplay prevented:', err));
+  }
+}
+
 // Video replaces static background
 
 const setCurrentSlide = (index: number) => { currentIndex.value = index }
@@ -228,6 +241,11 @@ const handleButtonClick = (btn: Button) => {
 let slideTimer: ReturnType<typeof setInterval>
 
 onMounted(() => {
+  if (heroVideo.value) {
+    heroVideo.value.muted = true;
+    heroVideo.value.play().catch(e => console.error("Autoplay prevented on mount", e))
+  }
+
   slideTimer = setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % slides.value.length
   }, 8000)

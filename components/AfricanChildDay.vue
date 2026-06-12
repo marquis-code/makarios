@@ -56,12 +56,16 @@
           <div class="group relative rounded-3xl overflow-hidden bg-slate-800 shadow-2xl border border-white/10 transform transition-transform duration-500 hover:-translate-y-2">
             <div class="aspect-video lg:aspect-[4/3] relative">
               <video 
-                src="/ensuring-access1.mp4" 
-                class="w-full h-full object-cover"
+                ref="promoVideo"
+                :src="currentVideoSrc" 
+                class="w-full h-full object-cover cursor-pointer"
                 autoplay
-                loop
                 muted
                 playsinline
+                @loadedmetadata="handleVideoLoad"
+                @canplay="handleVideoLoad"
+                @ended="handleVideoEnded"
+                @click="toggleFullScreen"
               ></video>
             </div>
           </div>
@@ -74,8 +78,51 @@
 </template>
 
 <script setup lang="ts">
-// No complex script needed; using native HTML5 video controls for simplicity and performance.
-// You can enhance this with a custom video player overlay if desired.
+import { ref, computed, onMounted } from 'vue'
+
+const promoVideo = ref<HTMLVideoElement | null>(null)
+
+const videos = [
+  '/ensuring-access1.mp4',
+  '/ensuring-access2.mp4'
+]
+
+const currentVideoIndex = ref(0)
+const currentVideoSrc = computed(() => videos[currentVideoIndex.value])
+
+const handleVideoLoad = (e: Event) => {
+  const target = e.target as HTMLVideoElement;
+  if (target) {
+    target.muted = true;
+    target.play().catch(err => console.log('Video autoplay prevented:', err));
+  }
+}
+
+const handleVideoEnded = () => {
+  currentVideoIndex.value = (currentVideoIndex.value + 1) % videos.length
+}
+
+const toggleFullScreen = () => {
+  const elem = promoVideo.value
+  if (!elem) return
+
+  elem.muted = false; // Unmute when opening full screen for better UX
+
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if ((elem as any).webkitRequestFullscreen) { /* Safari */
+    (elem as any).webkitRequestFullscreen();
+  } else if ((elem as any).msRequestFullscreen) { /* IE11 */
+    (elem as any).msRequestFullscreen();
+  }
+}
+
+onMounted(() => {
+  if (promoVideo.value) {
+    promoVideo.value.muted = true
+    promoVideo.value.play().catch(e => console.error("Autoplay prevented on mount", e))
+  }
+})
 </script>
 
 <style scoped>
