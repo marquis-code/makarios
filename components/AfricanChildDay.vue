@@ -78,37 +78,39 @@
     </div>
 
     <!-- Fullscreen Modal -->
-    <Teleport to="body">
-      <Transition name="modal-fade">
-        <div 
-          v-if="isModalOpen" 
-          class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 md:p-8"
-          @click.self="closeModal"
-        >
-          <!-- Close button -->
-          <button 
-            @click="closeModal"
-            class="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 transition-colors duration-200 text-white"
-            aria-label="Close video"
+    <ClientOnly>
+      <Teleport to="body">
+        <Transition name="modal-fade">
+          <div 
+            v-if="isModalOpen" 
+            class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 md:p-8"
+            @click.self="closeModal"
           >
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+            <!-- Close button -->
+            <button 
+              @click="closeModal"
+              class="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 transition-colors duration-200 text-white"
+              aria-label="Close video"
+            >
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
 
-          <video
-            ref="modalVideo"
-            class="max-w-full max-h-full w-full md:w-auto rounded-xl shadow-2xl"
-            controls
-            autoplay
-            playsinline
-            @ended="handleModalVideoEnded"
-          >
-            <source :src="currentVideoSrc" type="video/mp4" />
-          </video>
-        </div>
-      </Transition>
-    </Teleport>
+            <video
+              ref="modalVideo"
+              class="max-w-full max-h-full w-full md:w-auto rounded-xl shadow-2xl"
+              controls
+              autoplay
+              playsinline
+              @ended="handleModalVideoEnded"
+            >
+              <source :src="currentVideoSrc" type="video/mp4" />
+            </video>
+          </div>
+        </Transition>
+      </Teleport>
+    </ClientOnly>
   </section>
 </template>
 

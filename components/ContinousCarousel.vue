@@ -131,36 +131,38 @@
         </div>
   
       <!-- Profile Modal -->
-      <Teleport to="body">
-        <div
-          v-if="selectedProfile"
-          class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
-          @click="selectedProfile = null"
-        >
+      <ClientOnly>
+        <Teleport to="body">
           <div
-            class="bg-white rounded-2xl p-6 max-w-lg w-full"
-            @click.stop
+            v-if="selectedProfile"
+            class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+            @click="selectedProfile = null"
           >
-            <img
-              :src="selectedProfile.image"
-              :alt="selectedProfile.name"
-              class="w-32 h-32 rounded-full object-cover mx-auto mb-4"
-            />
-            <h2 class="text-2xl font-bold text-center mb-2">{{ selectedProfile.name }}</h2>
-            <p class="text-center text-gray-600 mb-4">
-              {{ selectedProfile.title }}
-              <span :class="`text-${selectedProfile.companyColor}`">{{ selectedProfile.company }}</span>
-            </p>
-            <p class="text-gray-700 mb-4 text-justify h-72 overflow-auto leading-relaxed">{{ selectedProfile.bio }}</p>
-            <button
-              class="w-full bg-gray-900 text-white rounded-lg py-3 hover:bg-gray-800"
-              @click="selectedProfile = null"
+            <div
+              class="bg-white rounded-2xl p-6 max-w-lg w-full"
+              @click.stop
             >
-              Close
-            </button>
+              <img
+                :src="selectedProfile.image"
+                :alt="selectedProfile.name"
+                class="w-32 h-32 rounded-full object-cover mx-auto mb-4"
+              />
+              <h2 class="text-2xl font-bold text-center mb-2">{{ selectedProfile.name }}</h2>
+              <p class="text-center text-gray-600 mb-4">
+                {{ selectedProfile.title }}
+                <span :class="`text-${selectedProfile.companyColor}`">{{ selectedProfile.company }}</span>
+              </p>
+              <p class="text-gray-700 mb-4 text-justify h-72 overflow-auto leading-relaxed">{{ selectedProfile.bio }}</p>
+              <button
+                class="w-full bg-gray-900 text-white rounded-lg py-3 hover:bg-gray-800"
+                @click="selectedProfile = null"
+              >
+                Close
+              </button>
+            </div>
           </div>
-        </div>
-      </Teleport>
+        </Teleport>
+      </ClientOnly>
 
 
     </div>

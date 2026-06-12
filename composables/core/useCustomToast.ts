@@ -1,5 +1,4 @@
-import { ref, shallowRef, onMounted, h } from 'vue'
-import ToastComponent from '@/components/core/Toast.vue'
+import { useState } from '#app'
 
 type ToastType = 'success' | 'error' | 'warning' | 'info'
 
@@ -10,44 +9,26 @@ export interface ToastOptions {
   duration?: number
 }
 
-// Create a singleton instance
-let toastApp: any = null
-let toastInstance: any = null
+let toastTimer: any = null
 
 export const useCustomToast = () => {
-  // Initialize toast on first call
-  const ensureToastInitialized = async () => {
-    if (!toastApp && typeof window !== 'undefined') {
-      const { createApp } = await import('vue');
-      // Create container
-      const toastContainer = document.createElement('div')
-      toastContainer.id = 'toast-container'
-      document.body.appendChild(toastContainer)
-      
-      // Create app instance
-      toastApp = createApp(ToastComponent)
-      toastInstance = toastApp.mount('#toast-container')
-    }
-  }
-  
-  // Show toast function
-  const showToast = async (options: ToastOptions) => {
-    if (typeof window === 'undefined') return;
-    
-    await ensureToastInitialized();
-    
-    if (!toastInstance) {
-      console.error('Toast component not initialized')
-      return
-    }
-    
+  const toastVisible = useState('toast-visible', () => false)
+  const toastData = useState('toast-data', () => ({
+    title: '',
+    message: '',
+    toastType: 'success' as ToastType
+  }))
+
+  const showToast = (options: ToastOptions) => {
     const { title, message, toastType, duration = 5000 } = options
     
-    // Map toastType to the type expected by the component
-    const type = toastType as ToastType
+    toastData.value = { title, message, toastType }
+    toastVisible.value = true
     
-    // Call the exposed method
-    return toastInstance.showToast(title, message, type, duration)
+    if (toastTimer) clearTimeout(toastTimer)
+    toastTimer = setTimeout(() => {
+      toastVisible.value = false
+    }, duration)
   }
   
   return {
