@@ -109,13 +109,103 @@
             </video>
           </div>
         </Transition>
+
+        <!-- Gallery Fullscreen Modal -->
+        <Transition name="modal-fade">
+          <div 
+            v-if="isGalleryModalOpen && activeGalleryItem" 
+            class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 md:p-8"
+            @click.self="closeGalleryModal"
+          >
+            <button 
+              @click="closeGalleryModal"
+              class="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 transition-colors duration-200 text-white"
+            >
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+
+            <template v-if="activeGalleryItem.type === 'video'">
+              <video
+                :src="activeGalleryItem.src"
+                class="max-w-full max-h-full w-full md:w-auto rounded-xl shadow-2xl"
+                controls
+                autoplay
+                playsinline
+              ></video>
+            </template>
+            <template v-else>
+              <img 
+                :src="activeGalleryItem.src" 
+                class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain" 
+                alt="Enlarged Asset"
+              />
+            </template>
+          </div>
+        </Transition>
       </Teleport>
     </ClientOnly>
+
+    <!-- IDAC 2026 Programme Fliers Masonry -->
+    <div class="mt-24 lg:mt-32 max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16 animate-fade-in-up" style="animation-delay: 0.2s">
+        <h3 class="text-3xl md:text-5xl font-black text-white mb-6">IDAC 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Campaign</span></h3>
+        <p class="text-lg text-slate-400 font-medium max-w-2xl mx-auto">Explore our official programme banners and visual campaigns driving the change for the International Day of the African Child.</p>
+      </div>
+      
+      <!-- CSS Masonry Grid -->
+      <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+        
+        <div 
+          v-for="(item, index) in galleryItems" 
+          :key="index"
+          class="break-inside-avoid relative group rounded-[2rem] overflow-hidden shadow-xl border border-white/5 bg-slate-800/50 hover:border-emerald-500/30 transition-all duration-300 transform hover:-translate-y-1"
+        >
+          <template v-if="item.type === 'video'">
+            <video 
+              :src="item.src" 
+              class="w-full h-auto rounded-[2rem] block" 
+              controls
+              playsinline
+            ></video>
+            <!-- Enlarge Button for Video -->
+            <button 
+              @click="openGalleryModal(item)"
+              class="absolute top-4 right-4 w-10 h-10 bg-black/70 hover:bg-black/90 backdrop-blur-md rounded-full flex items-center justify-center transition-all z-10 shadow-lg border border-white/20"
+              title="Enlarge Video"
+            >
+              <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+            </button>
+          </template>
+          
+          <template v-else>
+            <div @click="openGalleryModal(item)" class="cursor-pointer">
+              <img :src="item.src" class="w-full h-auto rounded-[2rem] block" alt="IDAC Campaign Asset" />
+              <div class="absolute inset-0 bg-emerald-900/40 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <!-- Enlarge icon -->
+              <div class="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+              </div>
+            </div>
+          </template>
+        </div>
+        
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
+
+import idac1 from '@/assets/img/idac1.jpeg'
+import idac2 from '@/assets/img/idac2.jpeg'
+import idac3 from '@/assets/img/idac3.jpeg'
+import idac4 from '@/assets/img/idac4.jpeg'
+import idac5 from '@/assets/img/idac5.jpeg'
+import idac6 from '@/assets/img/idac6.jpeg'
+import idac7 from '@/assets/img/idac7.jpeg'
+import idac8 from '@/assets/img/idac8.jpeg'
+import idac9 from '@/assets/img/idac9.mp4'
 
 const promoVideo = ref<HTMLVideoElement | null>(null)
 const modalVideo = ref<HTMLVideoElement | null>(null)
@@ -128,6 +218,37 @@ const videos = [
 
 const currentVideoIndex = ref(0)
 const currentVideoSrc = computed(() => videos[currentVideoIndex.value])
+
+// Gallery State
+const galleryItems = [
+  { type: 'video', src: idac9 },
+  { type: 'image', src: idac1 },
+  { type: 'image', src: idac2 },
+  { type: 'image', src: idac3 },
+  { type: 'image', src: idac4 },
+  { type: 'image', src: idac5 },
+  { type: 'image', src: idac6 },
+  { type: 'image', src: idac7 },
+  { type: 'image', src: idac8 },
+]
+
+const isGalleryModalOpen = ref(false)
+const activeGalleryItem = ref<{type: string, src: string} | null>(null)
+
+const openGalleryModal = (item: {type: string, src: string}) => {
+  activeGalleryItem.value = item
+  isGalleryModalOpen.value = true
+  document.body.style.overflow = 'hidden'
+  promoVideo.value?.pause() // pause main hero video
+}
+
+const closeGalleryModal = () => {
+  isGalleryModalOpen.value = false
+  setTimeout(() => { activeGalleryItem.value = null }, 300)
+  document.body.style.overflow = ''
+  playVideo(promoVideo.value, true) // resume main hero video
+}
+
 
 const playVideo = async (el: HTMLVideoElement | null, muted = true) => {
   if (!el) return
@@ -194,8 +315,9 @@ const closeModal = () => {
 }
 
 const handleEscKey = (e: KeyboardEvent) => {
-  if (e.key === 'Escape' && isModalOpen.value) {
-    closeModal()
+  if (e.key === 'Escape') {
+    if (isModalOpen.value) closeModal()
+    if (isGalleryModalOpen.value) closeGalleryModal()
   }
 }
 
