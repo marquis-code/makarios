@@ -4,6 +4,8 @@
     
     <AfricanChildDay id="african-child-day" />
     
+    <RecentProgramme id="recent-programme" />
+    
     <AnimatedHero />
 
     <!-- Subtle Professional Announcement Bar -->
@@ -45,6 +47,7 @@
 import AnimatedHero from "../components/AnimatedHero.vue"
 import NavbarSection from "../components/NavbarSection.vue"
 import AfricanChildDay from "../components/AfricanChildDay.vue"
+import RecentProgramme from "../components/RecentProgramme.vue"
 
 useServerSeoMeta({
   title: "Makarios Initiative | Building Hope, Transforming Lives",

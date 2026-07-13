@@ -11,31 +11,31 @@
       <div class="w-full lg:w-5/12 flex flex-col justify-center animate-fade-in-up">
         <div class="inline-flex items-center gap-3 mb-6">
           <span class="px-4 py-1.5 rounded-full bg-emerald-900/40 border border-emerald-500/20 text-emerald-300 text-xs font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-            June 25, 2026
+            Successfully Concluded
           </span>
-          <span class="text-sm font-bold text-slate-400 tracking-wider uppercase">Special Initiative</span>
+          <span class="text-sm font-bold text-slate-400 tracking-wider uppercase">June 25, 2026</span>
         </div>
         
         <h2 class="text-2xl md:text-3xl font-black tracking-tight leading-[1.1] mb-6 text-white">
-          Day of the <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">African Child</span>
+          Impact of the <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">African Child Day</span>
         </h2>
         
         <div class="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md mb-8 relative overflow-hidden group hover:bg-white/10 transition-colors duration-500">
           <div class="absolute -right-6 -bottom-6 text-6xl opacity-10 font-serif pointer-events-none transition-transform duration-700 group-hover:scale-110">"</div>
           <p class="text-lg md:text-xl text-emerald-50 font-serif leading-relaxed relative z-10">
-            "Ensuring universal access to water, sanitation, and hygiene for every child in Africa."
+            "We successfully expanded access to water, sanitation, and hygiene, securing a healthier future for every child we reached."
           </p>
         </div>
 
         <p class="text-base md:text-lg text-slate-400 font-medium mb-8">
-          Watch our documentary series highlighting the critical importance of WASH (Water, Sanitation, and Hygiene) resources in African communities and our ongoing commitment to a healthier future.
+          The program has come to an incredible close. Relive the highlights from our impactful documentary series and explore the unforgettable moments that made this initiative a resounding success.
         </p>
 
         <div class="flex flex-wrap items-center gap-4">
-          <a href="#donate" class="group relative overflow-hidden rounded-xl font-bold text-base px-6 py-3 bg-emerald-500 text-slate-900 hover:bg-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all duration-300 hover:-translate-y-1">
+          <a href="#recent-programme" class="group relative overflow-hidden rounded-xl font-bold text-base px-6 py-3 bg-emerald-500 text-slate-900 hover:bg-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all duration-300 hover:-translate-y-1">
             <span class="relative z-10 flex items-center gap-2">
-              Support Our Mission
+              View Our Impact
               <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </span>
           </a>
@@ -148,8 +148,8 @@
     <!-- IDAC 2026 Programme Fliers Masonry -->
     <div class="mt-24 lg:mt-32 max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
       <div class="text-center mb-16 animate-fade-in-up" style="animation-delay: 0.2s">
-        <h3 class="text-3xl md:text-5xl font-black text-white mb-6">IDAC 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Campaign</span></h3>
-        <p class="text-lg text-slate-400 font-medium max-w-2xl mx-auto">Explore our official programme banners and visual campaigns driving the change for the International Day of the African Child.</p>
+        <h3 class="text-3xl md:text-5xl font-black text-white mb-6">IDAC 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Impact</span></h3>
+        <p class="text-lg text-slate-400 font-medium max-w-2xl mx-auto">Look back at the official programme banners and visual campaigns that successfully drove change for the International Day of the African Child.</p>
       </div>
       
       <!-- CSS Masonry Grid -->
