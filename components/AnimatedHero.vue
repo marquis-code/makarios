@@ -224,7 +224,7 @@ const rawSlides = [
     id: 1,
     badge: 'Makarios Initiative',
     title: 'Improving Lives Through Education',
-    description: 'We are dedicated to improving health outcomes and empowering communities through sustainable, transformative development programs.',
+    description: 'Theme: We strongly advocate for universal access to clean water and securing a healthier future for children. We are dedicated to improving health outcomes and empowering communities through sustainable, transformative development programs.',
     buttons: [
       { text: "Kika's Examination", action: 'openModal', primary: true },
       { text: 'Explore Impact', action: '#impact', secondary: true }
