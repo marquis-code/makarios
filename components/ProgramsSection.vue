@@ -38,11 +38,11 @@
       </div>
 
       <!-- Gallery Highlights -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide">
         <div 
           v-for="(image, index) in galleryHighlights" 
           :key="index"
-          class="relative group aspect-square rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer"
+          class="flex-none w-[75vw] sm:w-auto snap-center relative group aspect-square rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer"
           @click="openImageModal(image)"
         >
           <img 
@@ -57,11 +57,11 @@
       </div>
 
       <!-- Secondary Videos -->
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="mt-12 flex md:grid md:grid-cols-2 gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide">
         <div 
           v-for="(video, index) in secondaryVideos" 
           :key="index"
-          class="flex flex-col sm:flex-row gap-6 p-6 rounded-2xl hover:bg-slate-50 transition-colors duration-300 cursor-pointer group"
+          class="flex-none w-[85vw] md:w-auto snap-center flex flex-col sm:flex-row gap-6 p-6 rounded-2xl hover:bg-slate-50 transition-colors duration-300 cursor-pointer group"
           @click="openVideoModal(video)"
         >
           <div class="relative w-full sm:w-48 aspect-video rounded-xl overflow-hidden shadow-sm bg-gray-100 flex-shrink-0">

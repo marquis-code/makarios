@@ -1,39 +1,32 @@
 <template>
-  <section class="relative bg-slate-900 pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden text-white font-sans">
+  <section class="relative bg-white pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden text-slate-900 font-sans">
     
     <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute -top-40 -right-40 w-96 h-96 bg-emerald-900/30 rounded-full blur-[120px]"></div>
-      <div class="absolute bottom-[-20%] -left-40 w-[40vw] h-[40vw] bg-emerald-800/20 rounded-full blur-[150px]"></div>
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-red-50/50 rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-[-20%] -left-40 w-[40vw] h-[40vw] bg-red-50/50 rounded-full blur-[150px]"></div>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
       
       <div class="w-full lg:w-5/12 flex flex-col justify-center animate-fade-in-up">
         <div class="inline-flex items-center gap-3 mb-6">
-          <span class="px-4 py-1.5 rounded-full bg-emerald-900/40 border border-emerald-500/20 text-emerald-300 text-xs font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+          <span class="px-4 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold tracking-widest uppercase shadow-sm">
             Successfully Concluded
           </span>
-          <span class="text-sm font-bold text-slate-400 tracking-wider uppercase">June 25, 2026</span>
+          <span class="text-sm font-bold text-slate-500 tracking-wider uppercase">June 25, 2026</span>
         </div>
         
-        <h2 class="text-2xl md:text-3xl font-black tracking-tight leading-[1.1] mb-6 text-white">
+        <h2 class="text-2xl md:text-3xl font-black tracking-tight leading-[1.1] mb-6 text-slate-900">
           Impact of the <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">African Child Day</span>
+          <span class="text-primary">African Child Day</span>
         </h2>
-        
-        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md mb-8 relative overflow-hidden group hover:bg-white/10 transition-colors duration-500">
-          <div class="absolute -right-6 -bottom-6 text-6xl opacity-10 font-serif pointer-events-none transition-transform duration-700 group-hover:scale-110">"</div>
-          <p class="text-lg md:text-xl text-emerald-50 font-serif leading-relaxed relative z-10">
-            "We successfully expanded access to water, sanitation, and hygiene, securing a healthier future for every child we reached."
-          </p>
-        </div>
 
-        <p class="text-base md:text-lg text-slate-400 font-medium mb-8">
+        <p class="text-base md:text-lg text-slate-600 font-medium mb-8">
           The program has come to an incredible close. Relive the highlights from our impactful documentary series and explore the unforgettable moments that made this initiative a resounding success.
         </p>
 
         <div class="flex flex-wrap items-center gap-4">
-          <a href="#recent-programme" class="group relative overflow-hidden rounded-xl font-bold text-base px-6 py-3 bg-emerald-500 text-slate-900 hover:bg-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all duration-300 hover:-translate-y-1">
+          <a href="#recent-programme" class="group relative overflow-hidden rounded-xl font-bold text-base px-6 py-3 bg-primary text-white hover:bg-primary-dark hover:shadow-[0_0_30px_rgba(230,43,30,0.3)] transition-all duration-300 hover:-translate-y-1">
             <span class="relative z-10 flex items-center gap-2">
               View Our Impact
               <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
@@ -45,9 +38,9 @@
       <div class="w-full lg:w-7/12 relative">
         <div class="relative">
           
-          <div class="absolute -inset-4 bg-gradient-to-r from-emerald-900/0 via-emerald-900/10 to-emerald-900/0 rounded-[3rem] blur-xl -z-10"></div>
+          <div class="absolute -inset-4 bg-gradient-to-r from-red-50/0 via-red-50/50 to-red-50/0 rounded-[3rem] blur-xl -z-10"></div>
 
-          <div class="group relative rounded-3xl overflow-hidden bg-slate-800 shadow-2xl border border-white/10 transform transition-transform duration-500 hover:-translate-y-2">
+          <div class="group relative rounded-3xl overflow-hidden bg-white shadow-xl border border-slate-100 transform transition-transform duration-500 hover:-translate-y-2">
             <div class="aspect-video lg:aspect-[4/3] relative">
               <video 
                 ref="promoVideo"
@@ -124,22 +117,52 @@
               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
 
-            <template v-if="activeGalleryItem.type === 'video'">
-              <video
-                :src="activeGalleryItem.src"
-                class="max-w-full max-h-full w-full md:w-auto rounded-xl shadow-2xl"
-                controls
-                autoplay
-                playsinline
-              ></video>
-            </template>
-            <template v-else>
-              <img 
-                :src="activeGalleryItem.src" 
-                class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain" 
-                alt="Enlarged Asset"
-              />
-            </template>
+            <!-- Navigation Arrows -->
+            <button 
+              @click.stop="prevGalleryItem"
+              class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 transition-all duration-300 text-white"
+              aria-label="Previous"
+            >
+              <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button 
+              @click.stop="nextGalleryItem"
+              class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20 transition-all duration-300 text-white"
+              aria-label="Next"
+            >
+              <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <div class="relative max-w-5xl w-full h-full flex flex-col items-center justify-center p-4">
+              <template v-if="activeGalleryItem.type === 'video'">
+                <video
+                  ref="modalGalleryVideoRef"
+                  :src="activeGalleryItem.src"
+                  class="max-w-full max-h-[90vh] rounded-xl shadow-2xl"
+                  controls
+                  autoplay
+                  playsinline
+                  @loadedmetadata="restoreVideoTime"
+                ></video>
+              </template>
+              <template v-else>
+                <img 
+                  :src="activeGalleryItem.src" 
+                  class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain select-none" 
+                  alt="Enlarged Asset"
+                />
+              </template>
+              
+              <!-- Counter -->
+              <div v-if="activeGalleryIndex !== null" class="absolute bottom-4 left-0 right-0 text-center text-white/70 text-sm font-semibold tracking-widest bg-black/50 backdrop-blur-md py-2 px-6 rounded-full mx-auto w-max">
+                {{ activeGalleryIndex + 1 }} / {{ galleryItems.length }}
+              </div>
+            </div>
           </div>
         </Transition>
       </Teleport>
@@ -148,17 +171,17 @@
     <!-- IDAC 2026 Programme Fliers Masonry -->
     <div class="mt-24 lg:mt-32 max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
       <div class="text-center mb-16 animate-fade-in-up" style="animation-delay: 0.2s">
-        <h3 class="text-3xl md:text-5xl font-black text-white mb-6">IDAC 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-200">Impact</span></h3>
-        <p class="text-lg text-slate-400 font-medium max-w-2xl mx-auto">Look back at the official programme banners and visual campaigns that successfully drove change for the International Day of the African Child.</p>
+        <h3 class="text-3xl md:text-5xl font-black text-slate-900 mb-6">IDAC 2026 <span class="text-primary">Impact</span></h3>
+        <p class="text-lg text-slate-600 font-medium max-w-2xl mx-auto">Look back at the official programme banners and visual campaigns that successfully drove change for the International Day of the African Child.</p>
       </div>
       
-      <!-- CSS Masonry Grid -->
-      <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+      <!-- CSS Masonry Grid / Mobile Carousel -->
+      <div class="flex sm:block sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-x-6 sm:space-x-0 overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 sm:mx-0 sm:px-0 sm:overflow-visible scrollbar-hide">
         
         <div 
           v-for="(item, index) in galleryItems" 
           :key="index"
-          class="break-inside-avoid relative group rounded-[2rem] overflow-hidden shadow-xl border border-white/5 bg-slate-800/50 hover:border-emerald-500/30 transition-all duration-300 transform hover:-translate-y-1"
+          class="flex-none w-[85vw] sm:w-auto snap-center sm:mb-6 break-inside-avoid relative group rounded-[2rem] overflow-hidden shadow-md border border-slate-200 bg-white hover:border-emerald-500/30 transition-all duration-300 transform hover:-translate-y-1"
         >
           <template v-if="item.type === 'video'">
             <video 
@@ -169,7 +192,7 @@
             ></video>
             <!-- Enlarge Button for Video -->
             <button 
-              @click="openGalleryModal(item)"
+              @click="openGalleryModal(item, index)"
               class="absolute top-4 right-4 w-10 h-10 bg-black/70 hover:bg-black/90 backdrop-blur-md rounded-full flex items-center justify-center transition-all z-10 shadow-lg border border-white/20"
               title="Enlarge Video"
             >
@@ -178,9 +201,9 @@
           </template>
           
           <template v-else>
-            <div @click="openGalleryModal(item)" class="cursor-pointer">
+            <div @click="openGalleryModal(item, index)" class="cursor-pointer">
               <img :src="item.src" class="w-full h-auto rounded-[2rem] block" alt="IDAC Campaign Asset" />
-              <div class="absolute inset-0 bg-emerald-900/40 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div class="absolute inset-0 bg-red-900/40 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               <!-- Enlarge icon -->
               <div class="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                 <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
@@ -234,20 +257,82 @@ const galleryItems = [
 
 const isGalleryModalOpen = ref(false)
 const activeGalleryItem = ref<{type: string, src: string} | null>(null)
+const activeGalleryIndex = ref<number | null>(null)
+const modalGalleryVideoRef = ref<HTMLVideoElement | null>(null)
+const savedVideoTimes = ref<Record<string, number>>({})
 
-const openGalleryModal = (item: {type: string, src: string}) => {
+const saveVideoTime = () => {
+  if (activeGalleryItem.value?.type === 'video' && modalGalleryVideoRef.value) {
+    savedVideoTimes.value[activeGalleryItem.value.src] = modalGalleryVideoRef.value.currentTime
+    modalGalleryVideoRef.value.pause()
+  }
+}
+
+const restoreVideoTime = (e: Event) => {
+  const video = e.target as HTMLVideoElement
+  if (activeGalleryItem.value && savedVideoTimes.value[activeGalleryItem.value.src]) {
+    video.currentTime = savedVideoTimes.value[activeGalleryItem.value.src]
+  }
+}
+
+const openGalleryModal = (item: {type: string, src: string}, index: number) => {
   activeGalleryItem.value = item
+  activeGalleryIndex.value = index
   isGalleryModalOpen.value = true
   document.body.style.overflow = 'hidden'
   promoVideo.value?.pause() // pause main hero video
 }
 
 const closeGalleryModal = () => {
+  saveVideoTime()
   isGalleryModalOpen.value = false
-  setTimeout(() => { activeGalleryItem.value = null }, 300)
+  setTimeout(() => { 
+    activeGalleryItem.value = null
+    activeGalleryIndex.value = null 
+  }, 300)
   document.body.style.overflow = ''
   playVideo(promoVideo.value, true) // resume main hero video
 }
+
+const nextGalleryItem = (e: Event) => {
+  e?.stopPropagation();
+  saveVideoTime()
+  if (activeGalleryIndex.value !== null) {
+    activeGalleryIndex.value = (activeGalleryIndex.value + 1) % galleryItems.length;
+    activeGalleryItem.value = galleryItems[activeGalleryIndex.value];
+  }
+}
+
+const prevGalleryItem = (e: Event) => {
+  e?.stopPropagation();
+  saveVideoTime()
+  if (activeGalleryIndex.value !== null) {
+    activeGalleryIndex.value = (activeGalleryIndex.value - 1 + galleryItems.length) % galleryItems.length;
+    activeGalleryItem.value = galleryItems[activeGalleryIndex.value];
+  }
+}
+
+const handleKeydown = (e: KeyboardEvent) => {
+  if (isGalleryModalOpen.value) {
+    if (e.key === 'Escape') {
+      closeGalleryModal()
+    } else if (e.key === 'ArrowRight') {
+      nextGalleryItem(e as any)
+    } else if (e.key === 'ArrowLeft') {
+      prevGalleryItem(e as any)
+    }
+  } else if (isModalOpen.value && e.key === 'Escape') {
+    closeModal()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
 
 
 const playVideo = async (el: HTMLVideoElement | null, muted = true) => {
@@ -336,6 +421,16 @@ onBeforeUnmount(() => {
   document.body.style.overflow = ''
 })
 </script>
+
+<style scoped>
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
 
 <style scoped>
 .animate-fade-in-up {

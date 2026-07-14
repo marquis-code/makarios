@@ -12,14 +12,14 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#1d4e89', // Deep Blue from logo
-          light: '#28AAE1', // Cyan from logo
-          dark: '#033958',
+          DEFAULT: '#E62B1E', // TEDx Red
+          light: '#FF4C40',
+          dark: '#B0180F',
         },
         secondary: {
-          DEFAULT: '#E4222E', // Red from logo
-          light: '#FC8181',
-          dark: '#9B2C2C',
+          DEFAULT: '#000000', // Black
+          light: '#1A1A1A',
+          dark: '#000000',
         },
         accent: {
           DEFAULT: '#2D3748',
@@ -27,11 +27,10 @@ export default {
           dark: '#1A202C',
         },
         brand: {
-          blue: '#1d4e89',
-          red: '#E4222E',
-          cyan: '#28AAE1',
-          dark: '#033958',
-          accent: '#00D1FF',
+          red: '#E62B1E',
+          black: '#000000',
+          dark: '#111111',
+          gray: '#333333',
         }
       },
       fontFamily: {

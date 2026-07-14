@@ -1,7 +1,7 @@
 <template>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide">
       <div v-for="(image, index) in images" :key="index" 
-        class="relative overflow-hidden rounded-lg cursor-pointer group"
+        class="flex-none w-[85vw] sm:w-auto snap-center relative overflow-hidden rounded-lg cursor-pointer group"
         @click="openLightbox(index)"
         v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: index * 100 } }">
         <img :src="image.src" :alt="image.alt" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -92,4 +92,14 @@
     window.removeEventListener('keydown', () => {});
   });
   </script>
+  
+<style scoped>
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
   

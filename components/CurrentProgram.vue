@@ -14,9 +14,10 @@
         </div>
   
         <!-- Main Content Grid -->
-        <div class="grid lg:grid-cols-2 gap-8 mb-8">
-          <!-- Event Image Section -->
-          <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="flex lg:grid lg:grid-cols-2 gap-8 mb-8 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide">
+        
+        <!-- Program Image -->
+        <div class="flex-none w-[90vw] lg:w-auto snap-center relative rounded-3xl overflow-hidden shadow-2xl group min-h-[400px]">
             <div class="p-6 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
               <h2 class="text-2xl font-bold mb-2">📸 Event Highlights</h2>
               <p class="opacity-90">Behind the scenes moments</p>
@@ -35,7 +36,7 @@
           </div>
   
           <!-- Video Section -->
-          <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div class="flex-none w-[90vw] lg:w-auto snap-center bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col justify-center">
             <div class="p-6 bg-gradient-to-r from-orange-500 to-red-500 text-white">
               <h2 class="text-2xl font-bold mb-2">🎥 Live Preview</h2>
               <p class="opacity-90">Watch the Sunday Show promo</p>

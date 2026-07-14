@@ -1,17 +1,13 @@
 <template>
-  <main class="bg-white">
+  <main class="bg-black text-white min-h-screen">
     <NavbarSection />
-    
-    <AfricanChildDay id="african-child-day" />
-    
-    <RecentProgramme id="recent-programme" />
     
     <AnimatedHero />
 
     <!-- Subtle Professional Announcement Bar -->
-    <div class="relative bg-emerald-900 overflow-hidden py-4 shadow-sm border-y border-emerald-800/20">
-      <div class="absolute inset-0 bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 opacity-50"></div>
-      <div class="relative whitespace-nowrap animate-marquee-slant text-sm md:text-base font-medium text-emerald-50/90 flex items-center will-change-transform">
+    <div class="relative bg-black overflow-hidden py-4 shadow-sm border-y border-white/10">
+      <div class="absolute inset-0 bg-gradient-to-r from-black via-zinc-900 to-black opacity-50"></div>
+      <div class="relative whitespace-nowrap animate-marquee-slant text-sm md:text-base font-medium text-white/90 flex items-center will-change-transform">
         <div class="inline-flex items-center gap-4 mr-12 lg:mr-24 text-shadow-sm">
           <span class="text-xl">✨</span>
           <span class="tracking-wide uppercase">Latest: "Kika's Examination" - Empowering children with moral resilience.</span>
@@ -26,6 +22,10 @@
         </div>
       </div>
     </div>
+
+    <AfricanChildDay id="african-child-day" />
+    
+    <RecentProgramme id="recent-programme" />
 
     <MakariosIntro id="about" />
     

@@ -1,6 +1,6 @@
 <template>
   <header 
-    class="fixed inset-x-0 top-0 z-50 bg-white transition-all duration-500" 
+    class="fixed inset-x-0 top-0 z-50 bg-black transition-all duration-500" 
     :class="{ 'shadow-lg': scrolled, 'transform -translate-y-full': !isNavVisible }"
   >
     <nav class="container mx-auto flex items-center justify-between p-4 lg:px-8" aria-label="Global">
@@ -14,9 +14,9 @@
               :class="{ 'h-10 w-10 lg:h-14 lg:w-14': scrolled }"
               alt="Logo"
             />
-            <div class="absolute inset-0 bg-olg-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+            <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
           </div>
-          <div class="logo-pulse absolute inset-0 rounded-full border-2 border-olg-green opacity-0 group-hover:opacity-100"></div>
+          <div class="logo-pulse absolute inset-0 rounded-full border-2 border-primary opacity-0 group-hover:opacity-100"></div>
         </NuxtLink>
       </div>
 
@@ -27,11 +27,11 @@
           <NuxtLink
             to="/"
             @click="handleHomeClick"
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === '' }"
+            class="nav-link text-base font-semibold text-slate-300 hover:text-primary relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-primary': route.path === '/' && activeSection === '' }"
           >
             <span class="nav-text relative block">Home</span>
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300" 
                   :class="(route.path === '/' && activeSection === '') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </NuxtLink>
 
@@ -39,11 +39,11 @@
           <a
             href="#about"
             @click="handleHashClick($event, 'about')"
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'about' }"
+            class="nav-link text-base font-semibold text-slate-300 hover:text-primary relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-primary': route.path === '/' && activeSection === 'about' }"
           >
             <span class="nav-text relative block">About</span>
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300" 
                   :class="(route.path === '/' && activeSection === 'about') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </a>
 
@@ -53,11 +53,11 @@
           <a
             href="#donate"
             @click="handleHashClick($event, 'donate')"
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'donate' }"
+            class="nav-link text-base font-semibold text-slate-300 hover:text-primary relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-primary': route.path === '/' && activeSection === 'donate' }"
           >
             <span class="nav-text relative block">Donate</span>
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300" 
                   :class="(route.path === '/' && activeSection === 'donate') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </a>
 
@@ -65,11 +65,11 @@
           <a
             href="#programs"
             @click="handleHashClick($event, 'programs')"
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'programs' }"
+            class="nav-link text-base font-semibold text-slate-300 hover:text-primary relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-primary': route.path === '/' && activeSection === 'programs' }"
           >
             <span class="nav-text relative block">Our Impact</span>
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300" 
                   :class="(route.path === '/' && activeSection === 'programs') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </a>
 
@@ -77,32 +77,32 @@
           <a
             href="#impact"
             @click="handleHashClick($event, 'impact')"
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path === '/' && activeSection === 'impact' }"
+            class="nav-link text-base font-semibold text-slate-300 hover:text-primary relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-primary': route.path === '/' && activeSection === 'impact' }"
           >
             <span class="nav-text relative block">Stories</span>
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300" 
                   :class="(route.path === '/' && activeSection === 'impact') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </a>
 
           <NuxtLink
             to="/safe-passage"
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path.startsWith('/safe-passage') }"
+            class="nav-link text-base font-semibold text-slate-300 hover:text-primary relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-primary': route.path.startsWith('/safe-passage') }"
           >
             <span class="nav-text relative block">Safe Passage Initiative</span>
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300" 
                   :class="route.path.startsWith('/safe-passage') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </NuxtLink>
 
           <!-- News Link -->
           <NuxtLink
             to="/news"
-            class="nav-link text-base font-semibold text-olg-blue hover:text-olg-green relative overflow-hidden group py-2 cursor-pointer"
-            :class="{ 'active-link text-olg-green': route.path.startsWith('/news') }"
+            class="nav-link text-base font-semibold text-slate-300 hover:text-primary relative overflow-hidden group py-2 cursor-pointer"
+            :class="{ 'active-link text-primary': route.path.startsWith('/news') }"
           >
             <span class="nav-text relative block">News</span>
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-olg-green transform transition-transform duration-300" 
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform transition-transform duration-300" 
                   :class="route.path.startsWith('/news') ? 'translate-y-0' : 'translate-y-1 group-hover:translate-y-0'"></span>
           </NuxtLink>
         </div>
@@ -113,12 +113,12 @@
         <a 
           href="#kika" 
           @click="handleHashClick($event, 'kika')"
-          class="cta-button text-base font-semibold text-white bg-olg-blue px-6 py-3 rounded-md hover:bg-olg-green transition-all duration-300 flex items-center gap-2 relative overflow-hidden group cursor-pointer"
-          :class="{ 'bg-olg-green': activeSection === 'kika' }"
+          class="cta-button text-base font-semibold text-white bg-olg-blue px-6 py-3 rounded-md hover:bg-primary transition-all duration-300 flex items-center gap-2 relative overflow-hidden group cursor-pointer"
+          :class="{ 'bg-primary': activeSection === 'kika' }"
         >
           <span class="relative z-10">Kika's Examination</span>
           <span class="arrow-icon inline-block transition-all duration-300 group-hover:translate-x-1 relative z-10" aria-hidden="true">&rarr;</span>
-          <span class="absolute inset-0 bg-olg-green transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+          <span class="absolute inset-0 bg-primary transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
         </a>
       </div>
       
@@ -126,7 +126,7 @@
       <div class="lg:hidden">
         <button 
           type="button" 
-          class="hamburger-button inline-flex items-center justify-center rounded-md p-2.5 text-olg-blue hover:bg-olg-blue/10 transition-colors duration-200" 
+          class="hamburger-button inline-flex items-center justify-center rounded-md p-2.5 text-slate-300 hover:bg-black/10 transition-colors duration-200" 
           @click="toggleMobileMenu"
           aria-label="Toggle menu"
         >
@@ -155,125 +155,129 @@
       </div>
     </nav>
     
-    <!-- Mobile menu -->
-    <div 
-      class="lg:hidden overflow-hidden transition-all duration-500 ease-in-out"
-      :class="mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'"
-    >
-      <div class="bg-white px-6 py-4 shadow-lg">
-        <div class="space-y-1">
-          <!-- Mobile Home -->
-          <NuxtLink
-            to="/"
-            @click="handleMobileHomeClick"
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
-            :class="[
-              (route.path === '/' && activeSection === '') 
-                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
-                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
-            ]"
-          >
-            Home
-          </NuxtLink>
-
-          <!-- Mobile About -->
-          <a
-            href="#about"
-            @click="handleMobileHashClick($event, 'about')"
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
-            :class="[
-              (route.path === '/' && activeSection === 'about') 
-                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
-                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
-            ]"
-          >
-            About
-          </a>
-
-          <!-- Mobile Safe Passage -->
-          <NuxtLink
-            to="/safe-passage"
+    <!-- Premium Mobile Side Drawer -->
+    <Teleport to="body">
+      <Transition name="fade">
+        <div v-if="mobileMenuOpen" class="fixed inset-0 z-[100] lg:hidden flex justify-end">
+          <!-- Glassmorphism Backdrop -->
+          <div 
+            class="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity"
             @click="closeMobileMenu"
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
-            :class="[
-              route.path.startsWith('/safe-passage') 
-                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
-                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
-            ]"
-          >
-            Safe Passage Initiative
-          </NuxtLink>
-
-          <!-- Mobile Donate -->
-          <a
-            href="#donate"
-            @click="handleMobileHashClick($event, 'donate')"
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
-            :class="[
-              (route.path === '/' && activeSection === 'donate') 
-                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
-                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
-            ]"
-          >
-            Donate
-          </a>
-
-          <!-- Mobile Programs -->
-          <a
-            href="#programs"
-            @click="handleMobileHashClick($event, 'programs')"
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
-            :class="[
-              (route.path === '/' && activeSection === 'programs') 
-                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
-                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
-            ]"
-          >
-            Our Impact
-          </a>
-
-          <!-- Mobile Impact Stories -->
-          <a
-            href="#impact"
-            @click="handleMobileHashClick($event, 'impact')"
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
-            :class="[
-              (route.path === '/' && activeSection === 'impact') 
-                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
-                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
-            ]"
-          >
-            Stories
-          </a>
-
-          <!-- Mobile News -->
-          <NuxtLink
-            to="/news"
-            @click="closeMobileMenu"
-            class="mobile-nav-item block rounded-lg px-3 py-2 text-base font-semibold transition-all duration-300 cursor-pointer"
-            :class="[
-              route.path.startsWith('/news') 
-                ? 'bg-olg-blue/10 text-olg-green border-l-4 border-olg-green pl-4' 
-                : 'text-olg-blue hover:bg-olg-blue/10 hover:pl-4'
-            ]"
-          >
-            News
-          </NuxtLink>
+          ></div>
           
-          <div class="pt-4 mt-4 border-t border-gray-200">
-            <a 
-              href="#kika" 
-              @click="handleMobileHashClick($event, 'kika')"
-              class="mobile-cta flex items-center justify-between rounded-lg px-3 py-3 text-base font-semibold transition-all duration-300 cursor-pointer text-white bg-olg-blue hover:bg-olg-green"
-              :class="{ 'bg-olg-green': activeSection === 'kika' }"
-            >
-              Kika's Examination
-              <span aria-hidden="true" class="text-white transition-transform duration-300">&rarr;</span>
-            </a>
+          <!-- Drawer Content -->
+          <div 
+            class="relative w-[85%] max-w-sm h-full bg-zinc-950 border-l border-white/5 shadow-2xl flex flex-col transform transition-transform duration-500 ease-out"
+          >
+            <!-- Drawer Header -->
+            <div class="flex items-center justify-between p-6 border-b border-white/5">
+              <div class="logo-wrapper overflow-hidden rounded-full relative">
+                <img src="@/assets/img/logo.jpeg" class="h-10 w-10 object-cover rounded-full" alt="Logo" />
+                <div class="absolute inset-0 rounded-full border border-primary/50"></div>
+              </div>
+              <button 
+                @click="closeMobileMenu"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors border border-white/10"
+              >
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            <!-- Drawer Links -->
+            <div class="flex flex-col flex-1 px-8 py-10 space-y-8 overflow-y-auto">
+              <!-- Home -->
+              <NuxtLink
+                to="/"
+                @click="handleMobileHomeClick"
+                class="group flex items-center gap-4 text-lg font-semibold transition-colors duration-300"
+                :class="(route.path === '/' && activeSection === '') ? 'text-primary' : 'text-slate-300 hover:text-white'"
+              >
+                <span class="w-8 h-[2px] transition-all duration-300" :class="(route.path === '/' && activeSection === '') ? 'bg-primary' : 'bg-transparent group-hover:bg-white/30'"></span>
+                Home
+              </NuxtLink>
+
+              <!-- About -->
+              <a
+                href="#about"
+                @click="handleMobileHashClick($event, 'about')"
+                class="group flex items-center gap-4 text-lg font-semibold transition-colors duration-300"
+                :class="(route.path === '/' && activeSection === 'about') ? 'text-primary' : 'text-slate-300 hover:text-white'"
+              >
+                <span class="w-8 h-[2px] transition-all duration-300" :class="(route.path === '/' && activeSection === 'about') ? 'bg-primary' : 'bg-transparent group-hover:bg-white/30'"></span>
+                About
+              </a>
+
+              <!-- Safe Passage -->
+              <NuxtLink
+                to="/safe-passage"
+                @click="closeMobileMenu"
+                class="group flex items-center gap-4 text-lg font-semibold transition-colors duration-300"
+                :class="route.path.startsWith('/safe-passage') ? 'text-primary' : 'text-slate-300 hover:text-white'"
+              >
+                <span class="w-8 h-[2px] transition-all duration-300" :class="route.path.startsWith('/safe-passage') ? 'bg-primary' : 'bg-transparent group-hover:bg-white/30'"></span>
+                Safe Passage
+              </NuxtLink>
+
+              <!-- Donate -->
+              <a
+                href="#donate"
+                @click="handleMobileHashClick($event, 'donate')"
+                class="group flex items-center gap-4 text-lg font-semibold transition-colors duration-300"
+                :class="(route.path === '/' && activeSection === 'donate') ? 'text-primary' : 'text-slate-300 hover:text-white'"
+              >
+                <span class="w-8 h-[2px] transition-all duration-300" :class="(route.path === '/' && activeSection === 'donate') ? 'bg-primary' : 'bg-transparent group-hover:bg-white/30'"></span>
+                Donate
+              </a>
+
+              <!-- Our Impact -->
+              <a
+                href="#programs"
+                @click="handleMobileHashClick($event, 'programs')"
+                class="group flex items-center gap-4 text-lg font-semibold transition-colors duration-300"
+                :class="(route.path === '/' && activeSection === 'programs') ? 'text-primary' : 'text-slate-300 hover:text-white'"
+              >
+                <span class="w-8 h-[2px] transition-all duration-300" :class="(route.path === '/' && activeSection === 'programs') ? 'bg-primary' : 'bg-transparent group-hover:bg-white/30'"></span>
+                Impact
+              </a>
+
+              <!-- Stories -->
+              <a
+                href="#impact"
+                @click="handleMobileHashClick($event, 'impact')"
+                class="group flex items-center gap-4 text-lg font-semibold transition-colors duration-300"
+                :class="(route.path === '/' && activeSection === 'impact') ? 'text-primary' : 'text-slate-300 hover:text-white'"
+              >
+                <span class="w-8 h-[2px] transition-all duration-300" :class="(route.path === '/' && activeSection === 'impact') ? 'bg-primary' : 'bg-transparent group-hover:bg-white/30'"></span>
+                Stories
+              </a>
+
+              <!-- News -->
+              <NuxtLink
+                to="/news"
+                @click="closeMobileMenu"
+                class="group flex items-center gap-4 text-lg font-semibold transition-colors duration-300"
+                :class="route.path.startsWith('/news') ? 'text-primary' : 'text-slate-300 hover:text-white'"
+              >
+                <span class="w-8 h-[2px] transition-all duration-300" :class="route.path.startsWith('/news') ? 'bg-primary' : 'bg-transparent group-hover:bg-white/30'"></span>
+                News
+              </NuxtLink>
+            </div>
+
+            <!-- Call to action button at the bottom of the drawer -->
+            <div class="p-8 border-t border-white/5 pb-12">
+              <a 
+                href="#kika" 
+                @click="handleMobileHashClick($event, 'kika')"
+                class="flex items-center justify-center w-full rounded-xl px-6 py-4 text-base font-semibold transition-all duration-300 hover:scale-105"
+                :class="activeSection === 'kika' ? 'bg-primary-dark text-white' : 'bg-primary text-white shadow-[0_0_20px_rgba(230,43,30,0.3)]'"
+              >
+                Kika's Exam <span class="ml-2">&rarr;</span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Transition>
+    </Teleport>
   </header>
 </template>
 
@@ -504,20 +508,21 @@ watch(() => route.hash, (newHash) => {
 
 <style>
 :root {
-  --olg-blue: #064e3b; /* emerald-900 */
-  --olg-green: #047857; /* emerald-700 */
+  --primary: #E62B1E;
+  --primary-dark: #B0180F;
+  --secondary: #000000; /* emerald-900 */
 }
 
-.text-olg-blue {
-  color: var(--olg-blue);
+.text-slate-300 {
+  color: #CBD5E1; /* Tailwind slate-300 hex to fix invisible text on dark background */
 }
 
-.text-olg-green {
-  color: var(--olg-green);
+.text-primary {
+  color: var(--primary);
 }
 
 .bg-olg-blue {
-  background-color: var(--olg-blue);
+  background-color: var(--secondary);
 }
 
 .bg-olg-blue\/10 {
@@ -528,25 +533,33 @@ watch(() => route.hash, (newHash) => {
   background-color: rgba(58, 117, 164, 0.1);
 }
 
-.bg-olg-green {
-  background-color: var(--olg-green);
+.btn-olg-green {
+  background-color: var(--primary);
+  color: white;
+}
+.btn-olg-green:hover {
+  background-color: var(--primary-dark);
 }
 
-.hover\:bg-olg-green:hover {
-  background-color: var(--olg-green);
+.bg-primary {
+  background-color: var(--primary);
 }
 
-.hover\:text-olg-green:hover {
-  color: var(--olg-green);
+.hover\:bg-primary:hover {
+  background-color: var(--primary-dark);
 }
 
-.border-olg-green {
-  border-color: var(--olg-green);
+.hover\:text-primary:hover {
+  color: var(--primary);
+}
+
+.border-primary {
+  border-color: var(--primary);
 }
 
 /* Active link styles */
-.active-link {
-  color: var(--olg-green);
+.nav-link.active-link {
+  color: var(--primary);
 }
 
 .active-link .nav-text {
@@ -630,5 +643,24 @@ watch(() => route.hash, (newHash) => {
 
 header {
   transition: transform 0.3s ease-in-out;
+}
+/* Mobile Side Drawer Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-active .transform,
+.fade-leave-active .transform {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-enter-from .transform {
+  transform: translateX(100%);
+}
+.fade-leave-to .transform {
+  transform: translateX(100%);
 }
 </style>

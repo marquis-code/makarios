@@ -74,8 +74,8 @@
           <h3 class="text-xl font-bold text-gray-900">Distribution Gallery</h3>
           <p class="text-gray-500 mt-2">Reaching schools and communities across the region.</p>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          <div v-for="(img, index) in distributionImages" :key="index" class="aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+        <div class="flex sm:grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide">
+          <div v-for="(img, index) in distributionImages" :key="index" class="flex-none w-[70vw] sm:w-auto snap-center aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
             <img :src="img" class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
@@ -140,6 +140,16 @@ const distributionImages = [kika1, kika2, kika3, kika4, kika5, kika6, kika7, kik
 
 const openVideo = (video: any) => selectedVideo.value = video
 </script>
+
+<style scoped>
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
 
 <style scoped>
 .tracking-widest {
