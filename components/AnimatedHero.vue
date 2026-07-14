@@ -34,11 +34,12 @@
               {{ currentSlide.description }}
             </p>
 
-            <div class="flex flex-wrap gap-4 animate-fade-in-up delay-400">
+            <div class="flex flex-wrap gap-4 animate-fade-in-up delay-400 relative z-50">
               <button 
                 v-for="(btn, i) in currentSlide.buttons" :key="i"
-                @click="handleButtonClick(btn)"
-                class="group relative overflow-hidden rounded-full font-bold text-sm px-6 py-3 transition-all duration-300"
+                @click.prevent="handleButtonClick(btn)"
+                style="pointer-events: auto;"
+                class="group relative overflow-hidden rounded-full font-bold text-sm px-6 py-3 transition-all duration-300 cursor-pointer z-50"
                 :class="btn.primary ? 'bg-[#E62B1E] text-white hover:shadow-lg hover:shadow-[#E62B1E]/40 hover:-translate-y-0.5' : 'bg-transparent text-white border border-white/30 hover:border-white/60 hover:-translate-y-0.5'"
               >
                 <span class="relative z-10 flex items-center gap-2">
@@ -125,7 +126,7 @@
       <Transition name="modal" appear>
         <div 
           v-if="showModal" 
-          class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4"
+          class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[9999] p-4"
           @click.self="closeModal"
         >
           <div class="bg-black rounded-[2.5rem] p-10 max-w-lg w-full shadow-2xl relative overflow-hidden border border-white/20">
@@ -278,7 +279,12 @@ const handleButtonClick = (btn: Button) => {
   if (btn.action === 'openModal') {
     showModal.value = true
   } else if (btn.action?.startsWith('#')) {
-    document.querySelector(btn.action)?.scrollIntoView({ behavior: 'smooth' })
+    const target = document.querySelector(btn.action)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      window.location.hash = btn.action
+    }
   }
 }
 
