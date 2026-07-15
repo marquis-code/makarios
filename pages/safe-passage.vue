@@ -1,6 +1,6 @@
 <template>
   <NavbarSection />
-  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-amber-900">
+  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-amber-900">
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center px-4">
       <!-- Main Hero Content -->
@@ -10,12 +10,12 @@
           :class="heroVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
         >
           <!-- Award Badge -->
-          <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-red-600 to-amber-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-full mb-8 shadow-xl">
+          <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-600 to-amber-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-full mb-8 shadow-xl">
             <div class="w-4 h-4 md:w-6 md:h-6 bg-amber-400 rounded-full"></div>
             <span class="font-bold text-sm md:text-lg">D-PRIZE GLOBAL AWARD WINNER 2018</span>
           </div>
 
-          <h1 class="text-4xl md:text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-400 to-red-500 mb-6 leading-tight">
+          <h1 class="text-4xl md:text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-amber-400 to-emerald-500 mb-6 leading-tight">
             SAFE PASSAGE INITIATIVE
           </h1>
           
@@ -26,7 +26,7 @@
           <p class="text-base md:text-lg lg:text-xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed">
             The world's <span class="text-amber-400 font-bold">#1 awarded operational model</span> 
             for combating maternal mortality - achieving 
-            <span class="text-red-400 font-bold">near-zero maternal deaths</span> 
+            <span class="text-emerald-400 font-bold">near-zero maternal deaths</span> 
             in our 3-month pilot program.
           </p>
 
@@ -34,7 +34,7 @@
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button 
               @click="scrollToSection('impact')"
-              class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-8 py-4 rounded-full text-lg font-bold transition-colors duration-300 shadow-xl w-full sm:w-auto"
+              class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white px-8 py-4 rounded-full text-lg font-bold transition-colors duration-300 shadow-xl w-full sm:w-auto"
             >
               SEE OUR IMPACT
             </button>
@@ -51,7 +51,7 @@
     </section>
 
     <!-- Award Recognition Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-r from-red-800 via-red-700 to-amber-700">
+    <section class="py-16 md:py-24 bg-gradient-to-r from-emerald-800 via-emerald-700 to-amber-700">
       <div class="container mx-auto px-4 md:px-6">
         <div class="text-center mb-16">
           <div class="text-6xl md:text-8xl mb-6">🏆</div>
@@ -68,7 +68,7 @@
               <a 
                 href="https://www.d-prize.org/winners/profiles/2018/8/1/safe-passage-initiative#" 
                 target="_blank"
-                class="inline-flex items-center bg-white text-red-700 px-6 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors duration-300 shadow-xl"
+                class="inline-flex items-center bg-white text-emerald-700 px-6 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors duration-300 shadow-xl"
               >
                 VIEW AWARD DETAILS
               </a>
@@ -79,10 +79,10 @@
     </section>
 
     <!-- Impact Statistics -->
-    <section id="impact" class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-red-900 to-amber-900">
+    <section id="impact" class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-emerald-900 to-amber-900">
       <div class="container mx-auto px-4 md:px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400 mb-8">
+          <h2 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-amber-400 mb-8">
             UNPRECEDENTED IMPACT
           </h2>
           <p class="text-lg md:text-2xl text-slate-200 max-w-4xl mx-auto font-semibold">
@@ -94,7 +94,7 @@
           <div 
             v-for="(stat, index) in stats" 
             :key="index"
-            class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center border border-red-400/30 shadow-xl"
+            class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center border border-emerald-400/30 shadow-xl"
           >
             <div class="text-5xl md:text-6xl mb-4" :class="stat.color">
               {{ stat.icon }}
@@ -110,27 +110,27 @@
 
         <!-- Success Story -->
         <div class="max-w-6xl mx-auto">
-          <div class="bg-gradient-to-r from-red-500/20 to-amber-500/20 backdrop-blur-lg rounded-2xl p-8 md:p-16 border border-red-400/40 shadow-2xl">
+          <div class="bg-gradient-to-r from-emerald-500/20 to-amber-500/20 backdrop-blur-lg rounded-2xl p-8 md:p-16 border border-emerald-400/40 shadow-2xl">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div>
-                <h3 class="text-3xl md:text-4xl font-black text-red-400 mb-6">
+                <h3 class="text-3xl md:text-4xl font-black text-emerald-400 mb-6">
                   🛡️ REVOLUTIONARY RESULTS
                 </h3>
                 <p class="text-lg md:text-xl text-slate-200 leading-relaxed mb-6 font-medium">
-                  Over <strong class="text-red-400 text-2xl">100 Traditional Birth Attendants (TBAs)</strong> 
+                  Over <strong class="text-emerald-400 text-2xl">100 Traditional Birth Attendants (TBAs)</strong> 
                   were trained across the 3 geopolitical zones of Imo State. The evaluation results 
                   showed a <strong class="text-amber-400 text-2xl">sharp reduction to near-zero</strong> 
                   maternal deaths during the 3-month pilot period.
                 </p>
                 <div class="flex items-center space-x-4">
-                  <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-amber-500 rounded-full flex items-center justify-center shadow-xl">
+                  <div class="w-12 h-12 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full flex items-center justify-center shadow-xl">
                     <div class="w-6 h-6 bg-white rounded-full"></div>
                   </div>
                   <span class="text-xl text-amber-400 font-bold">LIVES SAVED. FUTURES PROTECTED.</span>
                 </div>
               </div>
               <div class="flex items-center justify-center">
-                <div class="w-64 h-64 bg-gradient-to-br from-red-400/20 to-amber-400/20 rounded-full flex items-center justify-center border-2 border-red-400/50 shadow-2xl">
+                <div class="w-64 h-64 bg-gradient-to-br from-emerald-400/20 to-amber-400/20 rounded-full flex items-center justify-center border-2 border-emerald-400/50 shadow-2xl">
                   <div class="text-8xl">❤️</div>
                 </div>
               </div>
@@ -141,10 +141,10 @@
     </section>
 
     <!-- Video Section -->
-    <section id="video" class="py-16 md:py-24 bg-gradient-to-br from-red-900 via-slate-900 to-amber-900">
+    <section id="video" class="py-16 md:py-24 bg-gradient-to-br from-emerald-900 via-slate-900 to-amber-900">
       <div class="container mx-auto px-4 md:px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400 mb-8">
+          <h2 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-amber-400 mb-8">
             SEE OUR WORK IN ACTION
           </h2>
           <p class="text-lg md:text-2xl text-slate-200 max-w-4xl mx-auto font-semibold">
@@ -153,7 +153,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto">
-          <div class="aspect-video bg-gradient-to-br from-red-600/30 to-amber-600/30 rounded-2xl overflow-hidden border-2 border-red-400/50 shadow-2xl">
+          <div class="aspect-video bg-gradient-to-br from-emerald-600/30 to-amber-600/30 rounded-2xl overflow-hidden border-2 border-emerald-400/50 shadow-2xl">
             <div 
               v-if="!isVideoPlaying"
               class="w-full h-full flex items-center justify-center cursor-pointer"
@@ -161,7 +161,7 @@
             >
               <div class="text-center">
                 <div class="w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center mb-6 mx-auto shadow-2xl">
-                  <div class="w-12 h-12 md:w-14 md:h-14 bg-red-600 rounded-full flex items-center justify-center ml-1">
+                  <div class="w-12 h-12 md:w-14 md:h-14 bg-emerald-600 rounded-full flex items-center justify-center ml-1">
                     <div class="w-0 h-0 border-l-6 border-l-white border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
                   </div>
                 </div>
@@ -183,10 +183,10 @@
     </section>
 
     <!-- Simplified Image Gallery -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-amber-900 via-red-900 to-slate-900">
+    <section class="py-16 md:py-24 bg-gradient-to-br from-amber-900 via-emerald-900 to-slate-900">
       <div class="container mx-auto px-4 md:px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-400 mb-8">
+          <h2 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-emerald-400 mb-8">
             📸 PICTURE PROOF OF IMPACT
           </h2>
           <p class="text-lg md:text-2xl text-slate-200 max-w-4xl mx-auto font-semibold">
@@ -217,12 +217,12 @@
     </section>
 
     <!-- Innovation Highlight -->
-    <section class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-red-900 to-amber-900">
+    <section class="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-emerald-900 to-amber-900">
       <div class="container mx-auto px-4 md:px-6">
         <div class="max-w-6xl mx-auto">
-          <div class="bg-gradient-to-r from-red-400/20 to-amber-400/20 backdrop-blur-lg rounded-2xl p-8 md:p-16 border border-red-400/40 shadow-2xl">
+          <div class="bg-gradient-to-r from-emerald-400/20 to-amber-400/20 backdrop-blur-lg rounded-2xl p-8 md:p-16 border border-emerald-400/40 shadow-2xl">
             <div class="text-center mb-12">
-              <h2 class="text-3xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400 mb-6">
+              <h2 class="text-3xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-amber-400 mb-6">
                 WORLD-FIRST INNOVATION
               </h2>
             </div>
@@ -230,11 +230,11 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div class="space-y-8">
                 <div class="flex items-start space-x-4">
-                  <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-xl">
+                  <div class="w-12 h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-xl">
                     <div class="text-xl">🌍</div>
                   </div>
                   <div>
-                    <h3 class="text-2xl md:text-3xl font-black text-red-400 mb-3">GLOBAL FIRST</h3>
+                    <h3 class="text-2xl md:text-3xl font-black text-emerald-400 mb-3">GLOBAL FIRST</h3>
                     <p class="text-slate-200 text-lg leading-relaxed">
                       This innovative solution is the <strong class="text-amber-400">first of its kind</strong> and has never been implemented 
                       anywhere else in the world except in Imo State.
@@ -249,18 +249,18 @@
                   <div>
                     <h3 class="text-2xl md:text-3xl font-black text-amber-400 mb-3">PILOT SUCCESS</h3>
                     <p class="text-slate-200 text-lg leading-relaxed">
-                      Implemented from <strong class="text-red-400">September to November 2018</strong> in Imo State, 
+                      Implemented from <strong class="text-emerald-400">September to November 2018</strong> in Imo State, 
                       achieving unprecedented results in maternal health outcomes.
                     </p>
                   </div>
                 </div>
                 
                 <div class="flex items-start space-x-4">
-                  <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-amber-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-xl">
+                  <div class="w-12 h-12 bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-xl">
                     <div class="text-xl">📈</div>
                   </div>
                   <div>
-                    <h3 class="text-2xl md:text-3xl font-black text-red-400 mb-3">SCALABLE IMPACT</h3>
+                    <h3 class="text-2xl md:text-3xl font-black text-emerald-400 mb-3">SCALABLE IMPACT</h3>
                     <p class="text-slate-200 text-lg leading-relaxed">
                       Proven model ready for scaling across Nigeria and other developing countries 
                       to save countless maternal lives.
@@ -270,11 +270,11 @@
               </div>
               
               <div class="flex items-center justify-center">
-                <div class="w-64 h-64 bg-gradient-to-br from-red-400/20 to-amber-400/20 rounded-full flex items-center justify-center border-2 border-red-400/50 shadow-2xl">
+                <div class="w-64 h-64 bg-gradient-to-br from-emerald-400/20 to-amber-400/20 rounded-full flex items-center justify-center border-2 border-emerald-400/50 shadow-2xl">
                   <div class="text-center">
                     <div class="text-6xl mb-4">❤️</div>
                     <p class="text-2xl font-black text-white">SAVING LIVES</p>
-                    <p class="text-red-400 text-lg font-bold">One Mother at a Time</p>
+                    <p class="text-emerald-400 text-lg font-bold">One Mother at a Time</p>
                   </div>
                 </div>
               </div>

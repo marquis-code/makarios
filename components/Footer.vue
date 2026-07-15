@@ -9,7 +9,7 @@
       <!-- Left: Brand & Contact -->
       <div class="w-full lg:w-5/12 flex flex-col justify-between">
         <div>
-          <h2 class="text-4xl lg:text-5xl font-black tracking-tight text-white mb-6">
+          <h2 class="text-3xl lg:text-4xl font-bold tracking-tight text-white mb-6">
             MAKARIOS <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-200">Initiative</span>
           </h2>
           <p class="text-lg text-slate-400 font-medium max-w-md mb-12 leading-relaxed">
@@ -131,7 +131,7 @@
                   required
                 >
               </div>
-              <span v-if="phoneError" class="text-red-400 text-xs mt-2 block font-medium">{{ phoneError }}</span>
+              <span v-if="phoneError" class="text-amber-400 text-xs mt-2 block font-medium">{{ phoneError }}</span>
             </div>
     
             <div>

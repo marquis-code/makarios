@@ -11,9 +11,8 @@
       <!-- Left side: Typography and Controls -->
       <div class="w-full lg:w-5/12 flex flex-col justify-center animate-fade-in-up">
         <h2 class="text-emerald-900 font-bold tracking-widest uppercase text-xs mb-4">Impact Stories</h2>
-        <h3 class="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-          Voices of <br/>
-          <span class="text-emerald-900">Transformation</span>
+        <h3 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6">
+          The Team Behind <span class="text-emerald-700">The Impact</span>
         </h3>
         <p class="text-base text-slate-600 font-medium mb-8">
           Hear from educational leaders who have witnessed the powerful impact of our literacy initiatives in their communities.
@@ -109,21 +108,21 @@
     <!-- Impact Stats -->
     <div class="max-w-7xl mx-auto px-6 lg:px-8 mt-16 animate-fade-in-up delay-300">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="text-center group">
-          <div class="text-4xl md:text-5xl font-black text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">15+</div>
-          <div class="text-sm font-bold text-slate-500 uppercase tracking-widest">Active Programs</div>
+        <div class="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-lg hover:-translate-y-2 transition-transform duration-300 group">
+          <div class="text-3xl md:text-4xl font-bold text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">15+</div>
+          <div class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Years Experience</div>
         </div>
-        <div class="text-center group">
-          <div class="text-4xl md:text-5xl font-black text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">50k</div>
-          <div class="text-sm font-bold text-slate-500 uppercase tracking-widest">Books Donated</div>
+        <div class="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-lg hover:-translate-y-2 transition-transform duration-300 group">
+          <div class="text-3xl md:text-4xl font-bold text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">50k</div>
+          <div class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Books Donated</div>
         </div>
-        <div class="text-center group">
-          <div class="text-4xl md:text-5xl font-black text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">120</div>
-          <div class="text-sm font-bold text-slate-500 uppercase tracking-widest">Communities</div>
+        <div class="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-lg hover:-translate-y-2 transition-transform duration-300 group">
+          <div class="text-3xl md:text-4xl font-bold text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">120</div>
+          <div class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Communities</div>
         </div>
-        <div class="text-center group">
-          <div class="text-4xl md:text-5xl font-black text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">10k+</div>
-          <div class="text-sm font-bold text-slate-500 uppercase tracking-widest">Students Reached</div>
+        <div class="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-lg hover:-translate-y-2 transition-transform duration-300 group">
+          <div class="text-3xl md:text-4xl font-bold text-slate-900 mb-2 group-hover:text-emerald-900 transition-colors">10k+</div>
+          <div class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Students Reached</div>
         </div>
       </div>
     </div>

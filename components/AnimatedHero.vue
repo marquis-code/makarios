@@ -1,36 +1,36 @@
 <template>
-  <main class="relative bg-black min-h-[70vh] pt-32 overflow-hidden flex items-center">
+  <main class="relative bg-white min-h-[70vh] pt-32 overflow-hidden flex items-center">
     
     <!-- Ultra-minimal abstract shapes -->
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      <div class="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] rounded-full bg-[#E62B1E]/5 blur-3xl"></div>
-      <div class="absolute bottom-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#E62B1E]/10 blur-[100px]"></div>
+      <div class="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] rounded-full bg-primary/5 blur-3xl"></div>
+      <div class="absolute bottom-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary/10 blur-[100px]"></div>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10 py-10 lg:py-16 flex flex-col lg:flex-row items-center gap-10">
       
       <!-- Left Editorial Content -->
       <div class="w-full lg:w-1/2 relative z-20">
-        <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 shadow-sm border border-white/20 mb-8 animate-fade-in-up backdrop-blur-sm">
-          <span class="relative flex h-3 w-3">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E62B1E] opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-[#E62B1E]"></span>
+        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 shadow-sm border border-primary/20 mb-6 animate-fade-in-up backdrop-blur-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          <span class="text-sm font-bold text-white tracking-wider uppercase">{{ currentSlide.badge }}</span>
+          <span class="text-xs font-bold text-primary tracking-wider uppercase">{{ currentSlide.badge }}</span>
         </div>
 
         <Transition name="editorial-fade" mode="out-in">
           <div :key="currentIndex" class="w-full">
-            <h1 class="text-lg md:text-xl lg:text-3xl font-black text-white leading-[1.1] tracking-tight mb-4">
+            <h1 class="text-base md:text-lg lg:text-2xl font-black text-slate-900 leading-[1.1] tracking-tight mb-3">
               <span class="block overflow-hidden pb-1">
                 <span class="block animate-slide-up-word" style="animation-delay: 100ms">{{ currentSlide.titleWords[0] }}</span>
               </span>
               <span class="block overflow-hidden pb-1">
-                <span class="block text-[#E62B1E] animate-slide-up-word" style="animation-delay: 200ms">{{ currentSlide.titleWords.slice(1).join(' ') }}</span>
+                <span class="block text-primary animate-slide-up-word" style="animation-delay: 200ms">{{ currentSlide.titleWords.slice(1).join(' ') }}</span>
               </span>
             </h1>
 
-            <p class="text-base text-slate-300 font-medium leading-relaxed max-w-lg mb-6 animate-fade-in-up delay-300">
+            <p class="text-sm text-slate-600 font-medium leading-relaxed max-w-lg mb-5 animate-fade-in-up delay-300">
               {{ currentSlide.description }}
             </p>
 
@@ -39,17 +39,17 @@
                 v-for="(btn, i) in currentSlide.buttons" :key="i"
                 @click.prevent="handleButtonClick(btn)"
                 style="pointer-events: auto;"
-                class="group relative overflow-hidden rounded-full font-bold text-sm px-6 py-3 transition-all duration-300 cursor-pointer z-50"
-                :class="btn.primary ? 'bg-[#E62B1E] text-white hover:shadow-lg hover:shadow-[#E62B1E]/40 hover:-translate-y-0.5' : 'bg-transparent text-white border border-white/30 hover:border-white/60 hover:-translate-y-0.5'"
+                class="group relative overflow-hidden rounded-full font-bold text-xs px-4 py-2 transition-all duration-300 cursor-pointer z-50"
+                :class="btn.primary ? 'bg-primary text-white hover:shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5' : 'bg-transparent text-slate-900 border border-slate-300 hover:border-slate-400 hover:-translate-y-0.5'"
               >
                 <span class="relative z-10 flex items-center gap-2">
                   {{ btn.text }}
-                  <svg v-if="btn.primary" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg v-if="btn.primary" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </span>
                 <!-- Hover effect fill -->
-                <div v-if="btn.primary" class="absolute inset-0 bg-[#B0180F] transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 z-0"></div>
+                <div v-if="btn.primary" class="absolute inset-0 bg-primary-dark transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 z-0"></div>
               </button>
             </div>
           </div>
@@ -62,7 +62,7 @@
               v-for="(_, idx) in slides" :key="idx"
               @click="setCurrentSlide(idx)"
               class="h-1.5 rounded-full transition-all duration-500"
-              :class="idx === currentIndex ? 'w-12 bg-[#E62B1E]' : 'w-4 bg-white/30 hover:bg-white/50'"
+              :class="idx === currentIndex ? 'w-12 bg-primary' : 'w-4 bg-slate-300 hover:bg-slate-400'"
               :aria-label="`Slide ${idx + 1}`"
             ></button>
           </div>
@@ -74,7 +74,7 @@
 
       <!-- Right Glassmorphic Frame Image -->
       <div class="w-full lg:w-1/2 relative z-10 h-[400px] lg:h-[500px] animate-fade-in-scale">
-        <div class="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-zinc-900 shadow-2xl shadow-[#E62B1E]/10 border-4 border-white/10 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out group">
+        <div class="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-white shadow-2xl shadow-primary/20 border-4 border-white transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out group">
           <Transition name="editorial-fade" mode="out-in">
             <video 
               :key="currentIndex"
@@ -101,21 +101,21 @@
         </div>
 
         <!-- Floating Glass Widget 1 -->
-        <div class="absolute top-12 -left-12 bg-black/80 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-xl shadow-primary/20 transform -rotate-3 hover:rotate-0 hover:-translate-y-2 transition-all duration-300 hidden md:block">
-          <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center text-2xl mb-3">
+        <div class="absolute top-12 -left-12 bg-white/80 backdrop-blur-xl border border-slate-200 p-5 rounded-3xl shadow-xl shadow-primary/10 transform -rotate-3 hover:rotate-0 hover:-translate-y-2 transition-all duration-300 hidden md:block">
+          <div class="w-10 h-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl mb-3">
             📚
           </div>
-          <div class="text-2xl font-black text-white tracking-tight">50K+</div>
-          <div class="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Lives Changed</div>
+          <div class="text-xl font-black text-slate-900 tracking-tight">50K+</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Lives Changed</div>
         </div>
 
         <!-- Floating Glass Widget 2 -->
-        <div class="absolute bottom-16 -right-8 bg-primary/90 backdrop-blur-xl border border-primary p-6 rounded-3xl shadow-2xl shadow-primary/30 transform rotate-6 hover:rotate-0 hover:-translate-y-2 transition-all duration-300 hidden md:block text-white">
-          <div class="w-12 h-12 rounded-2xl bg-white/20 text-white flex items-center justify-center text-2xl mb-3">
+        <div class="absolute bottom-16 -right-8 bg-white/90 backdrop-blur-xl border border-slate-200 p-5 rounded-3xl shadow-2xl shadow-primary/20 transform rotate-6 hover:rotate-0 hover:-translate-y-2 transition-all duration-300 hidden md:block text-slate-900">
+          <div class="w-10 h-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl mb-3">
             🌍
           </div>
-          <div class="text-2xl font-black tracking-tight">120+</div>
-          <div class="text-sm font-bold text-white/80 uppercase tracking-widest mt-1">Communities</div>
+          <div class="text-xl font-black tracking-tight">120+</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1">Communities</div>
         </div>
       </div>
     </div>
@@ -126,35 +126,35 @@
       <Transition name="modal" appear>
         <div 
           v-if="showModal" 
-          class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[9999] p-4"
+          class="fixed inset-0 bg-primary/80 backdrop-blur-md flex items-center justify-center z-[9999] p-4"
           @click.self="closeModal"
         >
-          <div class="bg-black rounded-[2.5rem] p-10 max-w-lg w-full shadow-2xl relative overflow-hidden border border-white/20">
-            <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="bg-primary rounded-[2.5rem] p-8 max-w-lg w-full shadow-2xl relative overflow-hidden border border-white/20">
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="relative z-10 text-center">
-              <div class="w-20 h-20 bg-primary/20 rounded-3xl mx-auto mb-8 flex items-center justify-center text-primary">
-                <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div class="w-16 h-16 bg-white/20 rounded-3xl mx-auto mb-6 flex items-center justify-center text-white">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h3 class="text-3xl font-black text-white mb-4 tracking-tight">Kika's Examination</h3>
-              <p class="text-lg text-slate-300 mb-10 leading-relaxed font-medium">
+              <h3 class="text-2xl font-black text-white mb-3 tracking-tight">Kika's Examination</h3>
+              <p class="text-sm text-slate-200 mb-8 leading-relaxed font-medium">
                 Join us for the exciting launch of Kika's comprehensive examination preparation books designed to help students excel in their studies.
               </p>
               
               <div class="flex flex-col gap-3">
                 <a href="#kika"
                   @click="showModal = false"
-                  class="w-full px-8 py-4 bg-primary text-white font-bold rounded-2xl hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30 text-lg flex justify-center items-center gap-2"
+                  class="w-full px-6 py-3 bg-white text-primary font-bold rounded-2xl hover:bg-gray-100 transition-colors shadow-lg shadow-black/30 text-base flex justify-center items-center gap-2"
                 >
                   Learn More
-                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </a>
                 <button 
                   @click="closeModal"
-                  class="w-full px-8 py-3 text-slate-400 font-bold hover:text-white transition-colors"
+                  class="w-full px-6 py-2 text-slate-300 text-sm font-bold hover:text-white transition-colors"
                 >
                   Maybe Later
                 </button>
@@ -172,7 +172,7 @@
         <Transition name="modal-fade">
           <div 
             v-if="isVideoModalOpen" 
-            class="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 md:p-8"
+            class="fixed inset-0 z-[9999] bg-primary/95 flex items-center justify-center p-4 md:p-8"
             @click.self="closeFullscreen"
           >
             <button 

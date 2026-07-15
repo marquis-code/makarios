@@ -116,11 +116,11 @@
                   v-model="form.name"
                   type="text"
                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-teal-500 focus:ring-4 focus:ring-teal-200 transition-all duration-300 transform focus:scale-105"
-                  :class="{ 'border-red-500 animate-pulse': errors.name }"
+                  :class="{ 'border-amber-500 animate-pulse': errors.name }"
                   placeholder="Enter your full name"
                   @input="clearError('name')"
                 />
-                <div v-if="errors.name" class="absolute -bottom-6 left-0 text-red-500 text-xs animate-fade-in">
+                <div v-if="errors.name" class="absolute -bottom-6 left-0 text-amber-500 text-xs animate-fade-in">
                   {{ errors.name }}
                 </div>
               </div>
@@ -144,11 +144,11 @@
                   v-model="form.phone"
                   type="tel"
                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-200 transition-all duration-300 transform focus:scale-105"
-                  :class="{ 'border-red-500 animate-pulse': errors.phone }"
+                  :class="{ 'border-amber-500 animate-pulse': errors.phone }"
                   placeholder="+234 123 456 7890"
                   @input="clearError('phone')"
                 />
-                <div v-if="errors.phone" class="absolute -bottom-6 left-0 text-red-500 text-xs animate-fade-in">
+                <div v-if="errors.phone" class="absolute -bottom-6 left-0 text-amber-500 text-xs animate-fade-in">
                   {{ errors.phone }}
                 </div>
               </div>
@@ -173,11 +173,11 @@
                   v-model="form.email"
                   type="email"
                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all duration-300 transform focus:scale-105"
-                  :class="{ 'border-red-500 animate-pulse': errors.email }"
+                  :class="{ 'border-amber-500 animate-pulse': errors.email }"
                   placeholder="your.email@example.com"
                   @input="clearError('email')"
                 />
-                <div v-if="errors.email" class="absolute -bottom-6 left-0 text-red-500 text-xs animate-fade-in">
+                <div v-if="errors.email" class="absolute -bottom-6 left-0 text-amber-500 text-xs animate-fade-in">
                   {{ errors.email }}
                 </div>
               </div>
@@ -201,11 +201,11 @@
                   v-model="form.organization"
                   type="text"
                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:ring-4 focus:ring-orange-200 transition-all duration-300 transform focus:scale-105"
-                  :class="{ 'border-red-500 animate-pulse': errors.organization }"
+                  :class="{ 'border-amber-500 animate-pulse': errors.organization }"
                   placeholder="NGO, Government Agency, Private Sector, etc."
                   @input="clearError('organization')"
                 />
-                <div v-if="errors.organization" class="absolute -bottom-6 left-0 text-red-500 text-xs animate-fade-in">
+                <div v-if="errors.organization" class="absolute -bottom-6 left-0 text-amber-500 text-xs animate-fade-in">
                   {{ errors.organization }}
                 </div>
               </div>

@@ -9,7 +9,7 @@
       <!-- Professional Header -->
       <div class="mx-auto max-w-2xl text-center mb-10">
         <h2 class="text-sm font-semibold leading-7 text-emerald-900 uppercase tracking-widest">Our Foundation</h2>
-        <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">MAKARIOS Initiative</p>
+        <p class="mt-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">MAKARIOS Initiative</p>
         <p class="mt-4 text-lg leading-8 text-gray-600">
           A registered non-government entity, passionately serving grassroots communities since 2017 with dedicated medical and humanitarian expertise.
         </p>

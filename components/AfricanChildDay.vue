@@ -10,7 +10,7 @@
       
       <div class="w-full lg:w-5/12 flex flex-col justify-center animate-fade-in-up">
         <div class="inline-flex items-center gap-3 mb-6">
-          <span class="px-4 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold tracking-widest uppercase shadow-sm">
+          <span class="px-4 py-1.5 rounded-full bg-red-50 border border-emerald-200 text-emerald-600 text-xs font-bold tracking-widest uppercase shadow-sm">
             Successfully Concluded
           </span>
           <span class="text-sm font-bold text-slate-500 tracking-wider uppercase">June 25, 2026</span>
@@ -171,7 +171,7 @@
     <!-- IDAC 2026 Programme Fliers Masonry -->
     <div class="mt-24 lg:mt-32 max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
       <div class="text-center mb-16 animate-fade-in-up" style="animation-delay: 0.2s">
-        <h3 class="text-3xl md:text-5xl font-black text-slate-900 mb-6">IDAC 2026 <span class="text-primary">Impact</span></h3>
+        <h3 class="text-2xl md:text-4xl font-bold text-slate-900 mb-6">IDAC 2026 <span class="text-primary">Impact</span></h3>
         <p class="text-lg text-slate-600 font-medium max-w-2xl mx-auto">Look back at the official programme banners and visual campaigns that successfully drove change for the International Day of the African Child.</p>
       </div>
       
@@ -203,7 +203,7 @@
           <template v-else>
             <div @click="openGalleryModal(item, index)" class="cursor-pointer">
               <img :src="item.src" class="w-full h-auto rounded-[2rem] block" alt="IDAC Campaign Asset" />
-              <div class="absolute inset-0 bg-red-900/40 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div class="absolute inset-0 bg-emerald-900/40 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               <!-- Enlarge icon -->
               <div class="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                 <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>

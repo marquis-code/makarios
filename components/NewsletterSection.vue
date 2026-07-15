@@ -25,7 +25,7 @@
             </button>
           </form>
           
-          <div v-if="message" class="mt-4" :class="{'text-green-600': success, 'text-red-600': !success}">
+          <div v-if="message" class="mt-4" :class="{'text-green-600': success, 'text-amber-600': !success}">
             {{ message }}
           </div>
         </div>

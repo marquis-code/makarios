@@ -5,14 +5,14 @@
       v-if="toastVisible"
       :class="[
         'fixed top-4 right-4 rounded-lg shadow-lg flex items-center p-4 max-w-sm w-full',
-        toastData.toastType === 'error' ? 'bg-red-50 border-l-4 border-red-400' :
+        toastData.toastType === 'error' ? 'bg-red-50 border-l-4 border-amber-400' :
         toastData.toastType === 'warning' ? 'bg-yellow-50 border-l-4 border-yellow-400' :
         toastData.toastType === 'info' ? 'bg-blue-50 border-l-4 border-blue-400' :
         'bg-green-50 border-l-4 border-green-400'
       ]"
     >
       <div :class="[
-        toastData.toastType === 'error' ? 'bg-red-100 text-red-500' : 
+        toastData.toastType === 'error' ? 'bg-amber-100 text-amber-500' : 
         toastData.toastType === 'warning' ? 'bg-yellow-100 text-yellow-500' :
         toastData.toastType === 'info' ? 'bg-blue-100 text-blue-500' :
         'bg-green-100 text-green-500', 

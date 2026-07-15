@@ -3,9 +3,9 @@
       <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-8">
-          <div class="inline-flex items-center bg-white rounded-full px-6 py-3 shadow-lg border-2 border-red-500 mb-4">
+          <div class="inline-flex items-center bg-white rounded-full px-6 py-3 shadow-lg border-2 border-primary-500 mb-4">
             <span class="text-black font-bold text-xl mr-2">NTA</span>
-            <span class="bg-red-500 text-white px-3 py-1 rounded text-lg font-bold mr-2">10</span>
+            <span class="bg-primary-500 text-white px-3 py-1 rounded text-lg font-bold mr-2">10</span>
             <span class="text-sm text-gray-600">LAGOS</span>
           </div>
           
@@ -37,7 +37,7 @@
   
           <!-- Video Section -->
           <div class="flex-none w-[90vw] lg:w-auto snap-center bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col justify-center">
-            <div class="p-6 bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <div class="p-6 bg-gradient-to-r from-orange-500 to-primary-500 text-white">
               <h2 class="text-2xl font-bold mb-2">🎥 Live Preview</h2>
               <p class="opacity-90">Watch the Sunday Show promo</p>
             </div>
@@ -91,7 +91,7 @@
         </div>
   
         <!-- Social Media Footer -->
-        <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-6 text-white text-center">
+        <div class="bg-gradient-to-r from-orange-500 to-primary-500 rounded-xl p-6 text-white text-center">
           <h3 class="text-xl font-bold mb-4">Follow Us</h3>
           <div class="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6">
             <div class="flex items-center space-x-2">

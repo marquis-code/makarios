@@ -9,7 +9,7 @@
             Latest Updates
           </span>
         </div>
-        <h3 class="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
+        <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
           Recent <span class="text-primary">Programme Highlights</span>
         </h3>
         <p class="text-lg md:text-xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
